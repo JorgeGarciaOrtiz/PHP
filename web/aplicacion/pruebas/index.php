@@ -15,9 +15,10 @@ function cabecera() {}
 function cuerpo()
 {
 ?>
-    <br><br>
     Elemento de pruebas
+    <br><br>
+    <a href="pruebas01.php">Pruebas01 de clase</a>
     <br>
-    <a href="basicas.php">Funcionamiento basico</a>
+    <a href="pruebasCasa.php">Pruebas de casa</a>
 <?php
 }
