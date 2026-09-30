@@ -170,7 +170,7 @@ function cuerpo()
     $var3 = 200; // $var3 cambia → cambia $var1 también → $var1 = 200
     // $var2 se queda igual → $var2 = 150
 
-    unset($var1); // $var3 desaparece → $var1 sigue valiendo 200
+    unset($var1); // $var1 se elimina, pero $var3 sigue existiendo → $var3 = 200
 
     // ***********************************************************************************
 
