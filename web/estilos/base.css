@@ -1,14 +1,17 @@
 @charset "UTF8";
 
 body {
-    background-color: cyan;
+    background-color: rgb(255, 255, 255);
     font-size: 16px;
 }
 
 #documento{
     margin: 0 auto;
-    background-color: #8080ff;
+    margin-top: 30px;
+    background-color: #cecece;
     width: 700px;
+    padding: 10px;
+    border-radius: 10px;
 }
 #cabecera{
     background-color: #14e737;

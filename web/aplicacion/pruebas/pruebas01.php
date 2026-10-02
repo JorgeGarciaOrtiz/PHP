@@ -16,7 +16,12 @@ finCuerpo(); // Finaliza el contenido principal
 // Vista
 // ***********************************************************************************
 
-function cabecera() {}
+function cabecera()
+{
+?>
+    <!-- Esto es un comentario en HTML -->
+<?php
+}
 
 function cuerpo()
 {
