@@ -6,20 +6,19 @@ include_once(dirname(__FILE__) . "/cabecera.php");
 inicioCabecera("APLICACION PRIMER TRIMESTRE");
 cabecera();
 finCabecera();
-inicioCuerpo("2DAW APLICACION");
+inicioCuerpo("Prácticas de PHP");
 cuerpo();  //llamo a la vista
 finCuerpo();
+
 // **********************************************************
 
 //vista
-function cabecera() 
-{}
+function cabecera() {}
 
 //vista
 function cuerpo()
 {
 ?>
-    <br><br>
-    <a href="./aplicacion/pruebas/index.php">Pruebas</a>
+    <a href="./aplicacion/practicas/relacion1/index.php">Relación 1</a>
 <?php
 }
