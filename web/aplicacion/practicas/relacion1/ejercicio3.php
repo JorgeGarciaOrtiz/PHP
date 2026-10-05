@@ -78,6 +78,9 @@ $array3 = [
     34
 ];
 
+// Creo un array para guardar dentro todos los arrays creados antes
+$arrays = [$array1, $array2, $array3];
+
 // ==========================================================
 // PLANTILLA
 // ==========================================================
@@ -89,7 +92,7 @@ finCabecera();
 
 // Dibujamos el cuerpo de la página
 inicioCuerpo("Ejercicio 3");
-cuerpo($array1, $array2, $array3);
+cuerpo($arrays);
 
 finCuerpo();
 
@@ -115,24 +118,32 @@ finCuerpo();
 function cabecera() {}
 
 // Cuerpo propio de la vista
-function cuerpo($array1, $array2, $array3)
+function cuerpo($arrays)
 {
     // ---------------------------------------------------------
     // 4. Recorrer los tres arrays usando foreach mostrando todos sus valores.
     // ---------------------------------------------------------
 
-    $arrays = [$array1, $array2, $array3];
-
+    // Recorro cada uno de los arrays para poder poder mostrar uno por uno sus valores internos
     for ($i = 0; $i < count($arrays); $i++) {
 
-        echo "Array " . ($i+1) . ":<br>";
+        // Pongo esto para separar entre arrays y quede mejor visualmente
+        echo "Array " . ($i + 1) . ":<br>";
 
+        // Empiezo a leer los valores internos del array
         foreach ($arrays[$i] as $v1) {
 
+            // Si no es un array:
             if (!is_array($v1)) {
+                // Muestro su valor
                 echo $v1 . "<br>";
+
+                // En el caso de que si sea un array:
             } else {
+
+                // Recorro los valores de este nuevo array (este array esta dentro del array principal)
                 foreach ($v1 as $v2) {
+                    // Y los muestro
                     echo $v2 . "<br>";
                 }
             }

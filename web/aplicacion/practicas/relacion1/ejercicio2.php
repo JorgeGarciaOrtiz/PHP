@@ -7,9 +7,12 @@ include_once(dirname(__FILE__) . "/../../../cabecera.php");
 // CONTROLADOR
 // ==========================================================
 
+// Creo una cosntante con el numero de lanzamientos
 const numeroLanzamientos = 1000;
+// Creo una constante con el numero de caras del dado
 const carasDado = 6;
 
+// Creo el array
 $array = [0, 0, 0, 0, 0, 0];
 
 // ==========================================================
@@ -46,6 +49,7 @@ function cabecera() {}
 // Cuerpo propio de la vista
 function cuerpo($array)
 {
+    // Pongo un titulo
     echo "<h2>LANZAMIENTO DE UN DADO</h2>";
 
     for ($i = 0; $i < carasDado; $i++) {
@@ -59,7 +63,7 @@ function cuerpo($array)
 
     $contador = 1;
     while ($contador <= numeroLanzamientos) {
-        
+
         $contador++;
 
         // $numeroAleatorio = mt_rand(1, carasDado); // Forma normal
@@ -95,12 +99,11 @@ function cuerpo($array)
         }
     }
 
-    echo "El número 1 ha salido: " . $array[0] . " veces con un porcentaje de " . number_format(($array[0] / numeroLanzamientos) * 100, 2) . "%<br>";
-    echo "El número 2 ha salido: " . $array[1] . " veces con un porcentaje de " . number_format(($array[1] / numeroLanzamientos) * 100, 2) . "%<br>";
-    echo "El número 3 ha salido: " . $array[2] . " veces con un porcentaje de " . number_format(($array[2] / numeroLanzamientos) * 100, 2) . "%<br>";
-    echo "El número 4 ha salido: " . $array[3] . " veces con un porcentaje de " . number_format(($array[3] / numeroLanzamientos) * 100, 2) . "%<br>";
-    echo "El número 5 ha salido: " . $array[4] . " veces con un porcentaje de " . number_format(($array[4] / numeroLanzamientos) * 100, 2) . "%<br>";
-    echo "El número 6 ha salido: " . $array[5] . " veces con un porcentaje de " . number_format(($array[5] / numeroLanzamientos) * 100, 2) . "%<br>";
+    for ($i = 0; $i < carasDado; $i++) {
+
+        echo "El número 1 ha salido: " . $array[0] . " veces con un porcentaje de "
+        . number_format(($array[0] / numeroLanzamientos) * 100, 2) . "%<br>";
+    }
 ?>
 <?php
 }

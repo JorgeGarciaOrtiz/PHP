@@ -64,6 +64,14 @@ function cuerpo()
 
     echo "<h2>Variables en binario, octal y hexadecimal</h2>";
 
+    $decimal = 50;
+    $base4 = 1234;
+    $base8 = 1234;
+
+    echo "Número entero " . $numero . " -> binario: " . decbin($numero) . "<br>";
+    echo "Número entero " . $numero . " -> octal: " . decoct($numero) . "<br>";
+    echo "Número entero " . $numero . " -> hexadecimal: " . dechex($numero) . "<br><br>";
+
     $binario = 0b1010;
     $octal = 012;
     $hexadecimal = 0xA;
