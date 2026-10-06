@@ -18,7 +18,7 @@ finCabecera();
 
 // Dibujamos el cuerpo de la página
 inicioCuerpo("Ejercicio 1");
-cuerpo($array);
+cuerpo();
 
 finCuerpo();
 
@@ -53,7 +53,7 @@ finCuerpo();
 function cabecera() {}
 
 // Cuerpo propio de la vista
-function cuerpo($array)
+function cuerpo()
 {
 
 ?>
