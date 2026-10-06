@@ -20,5 +20,7 @@ function cuerpo()
     <a href="pruebasCasa.php">Pruebas de casa</a>
     <br>
     <a href="pasopar.php">Comunicación controlador</a>
+    <br>
+    <a href="./arrays.php">Prueba de Arrays</a>
 <?php
 }
