@@ -102,8 +102,6 @@ function cuerpo($array)
     for ($i = 0; $i < carasDado; $i++) {
 
         echo "El número 1 ha salido: " . $array[0] . " veces con un porcentaje de "
-        . number_format(($array[0] / numeroLanzamientos) * 100, 2) . "%<br>";
+            . number_format(($array[0] / numeroLanzamientos) * 100, 2) . "%<br>";
     }
-?>
-<?php
 }

@@ -7,7 +7,10 @@ include_once(dirname(__FILE__) . "/../../../cabecera.php");
 // CONTROLADOR
 // ==========================================================
 
+// Creamos un array
 $vector = array();
+
+// Lo rellenamos con los valores que nos piden
 $vector[1] = "esto es una cadena";
 $vector["posi1"] = 25.67;
 $vector[] = false;
@@ -62,21 +65,35 @@ function cabecera() {}
 // Cuerpo propio de la vista
 function cuerpo($vector)
 {
+    // Recorro los valores del array
     foreach ($vector as $posicion => $contenido) {
 
-        if (!is_array($contenido)) {
-            echo "Posición " . $posicion . ", contenido: " . $contenido . "<br>";
-        } else {
+        // Si el valor es un array lo muestro por pantalla con su formato
+        if (is_array($contenido)) {
 
-            echo "Posición " . $posicion . ", contenido: ";
+            echo "posición " . $posicion . ", contenido (array): ";
 
-            foreach ($contenido as $posicion2 => $contenido2) {
+            // Recorro todos los valores del array
+            foreach ($contenido as $contenido2) {
                 echo $contenido2 . " ";
             }
+            echo "<br><br>";
 
-            echo "<br>";
+            // Si el valor es un número entero lo muestro por pantalla con su formato
+        } else if (is_integer($contenido)) {
+            echo "posición " . $posicion . ", contenido (" . gettype($contenido) . "): entero con valor " . $contenido . ", en binario " . decbin($contenido) . "<br><br>";
+
+            // Si el valor es un número decimal lo muestro por pantalla con su formato
+        } else if (is_float($contenido)) {
+            echo "posición " . $posicion . ", contenido (" . gettype($contenido) . "): real " . $contenido . " que al cuadrado es " . pow($contenido, 2) . "<br><br>";
+
+            // Si el valor es una cadena la muestro por pantalla con su formato
+        } else if (is_string($contenido)) {
+            echo "posición " . $posicion . ", contenido (" . gettype($contenido) . "): -" . $contenido . "-<br><br>";
+
+            // Si el valor es un boolean muestro true o false por pantalla en el formato pedido
+        } else if (is_bool($contenido)) {
+            echo "posición " . $posicion . ", contenido (" . gettype($contenido) . "): " . ($contenido === true ? "true" : "false") . " y su opuesto " . ($contenido === true ? "false" : "true") . "<br><br>";
         }
     }
-?>
-<?php
 }

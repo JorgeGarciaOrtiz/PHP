@@ -150,6 +150,4 @@ function cuerpo($arrays)
         }
         echo "<br><br>";
     }
-?>
-<?php
 }

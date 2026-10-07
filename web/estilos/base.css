@@ -1,98 +1,159 @@
-@charset "UTF8";
+@charset "UTF-8";
 
+/* ============ VARIABLES DE COLOR ============ */
+:root {
+    --fondo-pagina: #1e2227;
+    --fondo-documento: #2b3138;
+    --fondo-bloque: #3a424b;
+    --fondo-campo: #343b43;
+    --texto: #ffffff;
+    --borde: #5b6672;
+    --boton: #4a5866;
+    --boton-hover: #6b7d8f;
+    --error-fondo: #4a2326;
+    --error: #ff8a8f;
+    --warning-fondo: #4a3a14;
+    --warning: #ffd166;
+    --enlace-hover: #7fd1ff;
+}
+
+/* ============ BASE ============ */
 body {
-    background-color: cyan;
+    background-color: var(--fondo-pagina);
+    color: var(--texto);
     font-size: 16px;
+    font-family: "Segoe UI", "Trebuchet MS", Verdana, sans-serif;
 }
 
-#documento{
-    margin: 0 auto;
-    background-color: #8080ff;
-    width: 700px;
+input,
+button,
+select,
+textarea {
+    font-family: inherit;
 }
-#cabecera{
-    background-color: #14e737;
+
+/* ============ ENLACES ============ */
+a,
+a:visited {
+    color: var(--texto);
+    text-decoration: none;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+a:hover {
+    color: var(--enlace-hover);
+    text-decoration: underline;
+}
+
+/* ============ ESTRUCTURA ============ */
+#documento {
+    margin: 20px auto 0 auto;
+    background-color: var(--fondo-documento);
+    color: var(--texto);
+    width: 700px;
+    border-radius: 12px;
+    padding: 5px 15px 15px 15px;
+    box-sizing: border-box;
+}
+
+#cabecera,
+#barraUbicacion,
+#pie {
+    background-color: var(--fondo-bloque);
+    color: var(--texto);
+    border-radius: 8px;
+}
+
+#cabecera {
     padding: 5px;
 }
-#cabecera #logo{
+
+#cabecera #logo {
     width: 75px;
     height: 50px;
 }
 
-#cabecera #titulo{
+#cabecera #titulo {
     font-size: 1.3em;
     font-style: italic;
 }
 
-#barraUbicacion {
-    background-color: #14e737;
-    color: black;
-}
-
-.boton{
-    background-color: blue;
-    color:white;
-    border:thin black solid;
-}
-
-.boton a{
-    text-decoration: none;
-    color:white;
-}
-
-.boton a:visited{
-    text-decoration: none;
-    color:white;
-}
-
-.boton a:hover{
-    background-color:cyan;
-    color: black;
-}
-
-.boton:hover{
-    background-color:cyan;
-    color: black;
-}
-
-.tabla{
-    width: 100%;
-    border-collapse: collapse;
-    border: none;
-    background-color: white;
-}
-
-.tabla th{
-    background-color: teal;
-    color: blue;
-}
-.tabla tr.par{
-    background-color: black;
-    color: white;
-    
-}
-
-.tabla tr.impar{
-    
-}
-
-#pie{
-    background-color: #81e714;
-    color: blue;
-    font-size: 1.5 em;
+#pie {
+    font-size: 1.5em;
     padding: 5px;
 }
 
-.for_texto{
-    border:blue thin solid;
-    background-color: white;
+/* ============ BOTONES ============ */
+.boton {
+    background-color: var(--boton);
+    color: var(--texto);
+    border: thin solid var(--borde);
+    border-radius: 6px;
+}
+
+.boton a,
+.boton a:visited {
+    text-decoration: none;
+    color: var(--texto);
+}
+
+.boton:hover,
+.boton a:hover {
+    background-color: var(--boton-hover);
+    color: var(--texto);
+}
+
+/* ============ TABLAS ============ */
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+    border: none;
+    background-color: var(--fondo-campo);
+    color: var(--texto);
+}
+
+.tabla th,
+.tabla tr.par {
+    background-color: var(--fondo-bloque);
+    color: var(--texto);
+}
+
+/* ============ FORMULARIOS ============ */
+.for_texto {
+    border: thin solid var(--borde);
+    background-color: var(--fondo-campo);
+    color: var(--texto);
     padding: 2px;
-    margin:2px;
+    margin: 2px;
     border-radius: 4px;
 }
-.error{
-    background-color: white;
-    color:red;
-    border:thin solid red;
-    padding:5px;
+
+/* ============ MENSAJES ============ */
+.error {
+    background-color: var(--error-fondo);
+    color: var(--error);
+    border: thin solid var(--error);
+    padding: 5px;
+    border-radius: 6px;
+}
+
+.warning {
+    background-color: var(--warning-fondo);
+    color: var(--warning);
+    border: thin solid var(--warning);
+    padding: 5px;
+    border-radius: 6px;
+}
+
+.error *,
+.warning * {
+    color: inherit;
+}
+
+/* ============ WARNINGS NATIVOS DE PHP / XDEBUG ============ */
+table.xdebug-error,
+table.xdebug-error th,
+table.xdebug-error td {
+    background-color: var(--warning-fondo) !important;
+    color: var(--warning) !important;
 }

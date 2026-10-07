@@ -72,6 +72,4 @@ function cuerpo($array)
         }
         echo "<br>";
     }
-?>
-<?php
 }

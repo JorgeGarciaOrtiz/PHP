@@ -79,6 +79,4 @@ function cuerpo()
     echo "Número " . $binario . " -> binario: " . decbin($binario) . "<br>";
     echo "Número " . $octal . " -> octal: " . decoct($octal) . "<br>";
     echo "Número " . $hexadecimal . " -> hexadecimal: " . dechex($hexadecimal) . "<br>";
-?>
-<?php
 }
