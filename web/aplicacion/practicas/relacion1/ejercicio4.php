@@ -28,12 +28,12 @@ for ($i = 0; $i < numeroFilas + 1; $i++) {
 // ==========================================================
 
 // Dibujamos la cabecera de la página
-inicioCabecera("Ejercicio 1");
+inicioCabecera("Ejercicio 4");
 cabecera();
 finCabecera();
 
 // Dibujamos el cuerpo de la página
-inicioCuerpo("Ejercicio 1");
+inicioCuerpo("Ejercicio 4");
 cuerpo($array);
 
 finCuerpo();

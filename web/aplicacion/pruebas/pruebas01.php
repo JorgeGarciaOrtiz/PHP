@@ -4,11 +4,27 @@ include_once(dirname(__FILE__) . "/../../cabecera.php"); // Incluye el archivo c
 
 // Controlador que se encarga de organizar la página
 
+$barra = [
+    [
+        "TEXTO" => "inicio",
+        "ENLACE" => "/index.php",
+        "ADICIONAL" => ">>"
+    ],
+    [
+        "TEXTO" => "pruebas",
+        "ADICIONAL" => "/aplicacion/pruebas/index.php"
+    ],
+    [
+        "TEXTO" => "eje basicos",
+    ]
+];
+
+
 inicioCabecera("APLICACION PRIMER TRIMESTRE"); // Inicia la cabecera de la página
 cabecera(); // Muestra el contenido de la cabecera
 finCabecera(); // Finaliza la cabecera
 
-inicioCuerpo("Pruebas basicas"); // Inicia el contenido principal de la página
+inicioCuerpo("Pruebas basicas", $barra); // Inicia el contenido principal de la página
 cuerpo(); // Muestra el contenido de la vista
 finCuerpo(); // Finaliza el contenido principal
 

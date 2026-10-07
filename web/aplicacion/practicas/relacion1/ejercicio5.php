@@ -7,18 +7,25 @@ include_once(dirname(__FILE__) . "/../../../cabecera.php");
 // CONTROLADOR
 // ==========================================================
 
+$vector = array();
+$vector[1] = "esto es una cadena";
+$vector["posi1"] = 25.67;
+$vector[] = false;
+$vector["ultima"] = array(2, 5, 96);
+$vector[56] = 23;
+
 // ==========================================================
 // PLANTILLA
 // ==========================================================
 
 // Dibujamos la cabecera de la página
-inicioCabecera("Ejercicio 1");
+inicioCabecera("Ejercicio 5");
 cabecera();
 finCabecera();
 
 // Dibujamos el cuerpo de la página
-inicioCuerpo("Ejercicio 1");
-cuerpo();
+inicioCuerpo("Ejercicio 5");
+cuerpo($vector);
 
 finCuerpo();
 
@@ -53,9 +60,23 @@ finCuerpo();
 function cabecera() {}
 
 // Cuerpo propio de la vista
-function cuerpo()
+function cuerpo($vector)
 {
+    foreach ($vector as $posicion => $contenido) {
 
+        if (!is_array($contenido)) {
+            echo "Posición " . $posicion . ", contenido: " . $contenido . "<br>";
+        } else {
+
+            echo "Posición " . $posicion . ", contenido: ";
+
+            foreach ($contenido as $posicion2 => $contenido2) {
+                echo $contenido2 . " ";
+            }
+
+            echo "<br>";
+        }
+    }
 ?>
 <?php
 }
