@@ -8,6 +8,7 @@ include_once(dirname(__FILE__) . "/../../../cabecera.php");
 // Ruta de navegación de la página
 $ubicacion = [
     "Inicio" => "../../../index.php",
+    "Ejercicios" => "./../index.php",
     "Relacion 1" => "./index.php",
     "Ejercicio 7" => ""
 ];

@@ -6,6 +6,7 @@ include_once(dirname(__FILE__) . "/../../../cabecera.php");
 // Ruta de navegación de la página
 $ubicacion = [
     "Inicio" => "../../../index.php",
+    "Ejercicios" => "./../index.php",
     "Relacion 1" => "./index.php",
     "Ejercicio 4" => ""
 ];
@@ -21,7 +22,7 @@ $array = [];
 const numeroFilas = 5;
 
 // Añado las filas al array principal
-for ($i = 0; $i < numeroFilas + 1; $i++) {
+for ($i = 1; $i < numeroFilas + 1; $i++) {
 
     /*
         Creo un array con el número de indices que yo quiero --> array_fill(indice inicial, tamaño, valores);

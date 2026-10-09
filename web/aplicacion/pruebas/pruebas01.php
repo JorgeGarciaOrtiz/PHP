@@ -1,36 +1,36 @@
 <?php
 
-include_once(dirname(__FILE__) . "/../../cabecera.php"); // Incluye el archivo cabecera.php
+// Incluimos la cabecera y la plantilla de la aplicación
+include_once(dirname(__FILE__) . "/../../cabecera.php");
 
-// Controlador que se encarga de organizar la página
-
-$barra = [
-    [
-        "TEXTO" => "inicio",
-        "ENLACE" => "/index.php",
-        "ADICIONAL" => ">>"
-    ],
-    [
-        "TEXTO" => "pruebas",
-        "ADICIONAL" => "/aplicacion/pruebas/index.php"
-    ],
-    [
-        "TEXTO" => "eje basicos",
-    ]
+// Ruta de navegación de la página
+$ubicacion = [
+    "Inicio" => "../../../index.php",
+    "Pruebas" => "./index.php",
+    "Pruebas 01" => ""
 ];
 
+// ==========================================================
+// CONTROLADOR
+// ==========================================================
 
-inicioCabecera("APLICACION PRIMER TRIMESTRE"); // Inicia la cabecera de la página
-cabecera(); // Muestra el contenido de la cabecera
-finCabecera(); // Finaliza la cabecera
+// ==========================================================
+// PLANTILLA
+// ==========================================================
 
-inicioCuerpo("Pruebas basicas", $barra); // Inicia el contenido principal de la página
-cuerpo(); // Muestra el contenido de la vista
-finCuerpo(); // Finaliza el contenido principal
+// Cabecera de la página
+inicioCabecera("Pruebas de PHP");
+cabecera();
+finCabecera();
 
-// ***********************************************************************************
-// Vista
-// ***********************************************************************************
+// Cuerpo de la página
+inicioCuerpo("Pruebas 01", $ubicacion);
+cuerpo();
+finCuerpo();
+
+// ==========================================================
+// VISTA
+// ==========================================================
 
 function cabecera()
 {
@@ -43,7 +43,7 @@ function cuerpo()
 {
 ?>
     <!-- comentario html -->
-    <br><br>Esto es Html
+    Esto es Html
 
     <?php
 
@@ -156,10 +156,10 @@ function cuerpo()
 
     // ***********************************************************************************
 
-    $var = 1 + true;      // 2
-    $var = 1 + 1.5;       // 2.5
-    $var = 1 + "1hola";   // 2
-    $var = 1 + "1.5hola"; // 2.5
+    // $var = 1 + true;      // 2
+    // $var = 1 + 1.5;       // 2.5
+    // $var = 1 + "1hola";   // 2
+    // $var = 1 + "1.5hola"; // 2.5
     // $var = 1 + "hola";    // Error
     // $var = 1 + [];        // Error
 

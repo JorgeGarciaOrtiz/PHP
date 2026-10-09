@@ -6,6 +6,7 @@ function paginaError($mensaje)
     inicioCabecera("PRACTICA");
     finCabecera();
     inicioCuerpo("ERROR");
+
     echo "<br/>\n";
     echo $mensaje;
     echo "<br/>\n";
@@ -25,17 +26,14 @@ function inicioCabecera($titulo)
     <head>
         <meta charset="utf-8">
 
-        <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
-        Remove this if you use the .htaccess -->
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-        <title><?php echo $titulo ?></title>
+        <title><?php echo $titulo; ?></title>
         <meta name="description" content="">
         <meta name="author" content="Administrador">
 
         <meta name="viewport" content="width=device-width; initial-scale=1.0">
 
-        <!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
         <link rel="shortcut icon" href="/favicon.ico">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -50,11 +48,9 @@ function finCabecera()
 <?php
 }
 
-// '$cabecera' es el titulo
 function inicioCuerpo(string $cabecera, ?array $ubicacion = null)
 {
     global $acceso;
-
 ?>
 
     <body>
@@ -65,6 +61,7 @@ function inicioCuerpo(string $cabecera, ?array $ubicacion = null)
             </header>
 
             <div id="barraLogin"></div>
+
             <div id="barraMenu">
                 <ul>
                     <li><a href="/index.php">Inicio</a></li>
@@ -72,27 +69,30 @@ function inicioCuerpo(string $cabecera, ?array $ubicacion = null)
                     <li><a href="/aplicacion/practicas/relacion1">Relación 1</a></li>
                 </ul>
             </div>
-            <div id="barraUbicacion">
-                <ul>
-                    <?php
-                    if ($ubicacion !== null) {
-                        mostrarBarraUbicacion($ubicacion);
-                    }
-                    ?>
-                </ul>
-            </div>
+
+            <?php
+            if ($ubicacion !== null) {
+            ?>
+                <div id="barraUbicacion">
+                    <?php mostrarBarraUbicacion($ubicacion); ?>
+                </div>
+            <?php
+            }
+            ?>
+
             <div>
             <?php
-        }
+}
 
-        function finCuerpo()
-        {
+function finCuerpo()
+{
             ?>
-                <br />
-                <br />
+                <br/>
+                <br/>
             </div>
+
             <footer>
-                <hr width="90%" />
+                <hr width="90%"/>
                 <div>
                     &copy; Copyright by Jorge García Ortiz
                 </div>
@@ -102,20 +102,24 @@ function inicioCuerpo(string $cabecera, ?array $ubicacion = null)
 
     </html>
 <?php
-        }
+}
 
-        function mostrarBarraUbicacion(array $ubicacion)
-        {
-            echo "<nav class='barraModdle'>";
-            $total = count($ubicacion);
-            $contador = 0;
+function mostrarBarraUbicacion(array $ubicacion)
+{
+    echo "<nav class='barraModdle'>";
 
-            foreach ($ubicacion as $nombre => $url) {
-                $contador++;
-                if ($contador < $total) {
-                    echo "<a href='{$url}'>{$nombre}</a> &raquo; ";
-                } else {
-                    echo "<span>{$nombre}</span>";
-                }
-            }
+    $total = count($ubicacion);
+    $contador = 0;
+
+    foreach ($ubicacion as $nombre => $url) {
+        $contador++;
+
+        if ($contador < $total) {
+            echo "<a href='{$url}'>{$nombre}</a> &raquo; ";
+        } else {
+            echo "<span>{$nombre}</span>";
         }
+    }
+
+    echo "</nav>";
+}

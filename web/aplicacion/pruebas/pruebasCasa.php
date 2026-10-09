@@ -1,22 +1,38 @@
 <?php
 
-include_once(dirname(__FILE__) . "/../../cabecera.php"); // Incluye el archivo cabecera.php
+// Incluimos la cabecera y la plantilla de la aplicación
+include_once(dirname(__FILE__) . "/../../cabecera.php");
+
+// Ruta de navegación de la página
+$ubicacion = [
+    "Inicio" => "../../../index.php",
+    "Pruebas" => "./index.php",
+    "Pruebas de casa" => ""
+];
+
+// ==========================================================
+// CONTROLADOR
+// ==========================================================
 
 const PI_2 = 3.141592;
 
-// Controlador que se encarga de organizar la página
+// ==========================================================
+// PLANTILLA
+// ==========================================================
 
-inicioCabecera("APLICACION PRIMER TRIMESTRE"); // Inicia la cabecera de la página
-cabecera(); // Muestra el contenido de la cabecera
-finCabecera(); // Finaliza la cabecera
+// Cabecera de la página
+inicioCabecera("Pruebas de PHP");
+cabecera();
+finCabecera();
 
-inicioCuerpo("Pruebas basicas"); // Inicia el contenido principal de la página
-cuerpo(); // Muestra el contenido de la vista
-finCuerpo(); // Finaliza el contenido principal
+// Cuerpo de la página
+inicioCuerpo("Pruebas de casa", $ubicacion);
+cuerpo();
+finCuerpo();
 
-// ***********************************************************************************
-// Vista
-// ***********************************************************************************
+// ==========================================================
+// VISTA
+// ==========================================================
 
 function cabecera() {}
 

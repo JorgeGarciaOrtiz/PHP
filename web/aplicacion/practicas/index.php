@@ -1,7 +1,13 @@
 <?php
 
 // Incluimos la cabecera y la plantilla de la aplicación
-include_once(dirname(__FILE__) . "/cabecera.php");
+include_once(dirname(__FILE__) . "/../../cabecera.php");
+
+// Ruta de navegación de la página
+$ubicacion = [
+    "Inicio" => "../../index.php",
+    "Ejercicios" => ""
+];
 
 // ==========================================================
 // CONTROLADOR
@@ -12,12 +18,12 @@ include_once(dirname(__FILE__) . "/cabecera.php");
 // ==========================================================
 
 // Cabecera de la página
-inicioCabecera("APLICACION PRIMER TRIMESTRE");
+inicioCabecera("Ejercicios");
 cabecera();
 finCabecera();
 
 // Cuerpo de la página
-inicioCuerpo("Prácticas de PHP");
+inicioCuerpo("Ejercicios", $ubicacion);
 cuerpo();
 finCuerpo();
 
@@ -30,8 +36,6 @@ function cabecera() {}
 function cuerpo()
 {
 ?>
-    <a href="./aplicacion/pruebas/index.php">Pruebas</a>
-    <br>
-    <a href="./aplicacion/practicas">Ejercicios</a>
+    <a href="./relacion1/">Relación 1</a>
 <?php
 }

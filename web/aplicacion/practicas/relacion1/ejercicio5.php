@@ -6,6 +6,7 @@ include_once(dirname(__FILE__) . "/../../../cabecera.php");
 // Ruta de navegación de la página
 $ubicacion = [
     "Inicio" => "../../../index.php",
+    "Ejercicios" => "./../index.php",
     "Relacion 1" => "./index.php",
     "Ejercicio 5" => ""
 ];
@@ -29,12 +30,12 @@ $vector[56] = 23;
 // ==========================================================
 
 // Cabecera de la página
-inicioCabecera("Ejercicio 5", $ubicacion);
+inicioCabecera("Ejercicio 5");
 cabecera();
 finCabecera();
 
 // Cuerpo de la página
-inicioCuerpo("Ejercicio 5");
+inicioCuerpo("Ejercicio 5", $ubicacion);
 cuerpo($vector);
 finCuerpo();
 

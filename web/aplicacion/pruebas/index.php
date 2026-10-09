@@ -1,25 +1,43 @@
 <?php
+// Incluimos la cabecera y la plantilla de la aplicación
 include_once(dirname(__FILE__) . "/../../cabecera.php");
-//controlador
-//dibuja la plantilla de la vista
+
+// Ruta de navegación de la página
+$ubicacion = [
+    "Inicio" => "../../../index.php",
+    "Pruebas" => ""
+];
+
+// ==========================================================
+// CONTROLADOR
+// ==========================================================
+
+// ==========================================================
+// PLANTILLA
+// ==========================================================
+
+// Cabecera de la página
 inicioCabecera("Pruebas de PHP");
 cabecera();
 finCabecera();
-inicioCuerpo("Pruebas de PHP");
-cuerpo(); //llamo a la vista
+
+// Cuerpo de la página
+inicioCuerpo("Pruebas de PHP", $ubicacion);
+cuerpo();
 finCuerpo();
-// **********************************************************
-//vista
+
+// ==========================================================
+// VISTA
+// ==========================================================
+
 function cabecera() {}
-//vista
+
 function cuerpo()
 {
 ?>
-    <a href="pruebas01.php">Pruebas de clase</a>
+    <a href="pruebas01.php">Pruebas 01</a>
     <br>
     <a href="pruebasCasa.php">Pruebas de casa</a>
-    <br>
-    <a href="pasopar.php">Comunicación controlador</a>
     <br>
     <a href="./arrays.php">Prueba de Arrays</a>
 <?php

@@ -14,7 +14,7 @@
     --error: #ff8a8f;
     --warning-fondo: #4a3a14;
     --warning: #ffd166;
-    --enlace-hover: #7fd1ff;
+    --enlace-hover: #ffffff;
 }
 
 /* ============ BASE ============ */
@@ -81,6 +81,18 @@ a:hover {
 #pie {
     font-size: 1.5em;
     padding: 5px;
+}
+
+/* ============ BARRA DE UBICACIÓN ============ */
+#barraUbicacion {
+    padding: 8px 15px 8px 20px;
+    margin-bottom: 20px;
+}
+
+#barraUbicacion ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 /* ============ BOTONES ============ */
@@ -185,7 +197,7 @@ table.xdebug-error td {
 
 #barraMenu li:hover {
     background-color: var(--boton-hover);
-    transform: translateY(-2px);
+    /* transform: translateY(-2px); */
 }
 
 #barraMenu li a,
@@ -201,4 +213,11 @@ table.xdebug-error td {
 #barraMenu li a:hover {
     color: var(--enlace-hover);
     text-decoration: none;
+}
+
+/* ============ SEPARADOR ============ */
+hr {
+    width: 100%;
+    border: none;
+    border-top: thin solid var(--borde);
 }
