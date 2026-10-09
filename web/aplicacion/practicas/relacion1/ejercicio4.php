@@ -3,20 +3,30 @@
 // Incluimos la cabecera y la plantilla de la aplicación
 include_once(dirname(__FILE__) . "/../../../cabecera.php");
 
+// Ruta de navegación de la página
+$ubicacion = [
+    "Inicio" => "../../../index.php",
+    "Relacion 1" => "./index.php",
+    "Ejercicio 4" => ""
+];
+
 // ==========================================================
 // CONTROLADOR
 // ==========================================================
 
-// Creo el array
+// Creo el array principal
 $array = [];
 
-// Variable con el número de filas
+// Creo una constante con el número de filas
 const numeroFilas = 5;
 
-// Añado los valores al array creado
+// Añado las filas al array principal
 for ($i = 0; $i < numeroFilas + 1; $i++) {
 
-    // Creo un array con el numero de indices que yo quiero --> array_fill(indice inicial, tamaño, valores);
+    /*
+        Creo un array con el número de indices que yo quiero --> array_fill(indice inicial, tamaño, valores);
+        Ejemplo: si $i = 3 → array_fill crea [3, 3, 3]
+    */
     $fila = array_fill(0, $i, $i);
 
     // Añado la fila a nuestro array principal
@@ -27,15 +37,14 @@ for ($i = 0; $i < numeroFilas + 1; $i++) {
 // PLANTILLA
 // ==========================================================
 
-// Dibujamos la cabecera de la página
+// Cabecera de la página
 inicioCabecera("Ejercicio 4");
 cabecera();
 finCabecera();
 
-// Dibujamos el cuerpo de la página
-inicioCuerpo("Ejercicio 4");
+// Cuerpo de la página
+inicioCuerpo("Ejercicio 4", $ubicacion);
 cuerpo($array);
-
 finCuerpo();
 
 // ==========================================================
@@ -55,10 +64,8 @@ finCuerpo();
  * Los datos se definirán en el controlador y se visualizarán en la vista.
  */
 
-// Cabecera propia de la vista
 function cabecera() {}
 
-// Cuerpo propio de la vista
 function cuerpo($array)
 {
     // Recorro cada fila del array
@@ -67,9 +74,10 @@ function cuerpo($array)
         // Recorro cada valor de cada fila
         foreach ($fila as $valor) {
 
-            // Muestro el valor
+            // Muestro el valor seguido de un espacio
             echo $valor . " ";
         }
+        // Salto de línea para que cada fila se muestre en su propia línea
         echo "<br>";
     }
 }

@@ -6,11 +6,11 @@ function paginaError($mensaje)
     inicioCabecera("PRACTICA");
     finCabecera();
     inicioCuerpo("ERROR");
-    echo "<br />\n";
+    echo "<br/>\n";
     echo $mensaje;
-    echo "<br />\n";
-    echo "<br />\n";
-    echo "<br />\n";
+    echo "<br/>\n";
+    echo "<br/>\n";
+    echo "<br/>\n";
     echo "<a href='/index.php'>Ir a la pagina principal</a>\n";
 
     finCuerpo();
@@ -69,28 +69,17 @@ function inicioCuerpo(string $cabecera, ?array $ubicacion = null)
                 <ul>
                     <li><a href="/index.php">Inicio</a></li>
                     <li><a href="/aplicacion/pruebas/index.php">Pruebas</a></li>
+                    <li><a href="/aplicacion/practicas/relacion1">Relación 1</a></li>
                 </ul>
             </div>
             <div id="barraUbicacion">
-
                 <ul>
                     <?php
-
-                        if ($ubicacion !== null) {
-                            mostrarBarraUbicacion($ubicacion);
-                        }
-
-
+                    if ($ubicacion !== null) {
+                        mostrarBarraUbicacion($ubicacion);
+                    }
                     ?>
                 </ul>
-
-
-
-
-
-
-               
-
             </div>
             <div>
             <?php
@@ -129,6 +118,4 @@ function inicioCuerpo(string $cabecera, ?array $ubicacion = null)
                     echo "<span>{$nombre}</span>";
                 }
             }
-
-            echo "</nav><br>";
         }

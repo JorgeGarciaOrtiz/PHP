@@ -3,14 +3,21 @@
 // Incluimos la cabecera y la plantilla de la aplicación
 include_once(dirname(__FILE__) . "/../../../cabecera.php");
 
+// Ruta de navegación de la página
+$ubicacion = [
+    "Inicio" => "../../../index.php",
+    "Relacion 1" => "./index.php",
+    "Ejercicio 5" => ""
+];
+
 // ==========================================================
 // CONTROLADOR
 // ==========================================================
 
-// Creamos un array
+// Creo un array vacío
 $vector = array();
 
-// Lo rellenamos con los valores que nos piden
+// Lo relleno con los valores que nos piden
 $vector[1] = "esto es una cadena";
 $vector["posi1"] = 25.67;
 $vector[] = false;
@@ -21,15 +28,14 @@ $vector[56] = 23;
 // PLANTILLA
 // ==========================================================
 
-// Dibujamos la cabecera de la página
-inicioCabecera("Ejercicio 5");
+// Cabecera de la página
+inicioCabecera("Ejercicio 5", $ubicacion);
 cabecera();
 finCabecera();
 
-// Dibujamos el cuerpo de la página
+// Cuerpo de la página
 inicioCuerpo("Ejercicio 5");
 cuerpo($vector);
-
 finCuerpo();
 
 // ==========================================================
@@ -59,39 +65,41 @@ finCuerpo();
  * El array se definirá en el controlador y se visualizará en la vista.
  */
 
-// Cabecera propia de la vista
 function cabecera() {}
 
-// Cuerpo propio de la vista
 function cuerpo($vector)
 {
-    // Recorro los valores del array
+    // Recorro los valores del array con su posición y su contenido
     foreach ($vector as $posicion => $contenido) {
 
-        // Si el valor es un array lo muestro por pantalla con su formato
+        // Si el valor es un array, lo muestro por pantalla con su format
         if (is_array($contenido)) {
 
+            // Muestro la posición y el tipo del contenido
             echo "posición " . $posicion . ", contenido (array): ";
 
-            // Recorro todos los valores del array
+            // Recorro todos los valores del array interno
             foreach ($contenido as $contenido2) {
+
+                // Muestro cada valor seguido de un espacio
                 echo $contenido2 . " ";
             }
+            // Dejo un espacio antes del siguiente elemento
             echo "<br><br>";
 
-            // Si el valor es un número entero lo muestro por pantalla con su formato
+            // Si el valor es un número entero, lo muestro por pantalla con su formato
         } else if (is_integer($contenido)) {
             echo "posición " . $posicion . ", contenido (" . gettype($contenido) . "): entero con valor " . $contenido . ", en binario " . decbin($contenido) . "<br><br>";
 
-            // Si el valor es un número decimal lo muestro por pantalla con su formato
+            // Si el valor es un número decimal, lo muestro por pantalla con su formato
         } else if (is_float($contenido)) {
             echo "posición " . $posicion . ", contenido (" . gettype($contenido) . "): real " . $contenido . " que al cuadrado es " . pow($contenido, 2) . "<br><br>";
 
-            // Si el valor es una cadena la muestro por pantalla con su formato
+            // Si el valor es una cadena, la muestro por pantalla con su formato
         } else if (is_string($contenido)) {
             echo "posición " . $posicion . ", contenido (" . gettype($contenido) . "): -" . $contenido . "-<br><br>";
 
-            // Si el valor es un boolean muestro true o false por pantalla en el formato pedido
+            // Si el valor es un booleano, muestro true o false por pantalla en el formato pedido
         } else if (is_bool($contenido)) {
             echo "posición " . $posicion . ", contenido (" . gettype($contenido) . "): " . ($contenido === true ? "true" : "false") . " y su opuesto " . ($contenido === true ? "false" : "true") . "<br><br>";
         }

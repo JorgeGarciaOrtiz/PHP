@@ -1,20 +1,6 @@
 <?php
 include_once(dirname(__FILE__) . "/cabecera.php");
 //controlador
-// $barra = [
-//     [
-//         "TEXTO" => "inicio",
-//         "ENLACE" => "/index.php",
-//         "ADICIONAL" => ">>"
-//     ],
-//     [
-//         "TEXTO" => "otro"
-//     ],
-//     [
-//         "TEXTO" => "index",
-//         "ADICIONAL" => "&copy;&copy;"
-//     ]
-// ];
 
 //dibuja la plantilla de la vista
 inicioCabecera("APLICACION PRIMER TRIMESTRE");
@@ -33,7 +19,8 @@ function cabecera() {}
 function cuerpo()
 {
 ?>
-     <a href="./aplicacion/pruebas/index.php">Accesoa a pruebas</a>
+    <a href="./aplicacion/pruebas/index.php">Pruebas</a>
+    <br>
     <a href="./aplicacion/practicas/relacion1/index.php">Relación 1</a>
 <?php
 }

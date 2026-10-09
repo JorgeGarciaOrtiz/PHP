@@ -3,6 +3,13 @@
 // Incluimos la cabecera y la plantilla de la aplicación
 include_once(dirname(__FILE__) . "/../../../cabecera.php");
 
+// Ruta de navegación de la página
+$ubicacion = [
+    "Inicio" => "../../../index.php",
+    "Relacion 1" => "./index.php",
+    "Ejercicio 3" => ""
+];
+
 // ==========================================================
 // CONTROLADOR
 // ==========================================================
@@ -19,6 +26,9 @@ $array1[1] = true;
 $array1[16] = -0.7;
 $array1[54] = 850;
 
+// c) Añadir el valor 34 al final
+$array1[] = 34;
+
 // d) Añadir los valores “cadena”, true, 1.345 en las posiciones “uno”, “dos” y “tres”
 $array1["uno"] = "cadena";
 $array1["dos"] = true;
@@ -27,11 +37,9 @@ $array1["tres"] = 1.345;
 // e) Rellenar la posición “ultima” con el array (1,34,”nueva”);
 $array1["ultima"] = [1, 34, "nueva"];
 
-// c) Añadir el valor 34 al final
-$array1[] = 34;
-
 // ---------------------------------------------------------
-// 2. Crear y rellenar el array usando una sola sentencia con array.
+// 2. Crear y rellenar el array usando una sola sentencia
+// con array.
 // ---------------------------------------------------------
 
 // a) Crear una variable de tipo array.
@@ -42,20 +50,21 @@ $array2 = array(
     16 => -0.7,
     54 => 850,
 
+    // c) Añadir el valor 34 al final
+    34,
+
     // d) Añadir los valores “cadena”, true, 1.345 en las posiciones “uno”, “dos” y “tres”
     "uno" => "cadena",
     "dos" => true,
     "tres" => 1.345,
 
     // e) Rellenar la posición “ultima” con el array (1,34,”nueva”);
-    "ultima" => array(1, 34, "nueva"),
-
-    // c) Añadir el valor 34 al final
-    34
+    "ultima" => array(1, 34, "nueva")
 );
 
 // ---------------------------------------------------------
-// 3. Crear y rellenar el array usando una sola sentencia con [].
+// 3. Crear y rellenar el array usando una sola sentencia
+// con [].
 // ---------------------------------------------------------
 
 // a) Crear una variable de tipo array.
@@ -66,16 +75,16 @@ $array3 = [
     16 => -0.7,
     54 => 850,
 
+    // c) Añadir el valor 34 al final
+    34,
+
     // d) Añadir los valores “cadena”, true, 1.345 en las posiciones “uno”, “dos” y “tres”
     "uno" => "cadena",
     "dos" => true,
     "tres" => 1.345,
 
     // e) Rellenar la posición “ultima” con el array (1,34,”nueva”);
-    "ultima" => [1, 34, "nueva"],
-
-    // c) Añadir el valor 34 al final
-    34
+    "ultima" => [1, 34, "nueva"]
 ];
 
 // Creo un array para guardar dentro todos los arrays creados antes
@@ -85,15 +94,14 @@ $arrays = [$array1, $array2, $array3];
 // PLANTILLA
 // ==========================================================
 
-// Dibujamos la cabecera de la página
+// Cabecera de la página
 inicioCabecera("Ejercicio 3");
 cabecera();
 finCabecera();
 
-// Dibujamos el cuerpo de la página
-inicioCuerpo("Ejercicio 3");
+// Cuerpo de la página
+inicioCuerpo("Ejercicio 3", $ubicacion);
 cuerpo($arrays);
-
 finCuerpo();
 
 // ==========================================================
@@ -102,52 +110,51 @@ finCuerpo();
 
 /**
  * 3.- Se quiere:
- * a) Crear una variable de tipo array.
- * b) Rellenar las posiciones 1, 16, 54 con valores cualquiera.
- * c) Añadir el valor 34 al final
- * d) Añadir los valores “cadena”, true, 1.345 en las posiciones “uno”, “dos” y “tres”
- * e) Rellenar la posición “ultima” con el array (1,34,”nueva”);
- *      - 1. Hacer lo anterior creando y rellenando el array usando varias sentencias.
- *      - 2. Hacer lo anterior usando una sola sentencia con array;
- *      - 3. Hacer lo anterior usando una sola sentencia con []
- *      - 4. Recorrer los tres arrays usando foreach mostrando todos los valores de los arrays creados
- * Los arrays se definirán en el controlador y se visualizarán en la vista.
+ *   a) Crear una variable de tipo array.
+ *   b) Rellenar las posiciones 1, 16, 54 con valores cualquiera.
+ *   c) Añadir el valor 34 al final
+ *   d) Añadir los valores “cadena”, true, 1.345 en las posiciones “uno”, “dos” y “tres”
+ *   e) Rellenar la posición “ultima” con el array (1,34,”nueva”);
+ * 
+ *      - Hacer lo anterior creando y rellenando el array usando varias sentencias.
+ *      - Hacer lo anterior usando una sola sentencia con array;
+ *      - Hacer lo anterior usando una sola sentencia con []
+ *      - Recorrer los tres arrays usando foreach mostrando todos los valores de los arrays creados
+ * 
+ *      Los arrays se definirán en el controlador y se visualizarán en la vista.
  */
 
-// Cabecera propia de la vista
 function cabecera() {}
 
-// Cuerpo propio de la vista
 function cuerpo($arrays)
 {
-    // ---------------------------------------------------------
-    // 4. Recorrer los tres arrays usando foreach mostrando todos sus valores.
-    // ---------------------------------------------------------
-
-    // Recorro cada uno de los arrays para poder poder mostrar uno por uno sus valores internos
+    // Recorro cada uno de los arrays para poder mostrar uno por uno sus valores internos
     for ($i = 0; $i < count($arrays); $i++) {
 
-        // Pongo esto para separar entre arrays y quede mejor visualmente
+        // Separo visualmente cada array con un título
         echo "Array " . ($i + 1) . ":<br>";
 
         // Empiezo a leer los valores internos del array
         foreach ($arrays[$i] as $v1) {
 
-            // Si no es un array:
+            // Si no es un array, es un valor normal
             if (!is_array($v1)) {
-                // Muestro su valor
+
+                // Muestro el valor
                 echo $v1 . "<br>";
 
-                // En el caso de que si sea un array:
+                // De lo contrario si es un array
             } else {
 
-                // Recorro los valores de este nuevo array (este array esta dentro del array principal)
+                // Recorro los valores del array interno
                 foreach ($v1 as $v2) {
-                    // Y los muestro
+
+                    // Muestro cada valor
                     echo $v2 . "<br>";
                 }
             }
         }
+        // Separación entre un array y el siguiente
         echo "<br><br>";
     }
 }

@@ -2,10 +2,10 @@
 include_once(dirname(__FILE__) . "/../../cabecera.php");
 //controlador
 //dibuja la plantilla de la vista
-inicioCabecera("APLICACION PRIMER TRIMESTRE");
+inicioCabecera("Pruebas de PHP");
 cabecera();
 finCabecera();
-inicioCuerpo("2DAW APLICACION");
+inicioCuerpo("Pruebas de PHP");
 cuerpo(); //llamo a la vista
 finCuerpo();
 // **********************************************************
@@ -15,7 +15,7 @@ function cabecera() {}
 function cuerpo()
 {
 ?>
-    <a href="pruebas01.php">Pruebas01 de clase</a>
+    <a href="pruebas01.php">Pruebas de clase</a>
     <br>
     <a href="pruebasCasa.php">Pruebas de casa</a>
     <br>
