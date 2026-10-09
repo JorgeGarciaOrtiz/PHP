@@ -51,7 +51,7 @@ function finCabecera()
 }
 
 // '$cabecera' es el titulo
-function inicioCuerpo(string $cabecera, array $ubicacion = [])
+function inicioCuerpo(string $cabecera, ?array $ubicacion = null)
 {
     global $acceso;
 
@@ -72,30 +72,25 @@ function inicioCuerpo(string $cabecera, array $ubicacion = [])
                 </ul>
             </div>
             <div id="barraUbicacion">
-                <?php
-                if ($ubicacion) {
 
-                    foreach ($ubicacion as $elemento) {
+                <ul>
+                    <?php
 
-                        if (isset($elemento["ENLACE"])) {
-
-                            echo "<a href='{$elemento["ENLACE"]}'>";
+                        if ($ubicacion !== null) {
+                            mostrarBarraUbicacion($ubicacion);
                         }
 
-                        echo $elemento["TEXTO"];
 
-                        if (isset($elemento["ENLACE"])) {
-                            echo "</a>";
-                        }
+                    ?>
+                </ul>
 
-                        if (isset($elemento["ADICIONAL"])) {
-                            echo $elemento["ADICIONAL"];
-                        } else {
-                            echo "&nbsp;&nbsp;";
-                        }
-                    }
-                }
-                ?>
+
+
+
+
+
+               
+
             </div>
             <div>
             <?php
@@ -118,4 +113,22 @@ function inicioCuerpo(string $cabecera, array $ubicacion = [])
 
     </html>
 <?php
+        }
+
+        function mostrarBarraUbicacion(array $ubicacion)
+        {
+            echo "<nav class='barraModdle'>";
+            $total = count($ubicacion);
+            $contador = 0;
+
+            foreach ($ubicacion as $nombre => $url) {
+                $contador++;
+                if ($contador < $total) {
+                    echo "<a href='{$url}'>{$nombre}</a> &raquo; ";
+                } else {
+                    echo "<span>{$nombre}</span>";
+                }
+            }
+
+            echo "</nav><br>";
         }

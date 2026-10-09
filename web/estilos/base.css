@@ -157,3 +157,47 @@ table.xdebug-error td {
     background-color: var(--warning-fondo) !important;
     color: var(--warning) !important;
 }
+
+/* Menú superior personalizado */
+#barraMenu {
+    background-color:#f5f5f5;
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+#barraMenu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+
+#barraMenu li {
+    background-color: #ffffff;
+    border: 2px solid #ad7829;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#barraMenu li:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    background-color: #c4a797;
+}
+
+#barraMenu li a {
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #616161;
+    font-weight: bold;
+    font-size: 1em;
+    text-align: center;
+    border-radius: 12px;
+}
