@@ -39,6 +39,8 @@ function cuerpo()
     <br>
     <a href="pruebasCasa.php">Pruebas de casa</a>
     <br>
-    <a href="./arrays.php">Prueba de Arrays</a>
+    <a href="arrays.php">Prueba de Arrays</a>
+    <br>
+    <a href="fechas.php">Prueba de Fechas</a>
 <?php
 }
