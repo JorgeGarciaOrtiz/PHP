@@ -17,7 +17,7 @@ cabecera();
 finCabecera();
 
 // Cuerpo de la página
-inicioCuerpo("Prácticas de PHP");
+inicioCuerpo("Inicio");
 cuerpo();
 finCuerpo();
 

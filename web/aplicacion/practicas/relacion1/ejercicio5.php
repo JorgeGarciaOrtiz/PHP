@@ -3,12 +3,15 @@
 // Incluimos la cabecera y la plantilla de la aplicación
 include_once(dirname(__FILE__) . "/../../../cabecera.php");
 
+// Variable con el titulo
+$titulo = "Ejercicio 5";
+
 // Ruta de navegación de la página
 $ubicacion = [
     "Inicio" => "../../../index.php",
     "Ejercicios" => "./../index.php",
-    "Relacion 1" => "./index.php",
-    "Ejercicio 5" => ""
+    "Relación 1" => "./index.php",
+    $titulo => ""
 ];
 
 // ==========================================================
@@ -30,12 +33,12 @@ $vector[56] = 23;
 // ==========================================================
 
 // Cabecera de la página
-inicioCabecera("Ejercicio 5");
+inicioCabecera($titulo);
 cabecera();
 finCabecera();
 
 // Cuerpo de la página
-inicioCuerpo("Ejercicio 5", $ubicacion);
+inicioCuerpo($titulo, $ubicacion);
 cuerpo($vector);
 finCuerpo();
 

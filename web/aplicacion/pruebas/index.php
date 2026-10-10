@@ -2,10 +2,13 @@
 // Incluimos la cabecera y la plantilla de la aplicación
 include_once(dirname(__FILE__) . "/../../cabecera.php");
 
+// Variable con el titulo
+$titulo = "Pruebas";
+
 // Ruta de navegación de la página
 $ubicacion = [
     "Inicio" => "../../../index.php",
-    "Pruebas" => ""
+    $titulo => ""
 ];
 
 // ==========================================================
@@ -17,12 +20,12 @@ $ubicacion = [
 // ==========================================================
 
 // Cabecera de la página
-inicioCabecera("Pruebas de PHP");
+inicioCabecera($titulo);
 cabecera();
 finCabecera();
 
 // Cuerpo de la página
-inicioCuerpo("Pruebas de PHP", $ubicacion);
+inicioCuerpo($titulo, $ubicacion);
 cuerpo();
 finCuerpo();
 
@@ -37,10 +40,10 @@ function cuerpo()
 ?>
     <a href="pruebas01.php">Pruebas 01</a>
     <br>
-    <a href="pruebasCasa.php">Pruebas de casa</a>
+    <a href="pruebas02.php">Pruebas 02</a>
     <br>
-    <a href="arrays.php">Prueba de Arrays</a>
+    <a href="arrays.php">Arrays</a>
     <br>
-    <a href="fechas.php">Prueba de Fechas</a>
+    <a href="fechas.php">Fechas</a>
 <?php
 }

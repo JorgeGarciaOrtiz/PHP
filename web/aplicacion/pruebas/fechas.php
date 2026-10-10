@@ -3,8 +3,11 @@
 // Incluimos la cabecera y la plantilla de la aplicación
 include_once(dirname(__FILE__) . "/../../cabecera.php");
 
-// Variable con el titulo del fichero 
-$titulo = "Pruebas de fechas";
+// Fijo la zona horaria para todas las funciones de fecha/hora
+date_default_timezone_set('Europe/Madrid');
+
+// Variable con el titulo
+$titulo = "Fechas";
 
 // Ruta de navegación de la página
 $ubicacion = [
@@ -12,9 +15,6 @@ $ubicacion = [
     "Pruebas" => "./index.php",
     $titulo => ""
 ];
-
-// Fijo la zona horaria para todas las funciones de fecha/hora
-date_default_timezone_set('Europe/Madrid');
 
 // ==========================================================
 // CONTROLADOR

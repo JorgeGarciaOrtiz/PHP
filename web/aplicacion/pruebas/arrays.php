@@ -3,11 +3,14 @@
 // Incluimos la cabecera y la plantilla de la aplicación
 include_once(dirname(__FILE__) . "/../../cabecera.php");
 
+// Variable con el titulo
+$titulo = "Arrays";
+
 // Ruta de navegación de la página
 $ubicacion = [
     "Inicio" => "../../../index.php",
     "Pruebas" => "./index.php",
-    "Pruebas de arrays" => ""
+    $titulo => ""
 ];
 
 // ==========================================================
@@ -19,12 +22,12 @@ $ubicacion = [
 // ==========================================================
 
 // Dibujamos la cabecera de la página
-inicioCabecera("Prueba de arrays");
+inicioCabecera($titulo);
 cabecera();
 finCabecera();
 
 // Dibujamos el cuerpo de la página
-inicioCuerpo("Prueba de arrays", $ubicacion);
+inicioCuerpo($titulo, $ubicacion);
 cuerpo();
 
 finCuerpo();

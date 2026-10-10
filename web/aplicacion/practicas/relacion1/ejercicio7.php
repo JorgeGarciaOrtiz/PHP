@@ -1,16 +1,20 @@
 <?php
 
-date_default_timezone_set('Europe/Madrid');
-
 // Incluimos la cabecera y la plantilla de la aplicación
 include_once(dirname(__FILE__) . "/../../../cabecera.php");
+
+// Fijo la zona horaria para todas las funciones de fecha/hora
+date_default_timezone_set('Europe/Madrid');
+
+// Variable con el titulo
+$titulo = "Ejercicio 7";
 
 // Ruta de navegación de la página
 $ubicacion = [
     "Inicio" => "../../../index.php",
     "Ejercicios" => "./../index.php",
-    "Relacion 1" => "./index.php",
-    "Ejercicio 7" => ""
+    "Relación 1" => "./index.php",
+    $titulo => ""
 ];
 
 // ==========================================================
@@ -22,12 +26,12 @@ $ubicacion = [
 // ==========================================================
 
 // Cabecera de la página
-inicioCabecera("Ejercicio 7");
+inicioCabecera($titulo);
 cabecera();
 finCabecera();
 
 // Cuerpo de la página
-inicioCuerpo("Ejercicio 7", $ubicacion);
+inicioCuerpo($titulo, $ubicacion);
 cuerpo();
 finCuerpo();
 

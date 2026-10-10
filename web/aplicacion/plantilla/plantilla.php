@@ -66,7 +66,7 @@ function inicioCuerpo(string $cabecera, ?array $ubicacion = null)
                 <ul>
                     <li><a href="/index.php">Inicio</a></li>
                     <li><a href="/aplicacion/pruebas/index.php">Pruebas</a></li>
-                    <li><a href="/aplicacion/practicas/relacion1">Relación 1</a></li>
+                    <li><a href="/aplicacion/practicas">Ejercicios</a></li>
                 </ul>
             </div>
 
