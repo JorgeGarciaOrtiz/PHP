@@ -45,5 +45,7 @@ function cuerpo()
     <a href="arrays.php">Arrays</a>
     <br>
     <a href="fechas.php">Fechas</a>
+    <br>
+    <a href="cadenas.php">Cadenas</a>
 <?php
 }

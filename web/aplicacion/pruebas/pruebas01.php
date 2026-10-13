@@ -281,9 +281,4 @@ function cuerpo()
         Shift left → << → desplaza a la izquierda (×2)
         Shift right → >> → desplaza a la derecha (÷2)
     */
-
-    // ***********************************************************************************
-
-    ?>
-<?php
 }
