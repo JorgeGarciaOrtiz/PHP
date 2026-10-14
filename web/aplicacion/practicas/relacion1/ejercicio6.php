@@ -62,6 +62,9 @@ function cuerpo($vector)
     // Añadimos un titulo
     echo "Funciones de recorrido: <br>";
 
+    // Necesario para poner el puntero en la primera posición
+    // reset($vector);
+
     // Mientras la posición actual del puntero exista, sigo recorriendo
     while (key($vector) != NULL) {
 
