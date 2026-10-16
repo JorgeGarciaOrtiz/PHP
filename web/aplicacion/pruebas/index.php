@@ -47,5 +47,7 @@ function cuerpo()
     <a href="fechas.php">Fechas</a>
     <br>
     <a href="cadenas.php">Cadenas</a>
+    <br>
+    <a href="expresionesRegulares.php">Expresiones regulares</a>
 <?php
 }

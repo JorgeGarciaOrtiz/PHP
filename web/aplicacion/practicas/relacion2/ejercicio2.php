@@ -65,52 +65,70 @@ function cabecera() {}
 
 function cuerpo($cadena)
 {
-    // ==========================================================
-    // FORMA 0
-    // ==========================================================
-
-    // Obtengo todos los caracteres de la cadena en un array
-    $caracteres = mb_str_split($cadena, 1, 'UTF-8');
-
-    // Creo una variable para dar el espacio delantero a cada caracter
-    $espacio = "";
-
-    // Recorremos cada uno de los caracteres del array y los mostramos, un caracter por linea
-    for ($i = 0; $i < count($caracteres); $i++) {
-        echo $espacio . $caracteres[$i] . "<br>" . PHP_EOL;
-        $espacio = $espacio . "&nbsp;";
-    }
+    // echo strlen($cadena); --> 22 (bytes)
+    // echo mb_strlen($cadena); --> 20 (caracteres)
 
     // ==========================================================
     // FORMA 1 --> []
     // ==========================================================
 
-    $espacio = "";
+    // $espacio = "";
+    // for ($i = 0; $i < strlen($cadena); $i++) {
+    //     echo $espacio . $cadena[$i] . "<br>" . PHP_EOL;
+    //     $espacio = $espacio . "&nbsp;";
+    // }
 
-    for ($i = 0; $i < count($caracteres); $i++) {
-        echo $espacio . $cadena[$i] . "<br>" . PHP_EOL;
+    // ==========================================================
+    // FORMA 2 --> substr($cadena, desde, cuantos)
+    // ==========================================================
+
+    // $espacio = "";
+    // for ($i = 0; $i < strlen($cadena); $i++) {
+    //     echo $espacio . substr($cadena, $i, 1) . "<br>" . PHP_EOL;
+    //     $espacio = $espacio . "&nbsp;";
+    // }
+
+    // ==========================================================
+    // FORMA 3 --> mb_substr($cadena, desde, cuantos)
+    // ==========================================================
+
+    // Mostramos los caracteres uno por uno en el formato pedido
+    $espacio = "";
+    for ($i = 0; $i < mb_strlen($cadena); $i++) {
+        echo $espacio . mb_substr($cadena, $i, 1, 'UTF-8') . "<br>" . PHP_EOL;
         $espacio = $espacio . "&nbsp;";
     }
 
-  
+    echo "<hr>";
 
-    // ==========================================================
-    // FORMA 2 --> substr
-    // ==========================================================
+    // Mostramos los mismos caracteres pero de forma inversa
+    $espacio = "";
+    for ($i = mb_strlen($cadena)-1; $i >= 0; $i--) {
 
-    
+        echo $espacio . ($i % 2 == 0 ?
+            mb_strtoupper(mb_substr($cadena, $i, 1, 'UTF-8')) :
+            mb_strtolower(mb_substr($cadena, $i, 1, 'UTF-8'))) . "<br>" . PHP_EOL;
 
-    // ==========================================================
-    // FORMA 3 --> mb_substr
-    // ==========================================================
+        $espacio = $espacio . "&nbsp;";
+    }
 
-    // // [] : primer carácter
-    // $palabra = "Hola";
-    // echo $palabra[0]; // H
+    echo "<hr>";
 
-    // // substr : 3 caracteres desde la posición 1
-    // echo substr("Mundo", 1, 3); // und
+    // Cortamos la cadena cuando encontremos el caracter "a"
+    $espacio = "";
+    for ($i = 0; $i < strlen($cadena); $i++) {
 
-    // // mb_substr : un carácter con tilde
-    // echo mb_substr("camión", 4, 1, 'UTF-8'); // ó
+        $cadenaCortada = "";
+        echo $cadenaCortada = $cadenaCortada . mb_substr($cadena, $i, 1, 'UTF-8');
+
+        if (mb_substr($cadena, $i, 1, 'UTF-8') == "a") {
+            echo $cadenaCortada = "<br>";
+        }
+    }
+
+    echo "<hr>";
+
+    // Intercambiamos el caracter vacio que hay despues de "niña" por "/mujer"
+    $nuevaCadena = str_replace("niña ", "niña/mujer ", $cadena);
+    echo $nuevaCadena;
 }

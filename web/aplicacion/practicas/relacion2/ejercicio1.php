@@ -28,14 +28,14 @@ $c1 = "Esto es una $cadena <b>normal</b> con \"comillas dobles\", caracteres: �
 $c2 = 'Esto es una $cadena <b>normal</b> con \'comillas simples\', caracteres: ‘, “, á, é, ñ<br>';
 
 // Creo una cadena con HEREDOC
-$c3 = <<<EOT
+$c3 = <<<fin
 Esto es una $cadena con <b>HEREDOC</b>, caracteres: ‘, “, á, é, ñ<br>
-EOT;
+fin;
 
 // Creo una cadena con NOWDOC
-$c4 = <<<'EOT'
+$c4 = <<<'fin'
 Esto es una $cadena con <b>NOWDOC</b>, caracteres: ‘, “, á, é, ñ<br>
-EOT;
+fin;
 
 // ==========================================================
 // PLANTILLA
@@ -67,8 +67,8 @@ function cabecera() {}
 function cuerpo($c1, $c2, $c3, $c4)
 {
     // Muestro todas las cadenas, utilizo htmlspecialchars para poder ver las etiquetas HTML
-    echo htmlspecialchars($c1, ENT_QUOTES, 'UTF-8') . "<br>" . PHP_EOL;
-    echo htmlspecialchars($c2, ENT_QUOTES, 'UTF-8') . "<br>" . PHP_EOL;
-    echo htmlspecialchars($c3, ENT_QUOTES, 'UTF-8') . "<br>" . PHP_EOL;
-    echo htmlspecialchars($c4, ENT_QUOTES, 'UTF-8') . "<br>" . PHP_EOL;
+    echo htmlspecialchars($c1) . "<br>" . PHP_EOL;
+    echo htmlspecialchars($c2) . "<br>" . PHP_EOL;
+    echo htmlspecialchars($c3) . "<br>" . PHP_EOL;
+    echo htmlspecialchars($c4) . "<br>" . PHP_EOL;
 }

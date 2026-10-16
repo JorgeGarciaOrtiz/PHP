@@ -40,7 +40,22 @@ function cabecera() {}
 function cuerpo()
 {
 ?>
-    El niño me ha escrito una carta en un camión <br>
+    El niï¿½o me ha escrito una carta en un camiï¿½n <br>
     El ni&ntilde;o me ha escrito una carta en un cami&oacute;n
 <?php
+
+    // Creamos la cadena que nos piden
+    $cadena = "EstÃ¡ la niÃ±a en casa";
+
+    // Obtengo todos los caracteres de la cadena en un array
+    $caracteres = mb_str_split($cadena, 1, 'UTF-8');
+
+    // Creo una variable para dar el espacio delantero a cada caracter
+    $espacio = "";
+
+    // Recorremos cada uno de los caracteres del array y los mostramos, un caracter por linea
+    for ($i = 0; $i < count($caracteres); $i++) {
+        echo $espacio . $caracteres[$i] . "<br>" . PHP_EOL;
+        $espacio = $espacio . "&nbsp;";
+    }
 }
