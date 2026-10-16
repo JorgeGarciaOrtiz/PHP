@@ -63,7 +63,7 @@ finCuerpo();
 
 function cabecera() {}
 
-function cuerpo($cadena)
+function cuerpo(string $cadena)
 {
     // echo strlen($cadena); --> 22 (bytes)
     // echo mb_strlen($cadena); --> 20 (caracteres)
