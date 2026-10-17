@@ -20,30 +20,37 @@ $ubicacion = [
 
 // Creo una cadena con HEREDOC
 $cadena = <<<fin
-<h1>Información tienda</h1>
-<p>aaClientes: 12</p>
-<b>Pedidos: 102</b>aa
-Empleados: 2aa
+<h3>Información tienda</h3>
+<p>Clientes: 12</p>
+<b>Pedidos: 102</b>
+<b>Empleados: 2</b>
 Correo: jorge@mail.com
-Correo: carlos@mail.comaa
+Correo: carlos@mail.com
 fin;
 
-// Define expresiones regulares apropiadas para localizar los distintos elementos creados
-// (etiqueta, numero y dirección de email) en la cadena.
+// Defino las expresiones regulares
+$expresionRegularEtiquetas = '/<\/{0,1}\w+>/';
+$expresionRegularNumeros = '/(?<![h])[0-9]+/';
+$expresionRegularEmails = '/\S*@\S*/';
 
-$etiquetas = "";
+$etiqueta = "";
+$numero = "";
+$email = "";
 
-// Obtengo el número total de etiquetas html
-$numeroEtiquetas = preg_match_all('/aa/', $cadena, $r);
-
-for ($i = 0; $i < $numeroEtiquetas; $i++) {
-    if (preg_match('/aa/', $cadena, $r)) {
-        $etiquetas = $etiquetas . $r[$i];
-    }
+// Encuentro la primera etiqueta de la cadena
+if (preg_match($expresionRegularEtiquetas, $cadena, $encontrado, PREG_OFFSET_CAPTURE)) {
+    $etiqueta = $encontrado[0][0] . " en la posición: " . $encontrado[0][1];
 }
 
-// Muestra la posición/elemento encontrado usando las expresiones regulares definidas y la
-// función preg_match.
+// Encuentro el primer número de la cadena
+if (preg_match($expresionRegularNumeros, $cadena, $encontrado, PREG_OFFSET_CAPTURE)) {
+    $numero = $encontrado[0][0] . " en la posición: " . $encontrado[0][1];
+}
+
+// Encuentro el primer email de la cadena
+if (preg_match($expresionRegularEmails, $cadena, $encontrado, PREG_OFFSET_CAPTURE)) {
+    $email = $encontrado[0][0] . " en la posición: " . $encontrado[0][1];
+}
 
 // ==========================================================
 // PLANTILLA
@@ -56,7 +63,7 @@ finCabecera();
 
 // Cuerpo de la página
 inicioCuerpo($titulo, $ubicacion);
-cuerpo($etiquetas);
+cuerpo($etiqueta, $numero, $email);
 finCuerpo();
 
 // ==========================================================
@@ -75,7 +82,14 @@ finCuerpo();
 
 function cabecera() {}
 
-function cuerpo(string $etiquetas)
+function cuerpo(string $etiqueta, string $numero, string $email)
 {
-    echo $etiquetas;
+    echo "<h3>Etiqueta HTML</h3>";
+    echo (htmlspecialchars($etiqueta)) . "<br>" . PHP_EOL;
+
+    echo "<h3>Número</h3>";
+    echo $numero . "<br>" . PHP_EOL;
+
+    echo "<h3>Correo electronico</h3>";
+    echo $email . "<br>" . PHP_EOL;
 }
