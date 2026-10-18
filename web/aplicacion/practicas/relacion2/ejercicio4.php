@@ -25,8 +25,11 @@ $float2 = 379987.24;
 // Formateo el primer float y lo relleno con 15 ceros a la izquierda
 $valor1 = str_pad(number_format($float1, 1, ',', '.'), 15, '0', STR_PAD_LEFT);
 
-// Formateo el segundo float
-$valor2 = number_format($float2, 2, ',', '.');
+// Formateo el segundo float y lo relleno con 15 espacios a la izquierda
+$valor2 = str_pad(number_format($float2, 2, ',', '.'), 15, ' ', STR_PAD_LEFT);
+
+// Convierto los espacios en &nbsp; para que el HTML los muestre
+$valor2 = str_replace(' ', '&nbsp;', $valor2);
 
 // Uno los textos con los valores ya formateados
 $cadenaFinal = "el primer valor -" . $valor1 . "-, el segundo valor -" . $valor2 . "-";

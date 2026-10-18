@@ -65,11 +65,10 @@ function cabecera() {}
 
 function cuerpo(string $cadena)
 {
-    // echo strlen($cadena); --> 22 (bytes)
-    // echo mb_strlen($cadena); --> 20 (caracteres)
-
     // ==========================================================
     // FORMA 1 --> []
+    // No es valida por que "á" y "ñ" ocupan 2 bytes en UTF-8,
+    // así que se parten en dos y se muestran caracteres rotos.
     // ==========================================================
 
     // $espacio = "";
@@ -80,6 +79,8 @@ function cuerpo(string $cadena)
 
     // ==========================================================
     // FORMA 2 --> substr($cadena, desde, cuantos)
+    // No es valida por que "á" y "ñ" ocupan 2 bytes en UTF-8,
+    // así que se parten en dos y se muestran caracteres rotos.
     // ==========================================================
 
     // $espacio = "";
@@ -90,6 +91,7 @@ function cuerpo(string $cadena)
 
     // ==========================================================
     // FORMA 3 --> mb_substr($cadena, desde, cuantos)
+    // VÁLIDA: trabaja con caracteres.
     // ==========================================================
 
     // Mostramos los caracteres uno por uno en el formato pedido
@@ -103,7 +105,7 @@ function cuerpo(string $cadena)
 
     // Mostramos los mismos caracteres pero de forma inversa
     $espacio = "";
-    for ($i = mb_strlen($cadena)-1; $i >= 0; $i--) {
+    for ($i = mb_strlen($cadena) - 1; $i >= 0; $i--) {
 
         echo $espacio . ($i % 2 == 0 ?
             mb_strtoupper(mb_substr($cadena, $i, 1, 'UTF-8')) :
@@ -111,7 +113,7 @@ function cuerpo(string $cadena)
 
         $espacio = $espacio . "&nbsp;";
     }
-
+    
     echo "<hr>";
 
     // Cortamos la cadena cuando encontremos el caracter "a"

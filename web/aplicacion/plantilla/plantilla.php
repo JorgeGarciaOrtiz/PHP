@@ -55,9 +55,11 @@ function inicioCuerpo(string $cabecera, ?array $ubicacion = null)
 
     <body>
         <div id="documento">
-
             <header>
-                <h1 id="titulo"><?php echo $cabecera; ?></h1>
+                <a href="/index.php">
+                    <img src="/imagenes/logo2.png" alt="Logo IES Pedro Espinosa" width="50" height="50" style="vertical-align: middle;">
+                </a>
+                <h1 id="titulo" style="display: inline-block; vertical-align: middle;"><?php echo $cabecera; ?></h1>
             </header>
 
             <div id="barraLogin"></div>
@@ -82,17 +84,17 @@ function inicioCuerpo(string $cabecera, ?array $ubicacion = null)
 
             <div>
             <?php
-}
+        }
 
-function finCuerpo()
-{
+        function finCuerpo()
+        {
             ?>
-                <br/>
-                <br/>
+                <br />
+                <br />
             </div>
 
             <footer>
-                <hr width="90%"/>
+                <hr width="90%" />
                 <div>
                     &copy; Copyright by Jorge García Ortiz
                 </div>
@@ -102,24 +104,24 @@ function finCuerpo()
 
     </html>
 <?php
-}
-
-function mostrarBarraUbicacion(array $ubicacion)
-{
-    echo "<nav class='barraModdle'>";
-
-    $total = count($ubicacion);
-    $contador = 0;
-
-    foreach ($ubicacion as $nombre => $url) {
-        $contador++;
-
-        if ($contador < $total) {
-            echo "<a href='{$url}'>{$nombre}</a> &raquo; ";
-        } else {
-            echo "<span>{$nombre}</span>";
         }
-    }
 
-    echo "</nav>";
-}
+        function mostrarBarraUbicacion(array $ubicacion)
+        {
+            echo "<nav class='barraModdle'>";
+
+            $total = count($ubicacion);
+            $contador = 0;
+
+            foreach ($ubicacion as $nombre => $url) {
+                $contador++;
+
+                if ($contador < $total) {
+                    echo "<a href='{$url}'>{$nombre}</a> &raquo; ";
+                } else {
+                    echo "<span>{$nombre}</span>";
+                }
+            }
+
+            echo "</nav>";
+        }
