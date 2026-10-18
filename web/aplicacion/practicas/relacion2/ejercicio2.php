@@ -107,13 +107,14 @@ function cuerpo(string $cadena)
     $espacio = "";
     for ($i = mb_strlen($cadena) - 1; $i >= 0; $i--) {
 
+        // Si la posición es par muestro el carácter en mayúscula y si es impar en minúscula
         echo $espacio . ($i % 2 == 0 ?
             mb_strtoupper(mb_substr($cadena, $i, 1, 'UTF-8')) :
             mb_strtolower(mb_substr($cadena, $i, 1, 'UTF-8'))) . "<br>" . PHP_EOL;
 
         $espacio = $espacio . "&nbsp;";
     }
-    
+
     echo "<hr>";
 
     // Cortamos la cadena cuando encontremos el caracter "a"
@@ -121,8 +122,11 @@ function cuerpo(string $cadena)
     for ($i = 0; $i < strlen($cadena); $i++) {
 
         $cadenaCortada = "";
+
+        // Muestro el carácter de la posición $i
         echo $cadenaCortada = $cadenaCortada . mb_substr($cadena, $i, 1, 'UTF-8');
 
+        // Si es una "a", muestro un salto de línea
         if (mb_substr($cadena, $i, 1, 'UTF-8') == "a") {
             echo $cadenaCortada = "<br>";
         }

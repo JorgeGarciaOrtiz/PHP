@@ -29,9 +29,9 @@ Correo: carlos@mail.com
 fin;
 
 // Defino las expresiones regulares
-$expresionRegularEtiquetas = '/<\/{0,1}\w+>/';
-$expresionRegularNumeros = '/(?<![h])[0-9]+/';
-$expresionRegularEmails = '/\S*@\S*/';
+$expresionRegularEtiquetas = '/<\/{0,1}\w+>/'; // Busca "<", una "/" opcional, letras o números, y ">"
+$expresionRegularNumeros = '/(?<![h])[0-9]+/'; // Busca uno o más dígitos que no vayan justo después de una "h"
+$expresionRegularEmails = '/\S*@\S*/'; // Busca texto sin espacios, una "@" y más texto sin espacios
 
 $etiqueta = "";
 $numero = "";
