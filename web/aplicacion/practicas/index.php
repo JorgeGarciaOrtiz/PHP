@@ -5,7 +5,7 @@ include_once(dirname(__FILE__) . "/../../cabecera.php");
 
 // Ruta de navegación de la página
 $ubicacion = [
-    "Inicio" => "../../index.php",
+    "Inicio" => "../../../index.php",
     "Ejercicios" => ""
 ];
 
@@ -39,5 +39,7 @@ function cuerpo()
     <a href="./relacion1/">Relación 1</a>
     <br>
     <a href="./relacion2/">Relación 2</a>
+    <br>
+    <a href="./relacion3/index_funciones.php">Relación 3</a>
 <?php
 }

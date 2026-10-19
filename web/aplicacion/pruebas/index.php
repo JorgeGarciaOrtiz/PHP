@@ -1,4 +1,5 @@
 <?php
+
 // Incluimos la cabecera y la plantilla de la aplicación
 include_once(dirname(__FILE__) . "/../../cabecera.php");
 
@@ -49,5 +50,7 @@ function cuerpo()
     <a href="cadenas.php">Cadenas</a>
     <br>
     <a href="expresionesRegulares.php">Expresiones regulares</a>
+    <br>
+    <a href="./funciones/index_funciones.php">Funciones</a>
 <?php
 }

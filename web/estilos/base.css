@@ -2,19 +2,19 @@
 
 /* ============ VARIABLES DE COLOR ============ */
 :root {
-    --fondo-pagina: #1e2227;
-    --fondo-documento: #2b3138;
-    --fondo-bloque: #3a424b;
-    --fondo-campo: #343b43;
-    --texto: #ffffff;
-    --borde: #5b6672;
-    --boton: #4a5866;
-    --boton-hover: #6b7d8f;
-    --error-fondo: #4a2326;
-    --error: #ff8a8f;
-    --warning-fondo: #4a3a14;
-    --warning: #ffd166;
-    --enlace-hover: #ffffff;
+    --fondo-pagina: #12141f;
+    --fondo-documento: #1b1e2e;
+    --fondo-bloque: #272b42;
+    --fondo-campo: #222538;
+    --texto: #eceefb;
+    --borde: #3f4468;
+    --boton: #5a4fcf;
+    --boton-hover: #7a6ff0;
+    --error-fondo: #3d1a2a;
+    --error: #ff7b9c;
+    --warning-fondo: #3b2f14;
+    --warning: #ffc857;
+    --enlace-hover: #7ee8d8;
 }
 
 /* ============ BASE ============ */
