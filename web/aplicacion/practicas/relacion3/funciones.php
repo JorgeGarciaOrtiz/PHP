@@ -15,7 +15,22 @@
 //     cuentaVeces($vector,”otra”,2,$numero);//$vector(“otra”=>9).En numero se devuelve 2
 //     porque es la segunda llamada…
 
-function cuentaVeces()
+function cuentaVeces(Array &$array, string $cadena, int $num1, int &$num2)
 {
-    return 0;
+    // Si la cadena es "2daw" o "primera" el resultado es erroneo
+    if ($cadena == "2daw" || $cadena == "primera") {
+        return false;
+    }
+
+    // Añadimos el primer numero al array
+    $array[$cadena] = $num1;
+
+    // Creamos un contador que recuerda el número de la llamada actual
+    static $cont = 0;
+    $cont++;
+    // El segundo número sera igual a este contador
+    $num2 = $cont;
+
+    // Devolvemos true si la cadena no es "2daw" o "primera"
+    return true;
 }
