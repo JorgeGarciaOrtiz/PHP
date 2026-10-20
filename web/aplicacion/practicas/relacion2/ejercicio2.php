@@ -67,8 +67,7 @@ function cuerpo(string $cadena)
 {
     // ==========================================================
     // FORMA 1 --> []
-    // No es valida por que "á" y "ñ" ocupan 2 bytes en UTF-8,
-    // así que se parten en dos y se muestran caracteres rotos.
+    // No es válida: "á" y "ñ" ocupan 2 bytes y se rompen al cortar.
     // ==========================================================
 
     // $espacio = "";
@@ -79,8 +78,7 @@ function cuerpo(string $cadena)
 
     // ==========================================================
     // FORMA 2 --> substr($cadena, desde, cuantos)
-    // No es valida por que "á" y "ñ" ocupan 2 bytes en UTF-8,
-    // así que se parten en dos y se muestran caracteres rotos.
+    // No es válida: "á" y "ñ" ocupan 2 bytes y se rompen al cortar.
     // ==========================================================
 
     // $espacio = "";
@@ -91,7 +89,7 @@ function cuerpo(string $cadena)
 
     // ==========================================================
     // FORMA 3 --> mb_substr($cadena, desde, cuantos)
-    // VÁLIDA: trabaja con caracteres.
+    // Válida: trabaja con caracteres.
     // ==========================================================
 
     // Mostramos los caracteres uno por uno en el formato pedido
@@ -103,14 +101,14 @@ function cuerpo(string $cadena)
 
     echo "<hr>";
 
-    // Mostramos los mismos caracteres pero de forma inversa
+    // Mostramos los mismos caracteres pero de forma inversa (con indices negativos)
     $espacio = "";
-    for ($i = mb_strlen($cadena) - 1; $i >= 0; $i--) {
+    for ($i = 1; $i <= mb_strlen($cadena); $i++) {
 
         // Si la posición es par muestro el carácter en mayúscula y si es impar en minúscula
         echo $espacio . ($i % 2 == 0 ?
-            mb_strtoupper(mb_substr($cadena, $i, 1, 'UTF-8')) :
-            mb_strtolower(mb_substr($cadena, $i, 1, 'UTF-8'))) . "<br>" . PHP_EOL;
+            mb_strtoupper(mb_substr($cadena, -$i, 1, 'UTF-8')) :
+            mb_strtolower(mb_substr($cadena, -$i, 1, 'UTF-8'))) . "<br>" . PHP_EOL;
 
         $espacio = $espacio . "&nbsp;";
     }
@@ -118,23 +116,19 @@ function cuerpo(string $cadena)
     echo "<hr>";
 
     // Cortamos la cadena cuando encontremos el caracter "a"
-    $espacio = "";
-    for ($i = 0; $i < strlen($cadena); $i++) {
+    for ($i = 0; $i < mb_strlen($cadena); $i++) {
+        $caracter = mb_substr($cadena, $i, 1, 'UTF-8');
 
-        $cadenaCortada = "";
-
-        // Muestro el carácter de la posición $i
-        echo $cadenaCortada = $cadenaCortada . mb_substr($cadena, $i, 1, 'UTF-8');
-
-        // Si es una "a", muestro un salto de línea
-        if (mb_substr($cadena, $i, 1, 'UTF-8') == "a") {
-            echo $cadenaCortada = "<br>";
+        if ($caracter == "a") {
+            echo "<br>";
+        } else {
+            echo $caracter;
         }
     }
 
     echo "<hr>";
 
     // Intercambiamos el caracter vacio que hay despues de "niña" por "/mujer"
-    $nuevaCadena = str_replace("niña ", "niña/mujer ", $cadena);
-    echo $nuevaCadena;
+    $posicion = mb_strpos($cadena, "niña") + 4;
+    echo mb_substr($cadena, 0, $posicion) . "/mujer" . mb_substr($cadena, $posicion);
 }

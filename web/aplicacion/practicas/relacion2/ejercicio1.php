@@ -67,8 +67,16 @@ function cabecera() {}
 function cuerpo($c1, $c2, $c3, $c4)
 {
     // Muestro todas las cadenas, utilizo htmlspecialchars para poder ver las etiquetas HTML
-    echo htmlspecialchars($c1) . "<br>" . PHP_EOL;
-    echo htmlspecialchars($c2) . "<br>" . PHP_EOL;
-    echo htmlspecialchars($c3) . "<br>" . PHP_EOL;
-    echo htmlspecialchars($c4) . "<br>" . PHP_EOL;
+
+    // htmlspecialchars(): convierte solo los 5 caracteres especiales de HTML (& " ' < >).
+    // echo htmlspecialchars($c1) . "<br>" . PHP_EOL;
+    // echo htmlspecialchars($c2) . "<br>" . PHP_EOL;
+    // echo htmlspecialchars($c3) . "<br>" . PHP_EOL;
+    // echo htmlspecialchars($c4) . "<br>" . PHP_EOL;
+
+    // htmlentities(): convierte esos 5 y cualquier carácter con entidad HTML (á → &aacute;, ñ → &ntilde;, © → &copy;).
+    echo htmlentities($c1) . "<br>" . PHP_EOL;
+    echo htmlentities($c2) . "<br>" . PHP_EOL;
+    echo htmlentities($c3) . "<br>" . PHP_EOL;
+    echo htmlentities($c4) . "<br>" . PHP_EOL;
 }

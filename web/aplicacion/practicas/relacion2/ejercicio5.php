@@ -37,19 +37,50 @@ $etiqueta = "";
 $numero = "";
 $email = "";
 
-// Encuentro la primera etiqueta de la cadena
-if (preg_match($expresionRegularEtiquetas, $cadena, $encontrado, PREG_OFFSET_CAPTURE)) {
-    $etiqueta = $encontrado[0][0] . " en la posición: " . $encontrado[0][1];
+// ----------------------------------------------------------
+// Asi solo encontramos la primera ocurrencia 
+// ----------------------------------------------------------
+
+// // Encuentro la primera etiqueta de la cadena
+// if (preg_match($expresionRegularEtiquetas, $cadena, $encontrado, PREG_OFFSET_CAPTURE)) {
+//     $etiqueta = $encontrado[0][0] . " en la posición: " . $encontrado[0][1];
+// }
+
+// // Encuentro el primer número de la cadena
+// if (preg_match($expresionRegularNumeros, $cadena, $encontrado, PREG_OFFSET_CAPTURE)) {
+//     $numero = $encontrado[0][0] . " en la posición: " . $encontrado[0][1];
+// }
+
+// // Encuentro el primer email de la cadena
+// if (preg_match($expresionRegularEmails, $cadena, $encontrado, PREG_OFFSET_CAPTURE)) {
+//     $email = $encontrado[0][0] . " en la posición: " . $encontrado[0][1];
+// }
+
+// ----------------------------------------------------------
+// Asi solo encontramos todas las ocurrencias
+// ----------------------------------------------------------
+
+// Encuentro todas las etiquetas, números y emails de la cadena
+preg_match_all($expresionRegularEtiquetas, $cadena, $etiquetas, PREG_OFFSET_CAPTURE);
+preg_match_all($expresionRegularNumeros, $cadena, $numeros, PREG_OFFSET_CAPTURE);
+preg_match_all($expresionRegularEmails, $cadena, $emails, PREG_OFFSET_CAPTURE);
+
+// Encuentro todas las etiquetas y las guardo con su posición
+preg_match_all($expresionRegularEtiquetas, $cadena, $encontrados, PREG_OFFSET_CAPTURE);
+foreach ($encontrados[0] as $encontrado) {
+    $etiqueta .= $encontrado[0] . " en la posición: " . $encontrado[1] . "\n";
 }
 
-// Encuentro el primer número de la cadena
-if (preg_match($expresionRegularNumeros, $cadena, $encontrado, PREG_OFFSET_CAPTURE)) {
-    $numero = $encontrado[0][0] . " en la posición: " . $encontrado[0][1];
+// Encuentro todos los números y los guardo con su posición
+preg_match_all($expresionRegularNumeros, $cadena, $encontrados, PREG_OFFSET_CAPTURE);
+foreach ($encontrados[0] as $encontrado) {
+    $numero .= $encontrado[0] . " en la posición: " . $encontrado[1] . "<br>" . PHP_EOL;
 }
 
-// Encuentro el primer email de la cadena
-if (preg_match($expresionRegularEmails, $cadena, $encontrado, PREG_OFFSET_CAPTURE)) {
-    $email = $encontrado[0][0] . " en la posición: " . $encontrado[0][1];
+// Encuentro todos los emails y los guardo con su posición
+preg_match_all($expresionRegularEmails, $cadena, $encontrados, PREG_OFFSET_CAPTURE);
+foreach ($encontrados[0] as $encontrado) {
+    $email .= $encontrado[0] . " en la posición: " . $encontrado[1] . "<br>" . PHP_EOL;
 }
 
 // ==========================================================
@@ -85,11 +116,11 @@ function cabecera() {}
 function cuerpo(string $etiqueta, string $numero, string $email)
 {
     echo "<h3>Etiqueta HTML</h3>";
-    echo (htmlspecialchars($etiqueta)) . "<br>" . PHP_EOL;
+    echo (htmlspecialchars($etiqueta));
 
     echo "<h3>Número</h3>";
-    echo $numero . "<br>" . PHP_EOL;
+    echo $numero;
 
     echo "<h3>Correo electronico</h3>";
-    echo $email . "<br>" . PHP_EOL;
+    echo $email;
 }
