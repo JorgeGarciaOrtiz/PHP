@@ -62,6 +62,7 @@ function cuerpo()
 
     echo "<h3>2 - Función generarCadena()</h3>";
 
+    // Mostramos el resultado de la función generarCadena()
     $cadena1 = generarCadena(7);
     echo "Resultado: " . ($cadena1 == true ?  $cadena1 : "No puede mostrarse la cadena");
 
@@ -69,11 +70,28 @@ function cuerpo()
 
     echo "<h3>3 - Función operaciones()</h3>";
 
+    // Mostramos el resultado de la función operaciones()
     echo "Resultado: " . operaciones(5, 2, 5, 7, 3, 4) . "<br>";
 
     // ==========================================================
 
     echo "<h3>4 - Función devuelve()</h3>";
+
+    // Mostramos el resultado de la función devuelve() con 3 parametros
+    $valor = 7;
+    echo "Resultado con los 3 parametros: " . devuelve($valor, 2, 3) . ", valor: " . $valor . "<br>";
+
+    // Mostramos el resultado de la función devuelve() con el primer parametro unicamente
+    $valor = 7;
+    echo "Resultado con el primer parametro: " . devuelve($valor) . ", valor: " . $valor . "<br>";
+
+    // Mostramos el resultado de la función devuelve() con el primer y el segundo parametro
+    $valor = 7;
+    echo "Resultado con el primer y segundo parametro: " . devuelve($valor, 2) . ", valor: " . $valor . "<br>";
+
+    // Mostramos el resultado de la función devuelve() con el primer y el tercer parametro
+    $valor = 7;
+    echo "Resultado con el primer y tercer parametro: " . devuelve($valor, num2: 3) . ", valor: " . $valor . "<br>";
 
     // ==========================================================
 

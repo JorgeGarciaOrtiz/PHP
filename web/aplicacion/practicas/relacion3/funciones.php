@@ -139,3 +139,52 @@ function operaciones(int $operando, float $num1, float $num2, ...$numeros)
     // Devolvemos el resultado
     return $resultado;
 }
+
+// 4.- Función devuelve(). Esta función recibe como parámetros tres números (enteros) y devuelve la
+// suma de los tres valores en el primer parámetro y como resultado de la función el producto de los
+// tres valores. Los dos últimos parámetros tendrán definidos valor por defecto (el que queráis).
+//      $valor=7;
+//      devuelve($valor,4) // $valor valdrá 7+4+10 y se devuelve 7*4*10 (10 es el valor por defecto que
+//      le he puesto al tercer parámetro.
+//      
+//      Hacer varias llamadas a la función indicando:
+//          - Los tres parámetros
+//          - El primer parámetro únicamente
+//          - El primer y el segundo parámetro
+//          - El primer y el tercer parámetro (ojo, el segundo parámetro no se indica)
+
+function devuelve(int &$valor, int $num1 = 5, int $num2 = 10)
+{
+    $valor = $valor + $num1 + $num2;
+    $suma = $valor * $num1 * $num2;
+
+    return $suma;
+}
+
+// 5.- Se tienen las funciones suma, resta y multiplicacion que reciben cada una dos parámetros
+// numéricos (entero) y que devuelven el resultado de la operación que indica su nombre sobre los
+// parámetros.
+//
+// Tenemos la Función hacerOperacion que recibe tres parámetros. El primero es una cadena
+// que puede ser suma, resta o multiplicacion. Los otros dos son los operandos. Esta función se
+// encargará de devolver el resultado de ejecutar la “cadena” con los operandos usando una variable-
+// función para llamar a la operación. Hay que comprobar indicando una operación correcta (devuelve
+// false si la operación no es válida).
+//
+//      hacerOperacion(“resta”,3,1) //devuelve 3-1. No se llama directamente a la función resta, se
+//      tiene una variable función para ello
+
+// 6.- Crear la función llamadaAFuncion que recibe tres operandos (entero, entero y callable) y que
+// devuelve un entero que es el resultado de llamar al parámetro callback con los otros parámetros.
+// Llamar a la función llamadaAFuncion 3 veces pasando como parámetro de callback funciones de
+// flecha distintas que tu definas.
+//
+//      llamadaAFuncion(1,2,fn($a,$b)=>$a+$b)
+//      Repetir las llamadas, definiendo las 3 funciones como anónimas (se asignan a variables)
+
+// 7.- Función ordenar(): A esta función se le pasa un array y lo ordena mediante una llamada a usort,
+// al que se indicará como función callback una función anónima que ordenará en orden descendente
+// según el número de caracteres de cada elemento.
+//
+//      $vector=array((“uno”,“grande”,“caminos”,”a”)
+//      Ordenar($vector);//el vector debe quedar (“caminos”,”grande”,”uno”,”a”)
