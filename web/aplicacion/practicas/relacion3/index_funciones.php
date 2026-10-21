@@ -69,7 +69,7 @@ function cuerpo()
 
     echo "<h3>3 - Función operaciones()</h3>";
 
-    echo "Resultado: " . operaciones(5, 2, 5, 7, 3, 4);
+    echo "Resultado: " . operaciones(5, 2, 5, 7, 3, 4) . "<br>";
 
     // ==========================================================
 

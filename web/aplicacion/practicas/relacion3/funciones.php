@@ -85,6 +85,8 @@ function operaciones(int $operando, float $num1, float $num2, ...$numeros)
         1 => $num1 + $num2,
         2 => $num1 - $num2,
         3 => $num1 * $num2,
+        // Debemos de añadir default de forma obligatoria
+        default => 0,
     };
 
     // Dependiendo del tipo de operador que sea sumamos/restamos/multiplicamos el resto de números
@@ -93,31 +95,45 @@ function operaciones(int $operando, float $num1, float $num2, ...$numeros)
             1 => $resultado += $numero,
             2 => $resultado -= $numero,
             3 => $resultado *= $numero,
+            // Debemos de añadir default de forma obligatoria
+            default => 0,
         };
     }
 
     // Si el operador no es diferente de 1, 2 o 3 
     if ($operando != 1 && $operando != 2 && $operando != 3) {
+
+        // Creo una array vacio
         $todoLosNumeros = [];
-        $todoLosNumeros[] = $operando;
+
+        // Añado a este array los dos números obligatorios (parametros obligatorios)
         $todoLosNumeros[] = $num1;
         $todoLosNumeros[] = $num2;
 
+        // Y añado el resto de números (parametros no obligatorios)
         foreach ($numeros as $numero) {
             $todoLosNumeros[] = $numero;
         }
 
+        // Creo variables para sumar por una lado los numeros en posiciones pares y por otro lado las posiciones impares
         $sumaPares = 0;
-        $sumaImapares = 0;
+        $sumaImpares = 0;
+
+        // Recorro todos los números
         for ($i = 0; $i < count($todoLosNumeros); $i++) {
+
+            // Si es el número esta en posición par lo sumamos con el resto de numeros pares
             if ($i % 2 == 0) {
-                $sumaPares += $i;
+                $sumaPares += $todoLosNumeros[$i];
+
+                // Si es el número esta en posición impar lo sumamos con el resto de numeros impar
             } else {
-                  $sumaImapares += $i;
+                $sumaImpares += $todoLosNumeros[$i];
             }
         }
 
-        $resultado = $sumaPares -  $sumaImapares;
+        // Realizo la resta de los pares contra los impares
+        $resultado = $sumaImpares - $sumaPares;
     }
 
     // Devolvemos el resultado
