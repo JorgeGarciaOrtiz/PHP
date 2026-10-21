@@ -15,7 +15,7 @@
 //     cuentaVeces($vector,”otra”,2,$numero); //$vector(“otra”=>9).En numero se devuelve 2
 //     porque es la segunda llamada…
 
-function cuentaVeces(array &$array, string $cadena, int $num1, int &$num2)
+function cuentaVeces(array &$array, string $cadena, int $num1, int &$num2): bool
 {
     // Si la cadena es "2daw" o "primera" el resultado es erroneo
     if ($cadena == "2daw" || $cadena == "primera") {
@@ -42,7 +42,7 @@ function cuentaVeces(array &$array, string $cadena, int $num1, int &$num2)
 //
 // generarCadena(7); // crea la cadena de 7 caracteres “AcG_%15”
 
-function generarCadena($longitud = 10)
+function generarCadena($longitud = 10): bool|string
 {
     // Si el número es igual o menor a cero el resultado es false
     if ($longitud <= 0) {
@@ -78,7 +78,7 @@ function generarCadena($longitud = 10)
 // Operaciones(1,2,5,7,3,4); // haría la suma de 2+5+7+3+4
 // Operaciones(5,2,5,7,3,4); // Sumaria suma las posiciones pares (5+3), las posiciones impares (2+7+4), y se restan los dos.
 
-function operaciones(int $operando, float $num1, float $num2, ...$numeros)
+function operaciones(int $operando, float $num1, float $num2, ...$numeros): int
 {
     // Dependiendo del tipo de operador que sea sumamos/restamos/multiplicamos los dos parametros obligatorios
     $resultado = match ($operando) {
@@ -153,7 +153,7 @@ function operaciones(int $operando, float $num1, float $num2, ...$numeros)
 //          - El primer y el segundo parámetro
 //          - El primer y el tercer parámetro (ojo, el segundo parámetro no se indica)
 
-function devuelve(int &$valor, int $num1 = 5, int $num2 = 10)
+function devuelve(int &$valor, int $num1 = 5, int $num2 = 10): int
 {
     $valor = $valor + $num1 + $num2;
     $suma = $valor * $num1 * $num2;
@@ -167,12 +167,40 @@ function devuelve(int &$valor, int $num1 = 5, int $num2 = 10)
 //
 // Tenemos la Función hacerOperacion que recibe tres parámetros. El primero es una cadena
 // que puede ser suma, resta o multiplicacion. Los otros dos son los operandos. Esta función se
-// encargará de devolver el resultado de ejecutar la “cadena” con los operandos usando una variable-
+// encargará de devolver el resultado de ejecutar la “cadena” con los operandos usando una variable
 // función para llamar a la operación. Hay que comprobar indicando una operación correcta (devuelve
 // false si la operación no es válida).
 //
-//      hacerOperacion(“resta”,3,1) //devuelve 3-1. No se llama directamente a la función resta, se
+//      hacerOperacion(“resta”,3,1) // devuelve 3-1. No se llama directamente a la función resta, se
 //      tiene una variable función para ello
+
+function hacerOperacion(string $operacion, int $num1, int $num2): int|bool
+{
+    $resultado = 0;
+
+    if ($operacion == "suma" || $operacion == "resta" || $operacion == "multiplicacion") {
+        $resultado = $operacion($num1, $num2);
+    } else {
+        return false;
+    }
+
+    return $resultado;
+}
+
+function suma(int $a, int $b): int
+{
+    return $a + $b;
+}
+
+function resta(int $a, int $b): int
+{
+    return $a - $b;
+}
+
+function multiplicacion(int $a, int $b): int
+{
+    return $a * $b;
+}
 
 // 6.- Crear la función llamadaAFuncion que recibe tres operandos (entero, entero y callable) y que
 // devuelve un entero que es el resultado de llamar al parámetro callback con los otros parámetros.
@@ -182,9 +210,19 @@ function devuelve(int &$valor, int $num1 = 5, int $num2 = 10)
 //      llamadaAFuncion(1,2,fn($a,$b)=>$a+$b)
 //      Repetir las llamadas, definiendo las 3 funciones como anónimas (se asignan a variables)
 
+function llamadaAFuncion(int $num1, int $num2, callable $num3): int
+{
+    return $num3($num1, $num2);
+}
+
 // 7.- Función ordenar(): A esta función se le pasa un array y lo ordena mediante una llamada a usort,
 // al que se indicará como función callback una función anónima que ordenará en orden descendente
 // según el número de caracteres de cada elemento.
 //
 //      $vector=array((“uno”,“grande”,“caminos”,”a”)
-//      Ordenar($vector);//el vector debe quedar (“caminos”,”grande”,”uno”,”a”)
+//      Ordenar($vector); // el vector debe quedar (“caminos”,”grande”,”uno”,”a”)
+
+function ordenar(array $array)
+{
+    return usort($array, fn($cadena1, $cadena2) => $cadena2 <=> $cadena1);
+}
