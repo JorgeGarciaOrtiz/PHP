@@ -15,6 +15,17 @@
 //     cuentaVeces($vector,”otra”,2,$numero); //$vector(“otra”=>9).En numero se devuelve 2
 //     porque es la segunda llamada…
 
+/**
+ * Función a la que le pasamos un array, una cadena y dos números. Añade el primer número al array en 
+ * la posición de la cadena y devuelve en el segundo número las veces que se ha llamado a la función. 
+ * Devuelve false si la cadena es "2daw" o "primera".
+ *
+ * @param array $array
+ * @param string $cadena
+ * @param integer $num1
+ * @param integer $num2
+ * @return boolean
+ */
 function cuentaVeces(array &$array, string $cadena, int $num1, int &$num2): bool
 {
     // Si la cadena es "2daw" o "primera" el resultado es erroneo
@@ -42,6 +53,14 @@ function cuentaVeces(array &$array, string $cadena, int $num1, int &$num2): bool
 //
 // generarCadena(7); // crea la cadena de 7 caracteres “AcG_%15”
 
+/**
+ * Función a la que le pasamos un valor numérico (por defecto 10), que se encarga de devolver una cadena
+ * aleatoria de letras mayúsculas, minúsculas y números con ese mismo tamaño. Devuelve false si el número 
+ * indicado es cero o negativo.
+ * 
+ * @param integer $longitud
+ * @return boolean|string
+ */
 function generarCadena($longitud = 10): bool|string
 {
     // Si el número es igual o menor a cero el resultado es false
@@ -78,6 +97,18 @@ function generarCadena($longitud = 10): bool|string
 // Operaciones(1,2,5,7,3,4); // haría la suma de 2+5+7+3+4
 // Operaciones(5,2,5,7,3,4); // Sumaria suma las posiciones pares (5+3), las posiciones impares (2+7+4), y se restan los dos.
 
+/**
+ * Función a la que le pasamos al menos tres parámetros numéricos, el primero es el tipo de operación
+ * (1 --> suma, 2 --> resta, 3 --> multiplicación) y el resto son los operandos. Si el primer parámetro tiene 
+ * otro valor se sumarán las posiciones pares por un lado y las impares por el otro, siendo el resultado de la 
+ * función la resta de estas dos sumas.
+ *
+ * @param integer $operando
+ * @param float $num1
+ * @param float $num2
+ * @param [type] ...$numeros
+ * @return integer
+ */
 function operaciones(int $operando, float $num1, float $num2, ...$numeros): int
 {
     // Dependiendo del tipo de operador que sea sumamos/restamos/multiplicamos los dos parametros obligatorios
@@ -153,12 +184,24 @@ function operaciones(int $operando, float $num1, float $num2, ...$numeros): int
 //          - El primer y el segundo parámetro
 //          - El primer y el tercer parámetro (ojo, el segundo parámetro no se indica)
 
+/**
+ * Función a la que le pasamos tres números enteros, devuelve en el primer parámetro la suma de los tres y
+ * como resultado de la función la multiplicación de los tres valores.
+ *
+ * @param integer $valor
+ * @param integer $num1
+ * @param integer $num2
+ * @return integer
+ */
 function devuelve(int &$valor, int $num1 = 5, int $num2 = 10): int
 {
+    // Sumamos los 3 numeros en el primer valor
     $valor = $valor + $num1 + $num2;
-    $suma = $valor * $num1 * $num2;
 
-    return $suma;
+    // Muliplicamos los 3 valores
+    $producto = $valor * $num1 * $num2;
+
+    return $producto;
 }
 
 // 5.- Se tienen las funciones suma, resta y multiplicacion que reciben cada una dos parámetros
@@ -174,29 +217,44 @@ function devuelve(int &$valor, int $num1 = 5, int $num2 = 10): int
 //      hacerOperacion(“resta”,3,1) // devuelve 3-1. No se llama directamente a la función resta, se
 //      tiene una variable función para ello
 
+/**
+ * Función a la que le pasamos una cadena con el tipo de operación ("suma", "resta" o "multiplicacion") 
+ * y dos números con los que se realizará dicha operación, llamando a la función que realiza el cálculo 
+ * con una variable función. Devuelve el resultado o false si hay algún error.
+ *
+ * @param string $operacion
+ * @param integer $num1
+ * @param integer $num2
+ * @return integer|boolean
+ */
 function hacerOperacion(string $operacion, int $num1, int $num2): int|bool
 {
     $resultado = 0;
 
+    // Si la opereacion es suma, resta o multiplicación realizamos dicha operacion llamando a su función
     if ($operacion == "suma" || $operacion == "resta" || $operacion == "multiplicacion") {
         $resultado = $operacion($num1, $num2);
     } else {
+        // Si no devolvemos false
         return false;
     }
 
     return $resultado;
 }
 
+// Función para sumar
 function suma(int $a, int $b): int
 {
     return $a + $b;
 }
 
+// Función para restar
 function resta(int $a, int $b): int
 {
     return $a - $b;
 }
 
+// Función para multiplicar
 function multiplicacion(int $a, int $b): int
 {
     return $a * $b;
@@ -210,8 +268,18 @@ function multiplicacion(int $a, int $b): int
 //      llamadaAFuncion(1,2,fn($a,$b)=>$a+$b)
 //      Repetir las llamadas, definiendo las 3 funciones como anónimas (se asignan a variables)
 
+/**
+ * Función a la que le pasamos como parámetros dos números enteros y uno callable, que devuelve el resultado
+ * de ejecutar una función flecha, anónima o con nombre.
+ *
+ * @param integer $num1
+ * @param integer $num2
+ * @param callable $num3
+ * @return integer
+ */
 function llamadaAFuncion(int $num1, int $num2, callable $num3): int
 {
+    // Llamamos al callback con los dos otros números y devolvemos el resultado
     return $num3($num1, $num2);
 }
 
@@ -222,7 +290,22 @@ function llamadaAFuncion(int $num1, int $num2, callable $num3): int
 //      $vector=array((“uno”,“grande”,“caminos”,”a”)
 //      Ordenar($vector); // el vector debe quedar (“caminos”,”grande”,”uno”,”a”)
 
-function ordenar(array $array)
+/**
+ * Función a la que le pasamos como parámetro un array con cadenas, estas las ordenamos en orden descendente
+ * segundo el número de caracteres.
+ *
+ * @param array $array
+ * @return boolean
+ */
+function ordenar(array &$array): bool
 {
-    return usort($array, fn($cadena1, $cadena2) => $cadena2 <=> $cadena1);
+    for ($i = 0; $i < count($array); $i++) {
+        if (!is_string($array[$i])) {
+            return false;
+        }
+    }
+
+    usort($array, fn($cadena1, $cadena2) => mb_strlen($cadena2, 'UTF-8') <=> mb_strlen($cadena1, 'UTF-8'));
+
+    return true;
 }

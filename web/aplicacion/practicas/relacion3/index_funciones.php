@@ -50,12 +50,12 @@ function cuerpo()
 
     // Probamos por primera vez la función
     echo "Resultado: " . (cuentaVeces($vector, "1osición", 7, $numero) == true ? "True" : "False");
-    echo "<br>Número de veces: " . $numero . "<br>". PHP_EOL;
+    echo "<br>Número de veces: " . $numero . "<br>" . PHP_EOL;
     print_r($vector);
 
     // Probamos por segunda vez la función
     echo "<br><br>Resultado: " . (cuentaVeces($vector, "otra", 2, $numero) == true ? "True" : "False");
-    echo "<br>Número de veces: " . $numero . "<br>". PHP_EOL;
+    echo "<br>Número de veces: " . $numero . "<br>" . PHP_EOL;
     print_r($vector);
 
     // ==========================================================
@@ -71,7 +71,7 @@ function cuerpo()
     echo "<h3>3 - Función operaciones()</h3>";
 
     // Mostramos el resultado de la función operaciones()
-    echo "Resultado: " . operaciones(5, 2, 5, 7, 3, 4) . "<br>". PHP_EOL;
+    echo "Resultado: " . operaciones(5, 2, 5, 7, 3, 4) . "<br>" . PHP_EOL;
 
     // ==========================================================
 
@@ -79,23 +79,23 @@ function cuerpo()
 
     // Mostramos el resultado de la función devuelve() con 3 parametros
     $valor = 7;
-    echo "Resultado con los 3 parametros: " . devuelve($valor, 2, 3) . ", valor: " . $valor . "<br>". PHP_EOL;
+    echo "Resultado con los 3 parametros: " . devuelve($valor, 2, 3) . ", valor: " . $valor . "<br>" . PHP_EOL;
 
     // Mostramos el resultado de la función devuelve() con el primer parametro unicamente
     $valor = 7;
-    echo "Resultado con el primer parametro: " . devuelve($valor) . ", valor: " . $valor . "<br>". PHP_EOL;
+    echo "Resultado con el primer parametro: " . devuelve($valor) . ", valor: " . $valor . "<br>" . PHP_EOL;
 
     // Mostramos el resultado de la función devuelve() con el primer y el segundo parametro
     $valor = 7;
-    echo "Resultado con el primer y segundo parametro: " . devuelve($valor, 2) . ", valor: " . $valor . "<br>". PHP_EOL;
+    echo "Resultado con el primer y segundo parametro: " . devuelve($valor, 2) . ", valor: " . $valor . "<br>" . PHP_EOL;
 
     // Mostramos el resultado de la función devuelve() con el primer y el tercer parametro
     $valor = 7;
-    echo "Resultado con el primer y tercer parametro: " . devuelve($valor, num2: 3) . ", valor: " . $valor . "<br>". PHP_EOL;
+    echo "Resultado con el primer y tercer parametro: " . devuelve($valor, num2: 3) . ", valor: " . $valor . "<br>" . PHP_EOL;
 
     // ==========================================================
 
-    echo "<h3>5 - Funciones hacerOperacion()</h3>";
+    echo "<h3>5 - Función hacerOperacion()</h3>";
 
     $resultado = hacerOperacion("resta", 3, 1);
     echo "Resultado: " . ($resultado == true ? $resultado : "False");
@@ -116,6 +116,10 @@ function cuerpo()
 
     echo "<h3>7 - Función ordenar()</h3>";
 
-    $vector = array("uno","grande","caminos","a");
-    echo "Resultado: " . ordenar($vector); // --> (“caminos”,”grande”,”uno”,”a”)
+    $vector = array("uno", "grande", "caminos", "a");
+    print_r($vector);
+    ordenar($vector);
+    echo "<br>";
+    print_r($vector);
+    echo " --> " . (ordenar($vector) == true ? "Si se ha podido ordenar" : "No se ha podido ordenar");
 }
