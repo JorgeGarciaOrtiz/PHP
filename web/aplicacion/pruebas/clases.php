@@ -44,9 +44,17 @@ $ubicacion = [
 
 // ==========================================================
 
+// Se crea el objeto con 100
 $programa = Unica::crear(100);
-$programa -> _numero = 1;
+
+// A ese mismo objeto le cambiamos el número a 1
+$programa -> _numero = 1; // Es como hacer "programa.numero = 1" en java
+
+// El objeto ya existe -> devuelve el mismo objeto con el número 1 (el 300 se ignora)
 $segunda = Unica::crear(300);
+
+// ¿Son el mismo objeto?
+// echo "¿Mismo objeto? " . ($programa === $segunda ? "Sí" : "No") . "<br>"; // Sí
 
 // ==========================================================
 // PLANTILLA
@@ -148,24 +156,34 @@ class Unica
     private static ?Unica $_objeto = null;
 
     // Constructor privado --> nos impide hacer "new Unica()" desde fuera
-    private function __construct(int $val = 0) {
+    private function __construct(int $val = 0)
+    {
         // Guarda el numero recibido en el parametro
-        $this -> _numero = $val;
+        $this->_numero = $val;
     }
 
-    public static function crear(int $numero):static {
+    // Método static que nos da el objeto (sustituye al "new Unica()")
+    // :static → devuelve un objeto de esta clase
+    public static function crear(int $numero): static
+    {
 
         // Si el objeto esta creada lo devuelvo
         if (self::$_creada) {
             return self::$_objeto;
 
-            // Si no lo creamos
+            // Si no, lo creamos desde cero
         } else {
-            $obj = new static($numero);
+            // Creamos el objeto
+            $obj = new static($numero); // que es lo mismo que --> $obj = new Unica($numero);
+
+            // Guardamos el objeto en la variable de la clase
             self::$_objeto = $obj;
+
+            // Ponemos la variable de nos dice si el objeto esta creado en true
             self::$_creada = true;
+
+            // Devolvemos el nuevo objeto creado
             return self::$_objeto;
         }
-        
     }
 }
