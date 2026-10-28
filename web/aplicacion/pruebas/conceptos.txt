@@ -1,0 +1,4 @@
+public → lo usa todo el mundo.
+protected → la clase y sus hijas.
+private → solo la clase.
+static → uno para todos los objetos (se usa con self::).

@@ -54,5 +54,7 @@ function cuerpo()
     <a href="./funciones/index_funciones.php">Funciones</a>
     <br>
     <a href="clases.php">Clases</a>
+    <br>
+    <a href="metodosMagicos.php">Metodos magicos</a>
 <?php
 }
