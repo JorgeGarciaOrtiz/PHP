@@ -41,6 +41,8 @@ $flauta6 = clone $flauta4;
 
 // ================================
 
+$persona1 = Persona::registrarPersona("Jorge", "19/03/2006", "Antequera", "Antequera", EstadoCivil::pareja);
+
 // ==========================================================
 // PLANTILLA
 // ==========================================================
@@ -60,7 +62,8 @@ cuerpo(
     $flauta3,
     $flauta4,
     $flauta5,
-    $flauta6
+    $flauta6,
+    $persona1
 );
 finCuerpo();
 
@@ -78,7 +81,8 @@ function cuerpo(
     Flauta $flauta3,
     Flauta $flauta4,
     Flauta $flauta5,
-    Flauta $flauta6
+    Flauta $flauta6,
+    Persona $persona1
 ) {
     echo "<h3>1. InstrumentoBase</h3>";
     echo "<p>No muestra nada</p>";
@@ -102,8 +106,10 @@ function cuerpo(
     // Métodos heredados de InstrumentoViento
 
     echo "<h3>5. EstadoCivil</h3>";
+    echo "<p>No muestra nada</p>";
 
     echo "<h3>5. Persona</h3>";
+    echo $persona1 . "<br><br>" . PHP_EOL;
 
     echo "<h3>6. SerieFibonacci</h3>";
 
