@@ -1,5 +1,6 @@
 <?php
 
+// Persona --> persona con sus datos personales y su estado civil
 class Persona
 {
     // ------------------------------------------------
@@ -21,7 +22,7 @@ class Persona
     {
         $this->_nombre = "prueba";
         $this->_fechaNacimiento = "01/01/2000";
-        $this->_domicilio = "carrera12";
+        $this->_domicilio = "carrera 12";
         $this->_localidad = "antequera";
         $this->_estadoCivil = EstadoCivil::soltero;
     }
@@ -30,6 +31,7 @@ class Persona
     // Constructor estático
     // ------------------------------------------------
 
+    // Constructor estático que crea una persona con los datos recibidos
     public static function registrarPersona(string $nombre, string $fechaNacimiento, string $domicilio, string $localidad, EstadoCivil $estadoCivil): Persona
     {
         // Creamos la persona con los valores por defecto
@@ -50,26 +52,31 @@ class Persona
     // Métodos get
     // ------------------------------------------------
 
+    // Devuelve el nombre
     public function getNombre(): string
     {
         return $this->_nombre;
     }
 
+    // Devuelve la fecha de nacimiento
     public function getFechaNacimiento(): string
     {
         return $this->_fechaNacimiento;
     }
 
+    // Devuelve el domicilio
     public function getDomicilio(): string
     {
         return $this->_domicilio;
     }
 
+    // Devuelve la localidad
     public function getLocalidad(): string
     {
         return $this->_localidad;
     }
 
+    // Devuelve el estado civil
     public function getEstadoCivil(): EstadoCivil
     {
         return $this->_estadoCivil;
@@ -79,26 +86,31 @@ class Persona
     // Métodos set
     // ------------------------------------------------
 
+    // Permite modificar el nombre
     public function setNombre(string $nombre): void
     {
         $this->_nombre = $nombre;
     }
 
+    // Permite modificar la fecha de nacimiento
     public function setFechaNacimiento(string $fechaNacimiento): void
     {
         $this->_fechaNacimiento = $fechaNacimiento;
     }
 
+    // Permite modificar el domicilio
     public function setDomicilio(string $domicilio): void
     {
         $this->_domicilio = $domicilio;
     }
 
+    // Permite modificar la localidad
     public function setLocalidad(string $localidad): void
     {
         $this->_localidad = $localidad;
     }
 
+    // Permite modificar el estado civil
     public function setEstadoCivil(EstadoCivil $estadoCivil): void
     {
         $this->_estadoCivil = $estadoCivil;

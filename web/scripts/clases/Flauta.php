@@ -1,6 +1,6 @@
 <?php
 
-// Flauta --> instrumento de viento fabricable del que no se puede heredar.
+// Flauta --> instrumento de viento fabricable del que no se puede heredar
 final class Flauta extends InstrumentoViento implements IFabricable
 {
     // Devuelve el método de reciclaje del instrumento
