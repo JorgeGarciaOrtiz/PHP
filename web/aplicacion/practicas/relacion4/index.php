@@ -40,7 +40,7 @@ $flauta6 = clone $flauta4;
 // ------------------------------------------------
 
 // Obtenemos un estado aleatorio
-$estadosCiviles = EstadoCivil::cases();
+$estadosCiviles = EstadoCivil::casos();
 $numeroAleatorio1 = random_int(0, count($estadosCiviles) - 1);
 $numeroAleatorio2 = random_int(0, count($estadosCiviles) - 1);
 
@@ -61,6 +61,16 @@ $persona2 = Persona::registrarPersona(
     "Málaga",
     $estadosCiviles[$numeroAleatorio2]
 );
+
+// ------------------------------------------------
+
+$Objeto = new ClaseMisPropiedades();
+
+$Objeto->propPublica = "publica";
+// $Objeto->_propPrivada = "privada"; // Fatal error: Uncaught Exception: No se puede asignar la propiedad
+
+$Objeto->propiedad1 = 25;
+$Objeto->propiedad2 = "cadena de texto";
 
 // ==========================================================
 // PLANTILLA
@@ -83,7 +93,8 @@ cuerpo(
     $flauta5,
     $flauta6,
     $persona1,
-    $persona2
+    $persona2,
+    $Objeto
 );
 finCuerpo();
 
@@ -103,15 +114,16 @@ function cuerpo(
     Flauta $flauta5,
     Flauta $flauta6,
     Persona $persona1,
-    Persona $persona2
+    Persona $persona2,
+    ClaseMisPropiedades $Objeto
 ) {
     echo "<h3>1. InstrumentoBase</h3>";
-    echo "<p>Clase abstracta: se prueba a través de InstrumentoViento y Flauta.</p>" . PHP_EOL;
+    echo "<p>Clase abstracta: se prueba a través de InstrumentoViento y Flauta</p>" . PHP_EOL;
 
     // ------------------------------------------------
 
     echo "<h3>2. IFabricable</h3>";
-    echo "<p>Interfaz: se prueba en Flauta.</p>" . PHP_EOL;
+    echo "<p>Interfaz: se prueba en Flauta</p>" . PHP_EOL;
 
     // ------------------------------------------------
 
@@ -122,12 +134,14 @@ function cuerpo(
     // ------------------------------------------------
 
     echo "<h3>4. Flauta</h3>";
+
     echo $flauta1 . "<br><br>" . PHP_EOL;
     echo $flauta2 . "<br><br>" . PHP_EOL;
     echo $flauta3 . "<br><br>" . PHP_EOL;
     echo $flauta4 . "<br><br>" . PHP_EOL;
     echo $flauta5 . "<br><br>" . PHP_EOL;
     echo $flauta6 . "<br><br>" . PHP_EOL;
+
     echo "Sonido: " . $flauta6->sonido() . "<br>" . PHP_EOL;
     echo "Afinar: " . $flauta6->afinar() . "<br>" . PHP_EOL;
     echo "Método de fabricación: " . $flauta6->metodoFabricacion() . "<br>" . PHP_EOL;
@@ -136,7 +150,7 @@ function cuerpo(
     // ------------------------------------------------
 
     echo "<h3>5. EstadoCivil</h3>";
-    echo "<p>Enumeración: se prueba en Persona, que usa casos() y descripcion().</p>" . PHP_EOL;
+    echo "<p>Enumeración: se prueba en Persona, que usa casos() y descripcion()</p>" . PHP_EOL;
 
     echo "<h3>5. Persona</h3>";
     echo $persona1 . "<br>" . PHP_EOL;
@@ -146,12 +160,14 @@ function cuerpo(
 
     echo "<h3>6. SerieFibonacci</h3>";
 
+    echo "Serie de Fibonacci con Iterator: ";
     foreach (new SerieFibonacci(10) as $valor) {
         echo $valor . "&nbsp";
     }
 
     echo "<br>" . PHP_EOL;
 
+    echo "Serie de Fibonacci con generador: ";
     foreach (SerieFibonacci::fFibonacci(10) as $valor) {
         echo $valor . "&nbsp";
     }
@@ -159,4 +175,12 @@ function cuerpo(
     // ------------------------------------------------
 
     echo "<h3>7. ClaseMisPropiedades</h3>";
+    echo "La propiedad 1 vale: " . $Objeto->propiedad1 . "<br>" . PHP_EOL;
+    // echo $Objeto->propiedad3; // Fatal error: Uncaught Exception: No existe la propiedad
+
+    echo "<br>" . PHP_EOL;
+
+    foreach ($Objeto as $clave => $valor) {
+        echo $clave . " -> " . $valor . "<br>";
+    }
 }

@@ -125,4 +125,32 @@ class Persona
     {
         return $this->_nombre . " es una persona " . $this->_estadoCivil->descripcion() . " nacida en " . $this->_fechaNacimiento . " y que vive en " . $this->_localidad;
     }
+
+    // ------------------------------------------------
+    // Métodos mágicos
+    // ------------------------------------------------
+
+    // Impide crear o modificar propiedades que no existen
+    public function __set(string $nombre, mixed $valor)
+    {
+        throw new Exception("No existe la propiedad " . $nombre);
+    }
+
+    // Impide leer propiedades que no existen
+    public function __get(string $nombre)
+    {
+        throw new Exception("No existe la propiedad " . $nombre);
+    }
+
+    // Indica que las propiedades que no existen no están definidas
+    public function __isset(string $nombre): bool
+    {
+        return false;
+    }
+
+    // Impide borrar propiedades que no existen
+    public function __unset(string $nombre)
+    {
+        throw new Exception("No existe la propiedad " . $nombre);
+    }
 }

@@ -14,7 +14,7 @@ class InstrumentoViento extends InstrumentoBase
     // Constructor
     // ------------------------------------------------
 
-    // Constructor que nos permite crear un intrumento de viento (de madera por defecto y con una edad de 15 años)
+    // Constructor que nos permite crear un instrumento de viento (de madera por defecto y con una edad de 15 años)
     public function __construct(string $material = "madera", int $edad = 15)
     {
         // La descripción siempre es la misma
@@ -44,9 +44,9 @@ class InstrumentoViento extends InstrumentoBase
     // Método toString
     // ------------------------------------------------
 
-    // Permite mostrar la información del instrumento más el tipo de metirial
+    // Permite mostrar la información del instrumento más el tipo de material
     public function __toString(): string
     {
-        return parent::__toString() . ". Instrumento de material " . $this->_material . ".";
+        return parent::__toString() . ". Instrumento de material " . $this->_material;
     }
 }

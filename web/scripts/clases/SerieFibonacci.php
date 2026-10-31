@@ -26,7 +26,7 @@ class SerieFibonacci implements Iterator
     // Método estático
     // ------------------------------------------------
 
-    // Devuelve la serie de Fibonacci hasta el ultimo valor que indiquemos
+    // Devuelve la serie de Fibonacci hasta el último valor que indiquemos
     public static function fFibonacci(int $ultimo): Generator
     {
         $primero = 0;

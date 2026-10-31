@@ -25,7 +25,7 @@ abstract class InstrumentoBase
         self::$_numeroElementosCreados++;
 
         // Ese valor del contador lo asignamos a la variable que nos 
-        // indique en qué orden fue creado, este valor se quedara así para siempre
+        // indique en qué orden fue creado, este valor se quedará así para siempre
         $this->_ordenCreacion = self::$_numeroElementosCreados;
     }
 
@@ -82,7 +82,7 @@ abstract class InstrumentoBase
     // Permite mostrar la información del instrumento
     public function __toString(): string
     {
-        return "Instrumento con descripción \"" . $this->_descripcion  . "\"" .
+        return "instrumento con descripción " . $this->_descripcion .
             ", instancia " . $this->_ordenCreacion .
             " de un total de " .   self::$_numeroElementosCreados .
             ". Tiene " . $this->_edad . " años. La clase es " . get_class($this);

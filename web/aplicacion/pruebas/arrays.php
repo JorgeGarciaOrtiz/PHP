@@ -13,6 +13,66 @@ $ubicacion = [
     $titulo => ""
 ];
 
+/*
+ * ==========================================================
+ *  ARRAYS EN PHP (Tema 2, apartado 6.8)
+ * ==========================================================
+ *
+ *  TIPOS
+ *      Escalar          → ["a", "b", "c"]                 (claves 0, 1, 2...)
+ *      Asociativo       → ["nombre" => "Ana", "edad" => 20]
+ *      Multidimensional → ["notas" => [5, 7, 9]]
+ *
+ *  CREAR
+ *      $a = array(1, 2, 3);
+ *      $b = [1, 2, 3];
+ *
+ *  AÑADIR / MODIFICAR / QUITAR
+ *      $a[] = 4;            → añade al final
+ *      $c["z"] = 30;        → añade o modifica una clave
+ *      unset($c["x"]);      → quita una clave
+ *
+ *  RECORRER
+ *      foreach ($a as $valor) {...}
+ *      foreach ($a as $clave => $valor) {...}
+ *
+ *  BÁSICAS
+ *      count($a)            → número de elementos
+ *      print_r($a)          → muestra claves y valores
+ *      is_array($a)         → ¿es un array?
+ *
+ *  ORDENAR
+ *      sort($a)             → ordena valores (pierde las claves)
+ *      natsort($a)          → orden "humano", mantiene claves
+ *      array_multisort(...) → ordena varios arrays a la vez
+ *
+ *  BUSCAR
+ *      in_array(v, $a)          → ¿está el valor? (true/false)
+ *      array_search(v, $a)      → clave del valor o false
+ *      array_key_exists(k, $a)  → ¿existe la clave?
+ *      isset($a[k])             → ¿existe la clave? (y no es null)
+ *      array_filter($a, f)      → los que cumplen una condición
+ *
+ *  ALEATORIO
+ *      shuffle($a)          → desordena el array
+ *      array_rand($a)       → una clave al azar
+ *
+ *  MANIPULAR
+ *      array_keys($a)           → array con las claves
+ *      array_values($a)         → array con los valores
+ *      array_flip($a)           → intercambia claves y valores
+ *      array_combine($k, $v)    → une claves y valores
+ *      array_fill(ini, n, v)    → n elementos con el mismo valor
+ *      array_unique($a)         → quita repetidos
+ *      array_pad($a, n, v)      → rellena hasta tamaño n
+ *      array_slice($a, ini, f)  → devuelve un trozo (no cambia el original)
+ *      array_splice($a, ini, n) → quita elementos (cambia el original)
+ *      array_merge($a, $b)      → une dos arrays
+ *      array_pop($a)            → quita el último
+ *      array_shift($a)          → quita el primero
+ * ==========================================================
+ */
+
 // ==========================================================
 // CONTROLADOR
 // ==========================================================
