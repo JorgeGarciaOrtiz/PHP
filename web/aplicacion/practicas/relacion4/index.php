@@ -64,11 +64,14 @@ $persona2 = Persona::registrarPersona(
 
 // ------------------------------------------------
 
+// Creamos un objeto que permite añadir propiedades dinámicas
 $Objeto = new ClaseMisPropiedades();
 
+// Asignamos la propiedad pública
 $Objeto->propPublica = "publica";
 // $Objeto->_propPrivada = "privada"; // Fatal error: Uncaught Exception: No se puede asignar la propiedad
 
+// Añadimos propiedades dinámicas
 $Objeto->propiedad1 = 25;
 $Objeto->propiedad2 = "cadena de texto";
 
@@ -128,6 +131,7 @@ function cuerpo(
     // ------------------------------------------------
 
     echo "<h3>3. InstrumentoViento</h3>";
+
     echo $instrumentoViento1 . "<br><br>" . PHP_EOL;
     echo $instrumentoViento2;
 
@@ -175,11 +179,13 @@ function cuerpo(
     // ------------------------------------------------
 
     echo "<h3>7. ClaseMisPropiedades</h3>";
+
     echo "La propiedad 1 vale: " . $Objeto->propiedad1 . "<br>" . PHP_EOL;
     // echo $Objeto->propiedad3; // Fatal error: Uncaught Exception: No existe la propiedad
 
     echo "<br>" . PHP_EOL;
 
+    // Recorremos el objeto
     foreach ($Objeto as $clave => $valor) {
         echo $clave . " -> " . $valor . "<br>";
     }
