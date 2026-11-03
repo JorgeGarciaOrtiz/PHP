@@ -17,12 +17,22 @@ $ubicacion = [
 // CONTROLADOR
 // ==========================================================
 
+// -> para objetos: $flauta->sonido()
+// :: para clases (lo estático): Flauta::CrearDesdeArray()
+
+// ----------------------------------------------------------
+// InstrumentoViento (hereda de InstrumentoBase)
+// ----------------------------------------------------------
+
 // Creamos un instrumento de viento con los valores por defecto
 $instrumentoViento1 = new InstrumentoViento();
 // Creamos otro instrumento de viento con los valores que nosotros queramos
 $instrumentoViento2 = new InstrumentoViento("metal", 2);
 
-// ------------------------------------------------
+// ----------------------------------------------------------
+// Flauta (hereda de InstrumentoViento e 
+// implementa IFabricable)
+// ----------------------------------------------------------
 
 // Creamos una flauta con los valores por defecto
 $flauta1 = Flauta::CrearDesdeArray();
@@ -33,11 +43,16 @@ $flauta3 = Flauta::CrearDesdeArray(["edad" => 2]);
 // Creamos una flauta con los valores que nosotros queramos
 $flauta4 = Flauta::CrearDesdeArray(["material" => "metal", "edad" => 2]);
 
-// Clonamos dos flautas
+// $flauta1 = new Flauta(); // Error por que es privado el constructor
+
+// Clonamos dos flautas: conservan el material y la descripción,
+// pero su edad pasa a 0 y tienen un nuevo orden de creación
 $flauta5 = clone $flauta1;
 $flauta6 = clone $flauta4;
 
-// ------------------------------------------------
+// ----------------------------------------------------------
+// Persona (usa la enumeración EstadoCivil)
+// ----------------------------------------------------------
 
 // Obtenemos un estado aleatorio
 $estadosCiviles = EstadoCivil::casos();
@@ -62,7 +77,9 @@ $persona2 = Persona::registrarPersona(
     $estadosCiviles[$numeroAleatorio2]
 );
 
-// ------------------------------------------------
+// ----------------------------------------------------------
+// ClaseMisPropiedades (implementa Iterator)
+// ----------------------------------------------------------
 
 // Creamos un objeto que permite añadir propiedades dinámicas
 $Objeto = new ClaseMisPropiedades();
@@ -123,19 +140,19 @@ function cuerpo(
     echo "<h3>1. InstrumentoBase</h3>";
     echo "<p>Clase abstracta: se prueba a través de InstrumentoViento y Flauta</p>" . PHP_EOL;
 
-    // ------------------------------------------------
+    // ----------------------------------------------------------
 
     echo "<h3>2. IFabricable</h3>";
     echo "<p>Interfaz: se prueba en Flauta</p>" . PHP_EOL;
 
-    // ------------------------------------------------
+    // ----------------------------------------------------------
 
     echo "<h3>3. InstrumentoViento</h3>";
 
     echo $instrumentoViento1 . "<br><br>" . PHP_EOL;
     echo $instrumentoViento2;
 
-    // ------------------------------------------------
+    // ----------------------------------------------------------
 
     echo "<h3>4. Flauta</h3>";
 
@@ -151,7 +168,7 @@ function cuerpo(
     echo "Método de fabricación: " . $flauta6->metodoFabricacion() . "<br>" . PHP_EOL;
     echo "Método de reciclado: " . $flauta6->metodoReciclado();
 
-    // ------------------------------------------------
+    // ----------------------------------------------------------
 
     echo "<h3>5. EstadoCivil</h3>";
     echo "<p>Enumeración: se prueba en Persona, que usa casos() y descripcion()</p>" . PHP_EOL;
@@ -160,7 +177,7 @@ function cuerpo(
     echo $persona1 . "<br>" . PHP_EOL;
     echo $persona2;
 
-    // ------------------------------------------------
+    // ----------------------------------------------------------
 
     echo "<h3>6. SerieFibonacci</h3>";
 
@@ -176,7 +193,7 @@ function cuerpo(
         echo $valor . "&nbsp";
     }
 
-    // ------------------------------------------------
+    // ----------------------------------------------------------
 
     echo "<h3>7. ClaseMisPropiedades</h3>";
 
