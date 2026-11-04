@@ -81,7 +81,7 @@ function cuerpo()
 
     // Crear una fecha cualquiera
     $especifica = mktime(14, 27, 35, 7, 17, 2018); // hora, min, seg, mes, día, año
-    echo "Fecha y hora (fecha creada):  " . date('d/m/Y H:i:s', $especifica) . "<br>";
+    echo "Fecha y hora (fecha creada):  " . date('d/m/Y H:i:s', $especifica) . "<br>"; // cada letra ya representa el dato completo --> 05/03/2023
 
     // Otros
     echo "Día de la semana: " . date('N', $ahora) . "<br>"; // 1 = lunes, 7 = domingo
