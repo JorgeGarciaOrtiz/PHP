@@ -184,6 +184,21 @@ function cuerpo()
 
     echo "Días de diferencia: " . $dif->days . "<br>";
 
+    // invert: indica el orden de las dos fechas en $fecha1->diff($fecha2)
+    // 0 --> fecha2 es posterior o igual a fecha1
+    // 1 --> fecha2 es anterior a fecha1
+    // Hace falta porque y, m y d siempre son positivos
+
+    $nacimiento = new DateTime('2000-05-10');
+    $posterior = new DateTime('2030-05-10');
+    $anterior = new DateTime('1970-05-10');
+
+    $dif1 = $nacimiento->diff($posterior);
+    $dif2 = $nacimiento->diff($anterior);
+
+    echo "Fecha posterior: " . $dif1->y . " años, invert = " . $dif1->invert . "<br>"; // 30 años, invert = 0
+    echo "Fecha anterior: " . $dif2->y . " años, invert = " . $dif2->invert . "<br>"; // 30 años, invert = 1
+
     // ----------------------------------------------------------
     // Comparar fechas
     // ----------------------------------------------------------

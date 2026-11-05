@@ -2,11 +2,6 @@
 
 namespace VALNORMAL;
 
-// function validaEntero(int &$var, int $min, int $max, int $defecto):bool Esta función
-// comprueba que $var contiene un entero cuyo valor está entre $min y $max. En $var se
-// devuelve el entero saneado (en caso de no cumplir las condiciones asigna a $var el valor
-// $defecto). La función devuelve true si es correcto y false en caso contrario.
-
 /**
  * Función que comprueba que un número entero está comprendido entre un número maximo y un 
  * minimo. Si no lo esta le asignamos el valor por defecto.
@@ -27,11 +22,6 @@ function validaEntero(int &$var, int $min, int $max, int $defecto): bool
     }
 }
 
-// function validaReal(float &$var, float $min, float $max, float $defecto):bool Esta función
-// comprueba que $var contiene un real cuyo valor está entre $min y $max. En $var se devuelve
-// el real saneado (en caso de no cumplir las condiciones asigna a $var el valor $defecto). La
-// función devuelve true si es correcto y false en caso contrario.
-
 /**
  * Función que comprueba que un número real está comprendido entre un número maximo y un 
  * minimo. Si no lo esta le asignamos el valor por defecto.
@@ -51,12 +41,6 @@ function validaReal(float &$var, float $min, float $max, float $defecto): bool
         return false;
     }
 }
-
-// function validaFecha(string &$var, string $defecto):bool Esta función comprueba que $var
-// contiene una fecha correcta en el formato dd/mm/aaaa. En $var se devuelve la fecha saneada
-// (2 cifras para dia y mes y cuatro para año- ej fecha 1/2/2023 es válida aunque se sanea y se
-// convierte en 01/02/2023). En caso de no cumplir las condiciones devuelve $defecto en
-// $var. La función devuelve true si es correcta y false en caso contrario.
 
 /**
  * Función que comprueba que una fecha tiene el formato dd/mm/aaaa y que existe.
@@ -97,12 +81,6 @@ function validaFecha(string &$var, string $defecto): bool
     return false;
 }
 
-// function validaHora(string &$var, string $defecto):bool Esta función comprueba que $var
-// contiene una hora correcta en el formato hh:mm:ss . En $var se devuelve la hora saneada (2
-// cifras para hora, min, segundos - Ej 0:5:1, hora valida aunque se sanea y se convierte a
-// 00:05:01). En caso de no cumplir las condiciones devuelve $defecto en $var. La función
-// devuelve true si es correcta y false en caso contrario
-
 /**
  * Función que comprueba que una hora tiene el formato hh:mm:ss y que sus valores son correctos.
  * Si es correcta, la deja con 2 cifras en la hora, los minutos y los segundos.
@@ -142,11 +120,6 @@ function validaHora(string &$var, string $defecto): bool
     return false;
 }
 
-// function validaEmail(string &$var, string $defecto):bool Esta función comprueba que $var
-// contiene un email correcto en el formato aaaaa@bbbb.ccc. En $var se devuelve el email
-// saneado (en caso de no cumplir las condiciones devuelve $defecto). La función devuelve
-// true si es correcto y false en caso contrario.
-
 /**
  * Función que comprueba que un email tiene el formato aaaaa@bbbb.ccc.
  * Si es correcto, lo deja saneado.
@@ -176,16 +149,90 @@ function validaEmail(string &$var, string $defecto): bool
     return false;
 }
 
-// function validaCadena(string &$var, int $longitud, string $defecto):bool Esta función
-// comprueba que $var contiene una cadena de longitud máxima $longitud. En caso de no
-// cumplir las condiciones se asigna a $var el valor $defecto. La función devuelve true si es
-// correcto y false en caso contrario.
+/**
+ * Función que comprueba que una cadena no supera la longitud máxima.
+ * Si la supera, le asignamos el valor por defecto.
+ *
+ * @param string $var Cadena que validamos, si no es válida la modificamos
+ * @param integer $longitud Longitud máxima permitida
+ * @param string $defecto Valor que se asigna si la cadena no es válida
+ * @return boolean True si la cadena es válida y false si no lo es
+ */
+function validaCadena(string &$var, int $longitud, string $defecto): bool
+{
+    // Si la cadena no supera la longitud máxima:
+    if (mb_strlen($var, 'UTF-8') <= $longitud) {
+        // Devolvemos true
+        return true;
+    } else {
+        // Si la cadena no es válida, asignamos el valor por defecto
+        $var = $defecto;
+        // Devolvemos false
+        return false;
+    }
+}
 
-// function validaExpresion(string &$var, string $expresion, string $defecto):bool Esta función
-// comprueba que $var cumple con la expresión regular $expresion. En caso de no cumplir las
-// condiciones se asigna a $var el valor por $defecto. La función devuelve true si es correcto y
-// false en caso contrario.
+/**
+ * Función que comprueba que una cadena cumple una expresión regular.
+ * Si no la cumple, le asignamos el valor por defecto.
+ *
+ * @param string $var Cadena que validamos, si no es válida la modificamos
+ * @param string $expresion Expresión regular que debe cumplir
+ * @param string $defecto Valor que se asigna si la cadena no es válida
+ * @return boolean True si la cadena es válida y false si no lo es
+ */
+function validaExpresion(string &$var, string $expresion, string $defecto): bool
+{
+    // Si la cadena coincide con la expresión regular:
+    if (preg_match($expresion, $var)) {
+        // Devolvemos true
+        return true;
+    }
 
-// function validaRango(mixed $var, array $posibles, int $tipo=1):bool Esta función comprueba
-// que $var sea igual a uno de los elementos del array $posibles ($tipo=1) o a una de las claves
-// del array $posibles ($tipo=2). La función devuelve true si es correcta y false en caso contrario.
+    // Si la cadena no es válida, asignamos el valor por defecto
+    $var = $defecto;
+    // Devolvemos false
+    return false;
+}
+
+/**
+ * Función que comprueba que un valor coincide con uno de los elementos
+ * o con una de las claves de un array.
+ *
+ * @param mixed $var Valor que validamos
+ * @param array $posibles Array con los valores o claves permitidos
+ * @param integer $tipo 1 para comparar con los elementos y 2 para comparar con las claves
+ * @return boolean True si el valor es válido y false si no lo es
+ */
+function validaRango(mixed $var, array $posibles, int $tipo = 1): bool
+{
+    // Si comparamos con los elementos del array:
+    if ($tipo === 1) {
+
+        // Recorremos los elementos
+        foreach ($posibles as $valor) {
+
+            // Si el valor coincide con el elemento:
+            if ($var === $valor) {
+                // Devolvemos true
+                return true;
+            }
+        }
+
+        // Si comparamos con las claves del array:
+    } else if ($tipo === 2) {
+
+        // Recorremos las claves
+        foreach ($posibles as $clave => $valor) {
+
+            // Si el valor coincide con la clave:
+            if ($var === $clave) {
+                  // Devolvemos true
+                return true;
+            }
+        }
+    }
+
+    // Si no hay ninguna coincidencia, devolvemos false
+    return false;
+}
