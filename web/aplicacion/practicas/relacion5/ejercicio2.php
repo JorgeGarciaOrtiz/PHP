@@ -27,6 +27,9 @@ $datos = [
     "mesCarnet" => "",
     "añoCarnet" => "",
     "fechaCarnet" => "",
+    "horaLevantarse" => "",
+    "estado" => "",
+    "estudios" => [],
 ];
 
 // Creamos un array con los errores
@@ -35,8 +38,8 @@ $errores = [];
 // Si se ha enviado el formulario:
 if ($_POST) {
 
-    // Inicializamos el nombre vacío
-    $nombre = "";
+    // Inicializamos el nombre con el valor inicial del array de datos
+    $nombre = $datos["nombre"];
 
     // Si el nombre ha llegado desde el formulario:
     if (isset($_POST["nombre"])) {
@@ -68,8 +71,8 @@ if ($_POST) {
 
     // ==========================================================
 
-    // Inicializamos la contraseña vacía
-    $contraseña = "";
+    // Inicializamos la contraseña con el valor inicial del array de datos
+    $contraseña = $datos["contraseña"];
 
     // Si la contraseña ha llegado desde el formulario:
     if (isset($_POST["contraseña"])) {
@@ -110,8 +113,8 @@ if ($_POST) {
 
     // ==========================================================
 
-    // Inicializamos la fecha de nacimiento vacía
-    $fechaNacimiento = "";
+    // Inicializamos la fecha de nacimiento con el valor inicial del array de datos
+    $fechaNacimiento = $datos["fechaNacimiento"];
 
     // Si la fecha de nacimiento ha llegado desde el formulario:
     if (isset($_POST["fechaNacimiento"])) {
@@ -130,10 +133,10 @@ if ($_POST) {
 
     // ==========================================================
 
-    // Inicializamos el día, el mes y el año del carnet vacíos
-    $diaCarnet = "";
-    $mesCarnet = "";
-    $añoCarnet = "";
+    // Inicializamos el día, el mes y el año del carnet con los valores iniciales del array de datos
+    $diaCarnet = $datos["diaCarnet"];
+    $mesCarnet = $datos["mesCarnet"];
+    $añoCarnet = $datos["añoCarnet"];
 
     // Si el día del carnet ha llegado desde el formulario:
     if (isset($_POST["diaCarnet"])) {
@@ -170,18 +173,97 @@ if ($_POST) {
     // Si las dos fechas son válidas:
     if (!isset($errores["fechaCarnet"]) && !isset($errores["fechaNacimiento"])) {
 
-        // Convertimos las dos fechas a objetos DateTime
-        $fecha1 = DateTime::createFromFormat('d/m/Y', $fechaNacimiento);
-        $fecha2 = DateTime::createFromFormat('d/m/Y', $fechaCarnet);
+        // Convertimos las dos fechas a objetos DateTime (! pone la hora a 00:00:00 para comparar solo el día)
+        $fecha1 = DateTime::createFromFormat('!d/m/Y', $fechaNacimiento); // Ej: 19/03/2006
+        $fecha2 = DateTime::createFromFormat('!d/m/Y', $fechaCarnet); // Ej: 18/03/2024
 
-        // Calculamos la diferencia entre las dos fechas
-        $diferencia = $fecha1->diff($fecha2);
+        // Le restamos 18 años a la fecha del carnet
+        $fecha2->sub(new DateInterval("P18Y")); // Ej: 18/03/2024 - 18 años = 18/03/2006
 
-        // Si tenía menos de 18 años dará error
-        if ($diferencia->y < 18) {
+        // Si la fecha2 (carnet-18) es menor a la fecha1 (nacimiento) damos un error 
+        // pues tiene que ser igual o mayor a la de nacimiento
+        if ($fecha2 < $fecha1) {
             $errores["fechaCarnet"][] = "La fecha del carnet debe ser mayor a la de la edad";
         }
     }
+
+    // ==========================================================
+
+    // Inicializamos la hora de levantarse con el valor inicial del array de datos
+    $horaLevantarse = $datos["horaLevantarse"];
+
+    // Si la hora de levantarse ha llegado desde el formulario:
+    if (isset($_POST["horaLevantarse"])) {
+        // Asigno el valor del formulario a la variable de la hora de levantarse
+        $horaLevantarse = $_POST["horaLevantarse"];
+        // Le quito los espacios de los extremos
+        $horaLevantarse = trim($horaLevantarse);
+    }
+
+    // Si la hora de levantarse no es válida dará error
+    if (!validaHora($horaLevantarse, $horaLevantarse)) {
+        $errores["horaLevantarse"][] = "La hora para levantarse no es valida";
+    }
+
+    // ==========================================================
+
+    $estado = $datos["estado"];
+
+    // if ($estado === 5) {
+    //     $errores["estado"][] = "La opción 5 no es valida";
+    // }
+
+    // ==========================================================
+
+    // Inicializamos los estudios con el valor inicial del array de datos
+    $estudios = $datos["estudios"];
+
+    // Si se ha marcado algún estudio:
+    if (isset($_POST["estudios"])) {
+        // Asigno los estudios marcados (llegan como array desde estudios[])
+        $estudios = $_POST["estudios"];
+    }
+
+    // Opciones de estudios válidas (texto => código)
+    $estudiosValidos = [
+        "Sin estudios" => 0,
+        "Primaria" => 1,
+        "Secundaria" => 2,
+        "Bachillerato" => 3,
+        "Ciclo formativo" => 4,
+        "Universitarios" => 5
+    ];
+
+    // Recorremos los estudios marcados
+    for ($i = 0; $i < count($estudios); $i++) {
+
+        // Convertimos el código a entero
+        $estudios[$i] = (int) $estudios[$i];
+
+        // Si el código no es una opción válida dará error
+        if (!validaRango($estudios[$i], $estudiosValidos, 1)) {
+            $errores["estudios"][] = "La opción 6 no es valida";
+        }
+    }
+
+    // Si se ha marcado "Sin estudios" junto a otras opciones, desmarcamos el resto
+    if ((count($estudios) >= 2) && (in_array(0, $estudios))) {
+        // Dejamos solo "Sin estudios"
+        $estudios = [0];
+    }
+
+    // Si no se ha marcado ningún estudio dará error
+    if ((count($estudios) === 0)) {
+        $errores["estudios"][] = "Debes marcar al menos uno";
+    }
+
+    // ==========================================================
+
+    // HERMANOS
+
+    // ==========================================================
+
+    // SUELDO
 
     // ==========================================================
 
@@ -195,6 +277,12 @@ if ($_POST) {
     $datos["diaCarnet"] = $diaCarnet;
     $datos["mesCarnet"] = $mesCarnet;
     $datos["añoCarnet"] = $añoCarnet;
+    // Guardamos la hora a la que se levanta para mostrarlo en el formulario
+    $datos["horaLevantarse"] = $horaLevantarse;
+    // Guardamos los estado para mostrarlo en el formulario
+    $datos["estado"] = $estado;
+    // Guardamos los estudios para mostrarlo en el formulario
+    $datos["estudios"] = $estudios;
 }
 
 // ==========================================================
@@ -226,31 +314,110 @@ function cuerpo(array $datos, array $errores)
                 echo "$clave => $error<br>" . PHP_EOL;
         }
         echo "</div>";
+?><br><?php
     }
-?>
+        ?>
     <form action="" method="post">
+
         <label for="nombre">Nombre: </label>
+
         <input type="text" name="nombre" id="nombre" maxlength="25"
             value="<?php echo $datos["nombre"]; ?>">
 
+        <!-- ========================================================== -->
+
         <br><label for="contraseña">Contraseña: </label>
+
         <input type="password" name="contraseña" id="contraseña" maxlength="15"
             value="<?php echo $datos["contraseña"]; ?>">
 
+        <!-- ========================================================== -->
+
         <br><label for="fechaNacimiento">Fecha nacimiento: </label>
+
         <input type="text" name="fechaNacimiento" id="fechaNacimiento"
             value="<?php echo $datos["fechaNacimiento"]; ?>">
 
+        <!-- ========================================================== -->
+
         <br><label for="fechaCarnet">Fecha carnet: </label>
+
         <br><label for="diaCarnet">Dia: </label>
         <input type="text" name="diaCarnet" id="diaCarnet"
             value="<?php echo $datos["diaCarnet"]; ?>">
+
         <br><label for="mesCarnet">Mes: </label>
         <input type="text" name="mesCarnet" id="mesCarnet"
             value="<?php echo $datos["mesCarnet"]; ?>">
+
         <br><label for="añoCarnet">Año: </label>
         <input type="text" name="añoCarnet" id="añoCarnet"
             value="<?php echo $datos["añoCarnet"]; ?>">
+
+        <!-- ========================================================== -->
+
+        <br><label for="horaLevantarse">Hora para levantarse: </label>
+
+        <input type="text" name="horaLevantarse" id="horaLevantarse"
+            value="<?php echo $datos["horaLevantarse"]; ?>">
+
+        <!-- ========================================================== -->
+
+        <br><label>Estado: </label>
+
+        <br><input type="radio" name="estado" id="estudiante" value="1"
+            <?php if ($datos["estado"] === 1) echo "checked"; ?>>
+        <label for="estudiante">Estudiante</label>
+
+        <br><input type="radio" name="estado" id="enParo" value="2"
+            <?php if (in_array(0, $datos["estado"])) echo "checked"; ?>>
+        <label for="enParo">En paro</label>
+
+        <br><input type="radio" name="estado" id="trabajo" value="3"
+            <?php if (in_array(0, $datos["estado"])) echo "checked"; ?>>
+        <label for="trabajo">Trabajo</label>
+
+        <br><input type="radio" name="estado" id="jubilado" value="4"
+            <?php if (in_array(0, $datos["estado"])) echo "checked"; ?>>
+        <label for="jubilado">Jubilado</label>
+
+        <br><input type="radio" name="estado" id="incorrecto" value="5"
+            <?php if (in_array(0, $datos["estado"])) echo "checked"; ?>>
+        <label for="incorrecto">Incorrecto</label>
+
+        <!-- ========================================================== -->
+
+        <br><label>Estudios: </label>
+
+        <br><input type="checkbox" name="estudios[]" id="sinEstudios" value="0"
+            <?php if (in_array(0, $datos["estudios"])) echo "checked"; ?>>
+        <label for="sinEstudios">Sin estudios</label>
+
+        <br><input type="checkbox" name="estudios[]" id="primaria" value="1"
+            <?php if (in_array(1, $datos["estudios"])) echo "checked"; ?>>
+        <label for="primaria">Primaria</label>
+
+        <br><input type="checkbox" name="estudios[]" id="secundaria" value="2"
+            <?php if (in_array(2, $datos["estudios"])) echo "checked"; ?>>
+        <label for="secundaria">Secundaria</label>
+
+        <br><input type="checkbox" name="estudios[]" id="bachillerato" value="3"
+            <?php if (in_array(3, $datos["estudios"])) echo "checked"; ?>>
+        <label for="bachillerato">Bachillerato</label>
+
+        <br><input type="checkbox" name="estudios[]" id="cicloFormativo" value="4"
+            <?php if (in_array(4, $datos["estudios"])) echo "checked"; ?>>
+        <label for="cicloFormativo">Ciclo formativo</label>
+
+        <br><input type="checkbox" name="estudios[]" id="universitarios" value="5"
+            <?php if (in_array(5, $datos["estudios"])) echo "checked"; ?>>
+        <label for="universitarios">Universitarios</label>
+
+        <br><input type="checkbox" name="estudios[]" id="incorrecta" value="6"
+            <?php if (in_array(6, $datos["estudios"])) echo "checked"; ?>>
+        <label for="incorrecta">Incorrecta</label>
+
+        <!-- ========================================================== -->
 
         <br><input type="submit" value="Enviar">
     </form>
