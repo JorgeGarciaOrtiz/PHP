@@ -49,7 +49,7 @@ if ($_POST) {
     // Si el nombre ha llegado desde el formulario:
     if (isset($_POST["nombre"])) {
 
-        // Asigno el valor del formulario al a la variable para el nombre
+        // Asigno el valor del formulario a la variable para el nombre
         $nombre = $_POST["nombre"];
 
         // Le quito los espacios de los extremos
@@ -64,9 +64,9 @@ if ($_POST) {
         $errores["nombre"][] = "El nombre esta vacio";
     }
 
-    // Si empiza por H, también dara error
+    // Si empieza por H, también dara error
     if (mb_substr($nombre, 0, 1, 'UTF-8') === "H") {
-        $errores["nombre"][] = "El nombre no puedo comenzar por H";
+        $errores["nombre"][] = "El nombre no puede comenzar por H";
     }
 
     // Si ocupa más de 25 caracteres dara error
@@ -140,7 +140,7 @@ if ($_POST) {
 
     // Si la fecha de nacimiento no es válida dará error
     if (!validaFecha($fechaNacimiento, $fechaNacimiento)) {
-        $errores["fechaNacimiento"][] = "La fecha de nacimineto no es valida";
+        $errores["fechaNacimiento"][] = "La fecha de nacimiento no es valida";
     }
 
     // Guardamos la fecha de nacimiento para mostrarla en el formulario
@@ -248,7 +248,7 @@ if ($_POST) {
         $errores["estado"][] = "Incorrecto no es un estado valido";
     }
 
-    // Guardamos los estado para mostrarlo en el formulario
+    // Guardamos el estado para mostrarlo en el formulario
     $datos["estado"] = $estado;
 
     // ==========================================================
@@ -295,7 +295,7 @@ if ($_POST) {
         $errores["estudios"][] = "Debes marcar al menos uno";
     }
 
-    // Guardamos los estudios para mostrarlo en el formulario
+    // Guardamos los estudios para mostrarlos en el formulario
     $datos["estudios"] = $estudios;
 
     // ==========================================================
