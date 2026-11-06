@@ -181,7 +181,7 @@ function validaEmail(string &$var, string $defecto): bool
         // Devolvemos false
         return false;
     } else {
-        // Si la longitud es válida, asignamos el valor correcto
+        // Si el email es válido, asignamos el valor correcto
         $var = $resultado;
         // Devolvemos true
         return true;

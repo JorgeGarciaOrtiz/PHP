@@ -37,9 +37,10 @@ $ubicacion = [
  *      foreach ($a as $clave => $valor) {...}
  *
  *  BÁSICAS
- *      count($a)            → número de elementos
- *      print_r($a)          → muestra claves y valores
- *      is_array($a)         → ¿es un array?
+ *      count($a)                  → número de elementos
+ *      print_r($a)                → muestra claves y valores
+ *      is_array($a)               → ¿es un array?
+ *      implode(separador, $a)     → convierte un array en texto uniendo sus valores
  *
  *  ORDENAR
  *      sort($a)             → ordena valores (pierde las claves)

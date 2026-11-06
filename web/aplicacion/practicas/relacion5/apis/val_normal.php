@@ -14,10 +14,14 @@ namespace VALNORMAL;
  */
 function validaEntero(int &$var, int $min, int $max, int $defecto): bool
 {
+    // Si el número está entre el mínimo y el máximo:
     if (($var >= $min) && ($var <= $max)) {
+        // Devolvemos true
         return true;
     } else {
+        // Si el número no es válido, asignamos el valor por defecto
         $var = $defecto;
+        // Devolvemos false
         return false;
     }
 }
@@ -34,10 +38,14 @@ function validaEntero(int &$var, int $min, int $max, int $defecto): bool
  */
 function validaReal(float &$var, float $min, float $max, float $defecto): bool
 {
+    // Si el número está entre el mínimo y el máximo:
     if (($var >= $min) && ($var <= $max)) {
+        // Devolvemos true
         return true;
     } else {
+        // Si el número no es válido, asignamos el valor por defecto
         $var = $defecto;
+        // Devolvemos false
         return false;
     }
 }
@@ -114,7 +122,7 @@ function validaHora(string &$var, string $defecto): bool
         }
     }
 
-    // Si la fecha no es válida, asignamos el valor por defecto
+    // Si la hora no es válida, asignamos el valor por defecto
     $var = $defecto;
     // Devolvemos false
     return false;
@@ -227,7 +235,7 @@ function validaRango(mixed $var, array $posibles, int $tipo = 1): bool
 
             // Si el valor coincide con la clave:
             if ($var === $clave) {
-                  // Devolvemos true
+                // Devolvemos true
                 return true;
             }
         }
