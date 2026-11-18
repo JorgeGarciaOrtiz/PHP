@@ -45,5 +45,7 @@ function cuerpo()
     <a href="./relacion4/">Relación 4</a>
     <br>
     <a href="./relacion5/">Relación 5</a>
+     <br>
+    <a href="./relacion7/">Relación 7</a>
 <?php
 }
