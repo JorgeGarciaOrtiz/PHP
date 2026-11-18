@@ -77,7 +77,6 @@ if ($_POST) {
     // Guardamos el nombre para mostrarlo en el formulario
     $datos["nombre"] = $nombre;
 
-
     // ==========================================================
 
     // Inicializamos la contraseña con el valor inicial del array de datos

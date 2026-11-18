@@ -2,7 +2,6 @@
 
 class Punto
 {
-
     // -------------------------------------------------------------
     // Propiedades
     // -------------------------------------------------------------
@@ -16,7 +15,7 @@ class Punto
     ];
 
     // Constante con todos los grosores disponibles
-    public static const GROSORES = [
+    public const GROSORES = [
         1 => "fino",
         2 => "medio",
         3 => "grueso",
@@ -87,7 +86,7 @@ class Punto
      */
     public function setX(int $x): bool
     {
-        if (validaEntero($x, 0, 2000, 0)) {
+        if (validaEntero($x, 0, 20000, 0)) {
             $this->_x = $x;
             return true;
         } else {
@@ -103,8 +102,8 @@ class Punto
      */
     public function setY(int $y): bool
     {
-        if (validaEntero($y, 0, 2000, 0)) {
-            $this->_x = $y;
+        if (validaEntero($y, 0, 20000, 0)) {
+            $this->_y = $y;
             return true;
         } else {
             return false;
@@ -171,12 +170,12 @@ class Punto
 
         // Si el color y no es válido, se lanza una excepción
         if (!$this->setColor($color)) {
-            throw new Exception("El color y no es válido");
+            throw new Exception("El color no es válido");
         }
 
         // Si el grosor y no es válido, se lanza una excepción
         if (!$this->setGrosor($grosor)) {
-            throw new Exception("El grosor y no es válido");
+            throw new Exception("El grosor no es válido");
         }
     }
 
