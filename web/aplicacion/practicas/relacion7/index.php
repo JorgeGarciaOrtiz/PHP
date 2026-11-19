@@ -4,7 +4,7 @@
 include_once(dirname(__FILE__) . "/../../../cabecera.php");
 
 // Variable con el titulo
-$titulo = "Ejercicio 1";
+$titulo = "Ejercicios";
 
 // Ruta de navegación de la página
 $ubicacion = [
@@ -17,6 +17,21 @@ $ubicacion = [
 // ==========================================================
 // CONTROLADOR
 // ==========================================================
+
+// Obtengo la ip con "_"
+$dirip = str_replace(".", "_", $_SERVER["REMOTE_ADDR"]);
+// Obtengo solo el nombre del navegador
+$navegador = encontrarNavegador($_SERVER["HTTP_USER_AGENT"] ?? "");
+
+// Ruta de la imagen
+$ruta = "/imagenes/puntos/imagen_" .  $dirip . "_" .  $navegador . ".jpg";
+
+// Creo una imagen solo si no hay otra igual
+if (!file_exists(RUTABASE . $ruta)) {
+    crearImagen($dirip, $navegador, $puntos);
+}
+
+// ----------------------------------------------------------
 
 // Creo un array con los colores
 $colores = Punto::COLORES;
@@ -125,11 +140,12 @@ if ($_POST) {
 
     // ==========================================================
 
-    // Si no hay ningún error, muestro el resumen en lugar del formulario
+    // Si no hay ningún error, creo el punto, lo añado al array y recreo la imagen
     if (!$errores) {
         $nuevoPunto = new Punto($coordenadaX, $coordenadaY, $color, $grosor);
 
         $puntos[] = $nuevoPunto;
+        crearImagen($dirip, $navegador, $puntos);
     }
 }
 
@@ -144,7 +160,7 @@ finCabecera();
 
 // Cuerpo de la página
 inicioCuerpo($titulo, $ubicacion);
-cuerpo($datos, $colores, $errores);
+cuerpo($datos, $colores, $errores, $puntos, $ruta);
 finCuerpo();
 
 // ==========================================================
@@ -165,9 +181,11 @@ function cuerpo(
     array $datos,
     array $colores,
     array $errores,
+    array $puntos,
+    string $ruta,
 ) {
     // Mestro el formulario con los datos y los errores
-    formulario($datos, $colores, $errores);
+    formulario($datos, $colores, $errores, $puntos, $ruta,);
 }
 
 /**
@@ -182,6 +200,8 @@ function formulario(
     array $datos,
     array $colores,
     array $errores,
+    array $puntos,
+    string $ruta,
 ) {
 ?>
     <form action="" method="post">
@@ -262,7 +282,14 @@ function formulario(
         }
         ?>
 
+        <!-- Botón -->
         <br><br><input type="submit" value="Enviar">
+
+        <!-- Textarea -->
+        <br><br><textarea name="texto" rows="6" cols="40"><?php foreach ($puntos as $clave => $valor) { ?><?php echo $valor->getX() . ", " . $valor->getY() . ", " . $valor->getColor() . ", " . $valor->getGrosor() . "\n" ?><?php } ?></textarea>
+
+        <!-- Imagen -->
+        <br><img src=<?php echo $ruta ?> alt="Imagen">
     </form>
 <?php
 }

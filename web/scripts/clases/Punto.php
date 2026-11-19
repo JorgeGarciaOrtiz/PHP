@@ -9,9 +9,9 @@ class Punto
     // Constante con todos los colores posibles
     public const COLORES = [
         "red" => ["nombre" => "rojo", "rgb" => [255, 0, 0]],
-        "green" => ["nombre" => "verde", "rgb" => [0, 255, 0]],
+        "green" => ["nombre" => "verde", "rgb" => [0, 225, 0]],
         "blue" => ["nombre" => "azul", "rgb" => [0, 0, 225]],
-        "yellow" => ["nombre" => "amarillo", "rgb" => [255, 255, 0]],
+        "yellow" => ["nombre" => "amarillo", "rgb" => [225, 225, 0]],
     ];
 
     // Constante con todos los grosores disponibles

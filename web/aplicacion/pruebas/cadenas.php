@@ -54,14 +54,14 @@ $strtolower = "Con strtolower: " . strtolower($cadena) . "<br>";
 $strtoupper = "Con strtoupper: " . strtoupper($cadena) . "<br>";
 
 // ==========================================================
-// mb_strtolower: convierte una cadena a minúsculas 
+// mb_strtolower: convierte una cadena a minúsculas
 // respetando UTF-8
 // ==========================================================
 
 $mb_strtolower = "Con mb_strtolower: " . mb_strtolower($cadena, 'UTF-8') . "<br>";
 
 // ==========================================================
-// mb_strtoupper: convierte una cadena a mayúsculas 
+// mb_strtoupper: convierte una cadena a mayúsculas
 // respetando UTF-8
 // ==========================================================
 
@@ -205,6 +205,114 @@ $ord = "";
 $ord = "Con ord: " . ord("A") . "<br>";
 
 // ==========================================================
+// lcfirst: convierte a minúscula el primer carácter
+// ==========================================================
+
+$lcfirst = "Con lcfirst: " . lcfirst("Hola Mundo") . "<br>";
+
+// ==========================================================
+// stripos: igual que strpos pero sin distinguir mayúsculas
+// ==========================================================
+
+$stripos = "";
+$posicion = stripos($cadena, "yamal");
+if ($posicion !== false) {
+    $stripos = "Con stripos: " . $posicion . "<br>";
+}
+
+// ==========================================================
+// strstr: devuelve desde la primera coincidencia hasta el final
+// ==========================================================
+
+$strstr = "Con strstr: " . strstr($cadena, "Yamal") . "<br>";
+
+// ==========================================================
+// stristr: igual que strstr pero sin distinguir mayúsculas
+// ==========================================================
+
+$stristr = "Con stristr: " . stristr($cadena, "yamal") . "<br>";
+
+// ==========================================================
+// strpbrk: busca cualquiera de los caracteres de una lista y
+// devuelve desde el primero que encuentre hasta el final
+// ==========================================================
+
+$strpbrk = "Con strpbrk: " . strpbrk($cadena, "LY") . "<br>";
+
+// ==========================================================
+// str_ireplace: igual que str_replace sin distinguir mayúsculas
+// ==========================================================
+
+$str_ireplace = "Con str_ireplace: " . str_ireplace("OCTUBRE", "Noviembre", $cadena) . "<br>";
+
+// ==========================================================
+// substr_replace: sustituye una parte indicando posición y
+// longitud (cuenta bytes: la "í" de "día" ocupa 2, por eso
+// el "26" empieza en la posición 8 y no en la 7)
+// ==========================================================
+
+$substr_replace = "Con substr_replace: " . substr_replace($cadena, "27", 8, 2) . "<br>";
+
+// ==========================================================
+// strtr: hace varios reemplazos a la vez con un array
+// ==========================================================
+
+$strtr = "Con strtr: " . strtr($cadena, ["Octubre" => "Noviembre", "Yamal" => "Mbappe"]) . "<br>";
+
+// ==========================================================
+// strip_tags: quita las etiquetas HTML de una cadena
+// ==========================================================
+
+$strip_tags = "Con strip_tags: " . strip_tags("<b>Hola</b> <i>mundo</i>") . "<br>";
+
+// ==========================================================
+// strcasecmp: compara dos cadenas sin distinguir mayúsculas
+// (0 = iguales, negativo o positivo según el orden)
+// ==========================================================
+
+$strcasecmp = "Con strcasecmp: " . strcasecmp("HOLA", "hola") . "<br>";
+
+// ==========================================================
+// strnatcmp: compara con orden "natural" (img2 va antes que
+// img10, cosa que strcmp no hace)
+// ==========================================================
+
+$strnatcmp = "Con strnatcmp: " . strnatcmp("img2", "img10") . "<br>";
+
+// ==========================================================
+// preg_replace: reemplaza con una expresión regular
+// (aquí, cualquier número por una X)
+// ==========================================================
+
+$preg_replace = "Con preg_replace: " . preg_replace('/\d+/', "X", $cadena) . "<br>";
+
+// ==========================================================
+// EXTRA (no están en tus apuntes)
+// ucwords: pone en mayúscula la primera letra de cada palabra
+// ==========================================================
+
+$ucwords = "Con ucwords: " . ucwords($cadena) . "<br>";
+
+// ==========================================================
+// EXTRA - rtrim: elimina espacios solo al final
+// ==========================================================
+
+$rtrim = "Con rtrim: [" . rtrim($cadena) . "]<br>";
+
+// ==========================================================
+// EXTRA - substr_count: cuenta cuántas veces aparece un texto
+// ==========================================================
+
+$substr_count = "Con substr_count: " . substr_count($cadena, "el") . "<br>";
+
+// ==========================================================
+// EXTRA - str_contains: comprueba si una cadena contiene otra
+// (PHP 8 en adelante)
+// ==========================================================
+
+$str_contains = "Con str_contains: " . (str_contains($cadena, "Yamal") ? "sí" : "no") . "<br>";
+
+// ==========================================================
 // PLANTILLA
 // ==========================================================
 
@@ -241,7 +349,23 @@ cuerpo(
     $number_format,
     $ctype_alnum,
     $chr,
-    $ord
+    $ord,
+    $lcfirst,
+    $stripos,
+    $strstr,
+    $stristr,
+    $strpbrk,
+    $str_ireplace,
+    $substr_replace,
+    $strtr,
+    $strip_tags,
+    $strcasecmp,
+    $strnatcmp,
+    $preg_replace,
+    $ucwords,
+    $rtrim,
+    $substr_count,
+    $str_contains
 );
 finCuerpo();
 
@@ -277,7 +401,23 @@ function cuerpo(
     string $number_format,
     string $ctype_alnum,
     string $chr,
-    string $ord
+    string $ord,
+    string $lcfirst,
+    string $stripos,
+    string $strstr,
+    string $stristr,
+    string $strpbrk,
+    string $str_ireplace,
+    string $substr_replace,
+    string $strtr,
+    string $strip_tags,
+    string $strcasecmp,
+    string $strnatcmp,
+    string $preg_replace,
+    string $ucwords,
+    string $rtrim,
+    string $substr_count,
+    string $str_contains
 ) {
     echo "<h4>" . $cadena . "</h4>";
     echo $strlen . "<br>" . PHP_EOL;
@@ -305,4 +445,20 @@ function cuerpo(
     echo $ctype_alnum . "<br>" . PHP_EOL;
     echo $chr . "<br>" . PHP_EOL;
     echo $ord . "<br>" . PHP_EOL;
+    echo $lcfirst . "<br>" . PHP_EOL;
+    echo $stripos . "<br>" . PHP_EOL;
+    echo $strstr . "<br>" . PHP_EOL;
+    echo $stristr . "<br>" . PHP_EOL;
+    echo $strpbrk . "<br>" . PHP_EOL;
+    echo $str_ireplace . "<br>" . PHP_EOL;
+    echo $substr_replace . "<br>" . PHP_EOL;
+    echo $strtr . "<br>" . PHP_EOL;
+    echo $strip_tags . "<br>" . PHP_EOL;
+    echo $strcasecmp . "<br>" . PHP_EOL;
+    echo $strnatcmp . "<br>" . PHP_EOL;
+    echo $preg_replace . "<br>" . PHP_EOL;
+    echo $ucwords . "<br>" . PHP_EOL;
+    echo $rtrim . "<br>" . PHP_EOL;
+    echo $substr_count . "<br>" . PHP_EOL;
+    echo $str_contains . "<br>" . PHP_EOL;
 }

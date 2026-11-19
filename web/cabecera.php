@@ -21,6 +21,11 @@ spl_autoload_register(function ($clase) {
 
 include(RUTABASE . "/aplicacion/plantilla/plantilla.php");
 include(RUTABASE . "/scripts/librerias/validacion.php");
+include(RUTABASE . "/scripts/librerias/imagenes.php");
 
-// Creo un array de puntos
-$puntos = [];
+// Creo un array con 3 puntos
+$puntos = [
+    new Punto(100, 100, "red", 1),
+    new Punto(250, 250, "blue", 2),
+    new Punto(400, 150, "green", 3),
+];
