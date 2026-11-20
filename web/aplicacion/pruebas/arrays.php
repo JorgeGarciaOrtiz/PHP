@@ -67,7 +67,10 @@ $ubicacion = [
  *      array_unique($a)         → quita repetidos
  *      array_pad($a, n, v)      → rellena hasta tamaño n
  *      array_slice($a, ini, f)  → devuelve un trozo (no cambia el original)
+ * 
  *      array_splice($a, ini, n) → quita elementos (cambia el original)
+ *      array_splice($array, desde_qué_posición, cuántos_quitas, [array_con_lo_que_metes]);
+ * 
  *      array_merge($a, $b)      → une dos arrays
  *      array_pop($a)            → quita el último
  *      array_shift($a)          → quita el primero

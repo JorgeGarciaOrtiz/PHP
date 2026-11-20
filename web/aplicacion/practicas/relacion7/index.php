@@ -31,6 +31,17 @@ if (!file_exists(RUTABASE . $ruta)) {
     crearImagen($dirip, $navegador, $puntos);
 }
 
+// Ruta deL fichero
+$rutaFichero = __DIR__ . "/datos/puntos_" .  $dirip . "_" .  $navegador . ".dat";
+
+// Creo un fichero con los puntos solo si no hay otro igual
+if (!file_exists($rutaFichero)) {
+    file_put_contents($rutaFichero, "");
+}
+
+// Leo el fichero y creo un punto nuevo
+leerFichero($rutaFichero, $puntos);
+
 // ----------------------------------------------------------
 
 // Creo un array con los colores
@@ -50,8 +61,8 @@ $datos = [
 // Creo un array con los errores
 $errores = [];
 
-// Si se ha enviado el formulario:
-if ($_POST) {
+// Si se ha pulsado el botón de enviar:
+if (isset($_POST["enviar"])) {
 
     // Creo un punto de prueba para comprobar los datos con sus set
     $auxiliar = new Punto(5, 20, "red", 2);
@@ -140,14 +151,41 @@ if ($_POST) {
 
     // ==========================================================
 
-    // Si no hay ningún error, creo el punto, lo añado al array y recreo la imagen
+    // Si no hay ningún error, añado la información del punto al fichero, leo el fichero 
+    // para actualizar el array de puntos y creo la imagen con todos los puntos
     if (!$errores) {
-        $nuevoPunto = new Punto($coordenadaX, $coordenadaY, $color, $grosor);
 
-        $puntos[] = $nuevoPunto;
+        // Guardo toda la información 
+        $info = $coordenadaX . " ; " . $coordenadaY . " ; " . $color . " ; " . $grosor;
+
+        // Modifico el fichero ya creado con la nueva información
+        $f = fopen($rutaFichero, "a");
+        fputs($f,  $info . PHP_EOL);
+        fclose($f);
+
+        // Creo la imagen con los puntos
         crearImagen($dirip, $navegador, $puntos);
     }
 }
+
+// Si se ha pulsado el botón de eliminar
+if (isset($_POST["eliminar"])) {
+
+    // Empiezo sin ninguna posición elegida
+    $posicionPuntoBorrar = 0;
+
+    // Si ha llegado una posición del combo y es un número:
+    if (isset($_POST["selectPuntos"]) && is_numeric($_POST["selectPuntos"])) {
+
+        // Guardo la posición del punto a borrar como número entero
+        $posicionPuntoBorrar = (int) $_POST["selectPuntos"];
+
+        // Quito el punto del array de puntos
+        array_splice($puntos, $posicionPuntoBorrar, 1);
+    }
+}
+
+// leerFichero($rutaFichero, $puntos);
 
 // ==========================================================
 // PLANTILLA
@@ -282,14 +320,97 @@ function formulario(
         }
         ?>
 
+        <!-- Combo con todos los puntos -->
+        <br><select name="selectPuntos">
+            <?php for ($i = 0; $i < count($puntos); $i++) { ?>
+                <option value=" <?php echo $i ?> " ?>
+                    <?php echo $puntos[$i]->getX() . ";" . $puntos[$i]->getY() . ";" . $puntos[$i]->getColor() . ";" . $puntos[$i]->getGrosor() ?>
+                </option>
+            <?php } ?>
+        </select>
+
+        <!-- Botón borrar boton -->
+        <br><br><input type="submit" name="eliminar" value="Eliminar">
+
         <!-- Botón -->
-        <br><br><input type="submit" value="Enviar">
+        <br><br><input type="submit" name="enviar" value="Enviar">
 
         <!-- Textarea -->
-        <br><br><textarea name="texto" rows="6" cols="40"><?php foreach ($puntos as $clave => $valor) { ?><?php echo $valor->getX() . ", " . $valor->getY() . ", " . $valor->getColor() . ", " . $valor->getGrosor() . "\n" ?><?php } ?></textarea>
+        <br><br><textarea readonly name="texto" rows="6" cols="40"><?php foreach ($puntos as $clave => $valor) { ?><?php echo $valor->getX() . ", " . $valor->getY() . ", " . $valor->getColor() . ", " . $valor->getGrosor() . "\n" ?><?php } ?></textarea>
 
         <!-- Imagen -->
         <br><img src=<?php echo $ruta ?> alt="Imagen">
     </form>
 <?php
+}
+
+/**
+ * Funcion que lee un fichero y crea puntos a partir de el
+ * 
+ * @param string $ruta Ruta del fichero
+ * @param array $datos Array que se rellena con los puntos leidos
+ * @return bool Devuelve true si se ha leido bien, false si no se pudo abrir el fichero
+ */
+function leerFichero(string $ruta, array &$datos): bool
+{
+    // Se abre el fichero para leer (tiene que existir)
+    $fic = fopen($ruta, "r");
+    // Si no se pudo abrir, se sale de la función con false
+    if (!$fic) {
+        return false;
+    }
+
+    // Se vacía el array antes de rellenarlo
+    foreach ($datos as $pos => $valor) {
+        unset($datos[$pos]);
+    }
+
+    // Se lee el fichero línea a línea hasta que no queden más
+    while ($linea = fgets($fic)) {
+
+        // Se quitan los saltos de línea del final
+        $linea = str_replace("\r", "", $linea);
+        $linea = str_replace("\n", "", $linea);
+
+        // Si la línea no está vacía
+        if ($linea != "") {
+            // Se separa la línea en trozos
+            $linea = explode(" ; ", $linea);
+
+            $nuevoPunto = new Punto((int) $linea[0], (int) $linea[1], $linea[2], (int) $linea[3]);
+            $datos[] = $nuevoPunto;
+        }
+    }
+
+    // Se cierra el fichero
+    fclose($fic);
+    // Todo ha ido bien
+    return true;
+}
+
+/**
+ * Undocumented function
+ *
+ * @param string $ruta
+ * @param array $datos
+ * @return boolean
+ */
+function editarFichero(string $ruta, array $datos): bool
+{
+    $fic = fopen($ruta, "w");
+    if (!$fic) {
+        return false;
+    }
+
+    foreach ($datos as $fila) {
+        $linea = "";
+        foreach ($fila as $columna) {
+            $linea .= $columna . ",";
+        }
+        $linea .= "\r\n";
+        fputs($fic, $linea);
+    }
+
+    fclose($fic);
+    return true;
 }
