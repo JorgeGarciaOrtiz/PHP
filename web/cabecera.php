@@ -22,6 +22,7 @@ spl_autoload_register(function ($clase) {
 include(RUTABASE . "/aplicacion/plantilla/plantilla.php");
 include(RUTABASE . "/scripts/librerias/validacion.php");
 include(RUTABASE . "/scripts/librerias/imagenes.php");
+include(RUTABASE . "/scripts/librerias/ficheros.php");
 
 // Creo un array vacio
 $puntos = [];

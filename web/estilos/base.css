@@ -50,7 +50,7 @@ a:hover {
     margin: 20px auto 0 auto;
     background-color: var(--fondo-documento);
     color: var(--texto);
-    width: 700px;
+    width: 1000px;
     border-radius: 12px;
     padding: 5px 15px 15px 15px;
     box-sizing: border-box;

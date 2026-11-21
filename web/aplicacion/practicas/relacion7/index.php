@@ -3,7 +3,7 @@
 // Incluyo la cabecera y la plantilla de la aplicación
 include_once(dirname(__FILE__) . "/../../../cabecera.php");
 
-// Variable con el titulo
+// Variable con el título
 $titulo = "Ejercicios";
 
 // Ruta de navegación de la página
@@ -23,6 +23,17 @@ $dirip = str_replace(".", "_", $_SERVER["REMOTE_ADDR"]);
 // Obtengo solo el nombre del navegador
 $navegador = encontrarNavegador($_SERVER["HTTP_USER_AGENT"] ?? "");
 
+// Ruta del fichero
+$rutaFichero = __DIR__ . "/datos/puntos_" .  $dirip . "_" .  $navegador . ".dat";
+
+// Creo un fichero con los puntos solo si no hay otro igual
+if (!file_exists($rutaFichero)) {
+    file_put_contents($rutaFichero, "");
+}
+
+// Leo el fichero y cargo sus puntos en el array de puntos
+leerFichero($rutaFichero, $puntos);
+
 // Ruta de la imagen
 $ruta = "/imagenes/puntos/imagen_" .  $dirip . "_" .  $navegador . ".jpg";
 
@@ -31,23 +42,12 @@ if (!file_exists(RUTABASE . $ruta)) {
     crearImagen($dirip, $navegador, $puntos);
 }
 
-// Ruta deL fichero
-$rutaFichero = __DIR__ . "/datos/puntos_" .  $dirip . "_" .  $navegador . ".dat";
-
-// Creo un fichero con los puntos solo si no hay otro igual
-if (!file_exists($rutaFichero)) {
-    file_put_contents($rutaFichero, "");
-}
-
-// Leo el fichero y creo un punto nuevo
-leerFichero($rutaFichero, $puntos);
-
 // ----------------------------------------------------------
 
-// Creo un array con los colores
+// Creo un array con los colores (es una copia)
 $colores = Punto::COLORES;
 
-// Creo un array con los grosores
+// Creo un array con los grosores (es una copia)
 $grosores = Punto::GROSORES;
 
 // Creo un array con los datos del formulario
@@ -61,13 +61,8 @@ $datos = [
 // Creo un array con los errores
 $errores = [];
 
-// Si se ha pulsado el botón de enviar:
-if (isset($_POST["enviar"])) {
-
-    // Creo un punto de prueba para comprobar los datos con sus set
-    $auxiliar = new Punto(5, 20, "red", 2);
-
-    // ==========================================================
+// Si se ha pulsado el botón para crear un punto:
+if (isset($_POST["crearPunto"])) {
 
     // Creo la coordenada 'x' con el valor inicial del array de datos
     $coordenadaX = $datos["coordenadaX"];
@@ -76,6 +71,9 @@ if (isset($_POST["enviar"])) {
     if (isset($_POST["coordenadaX"]) && is_numeric($_POST["coordenadaX"])) {
         // Asigno el valor del formulario convertido a int
         $coordenadaX = (int) $_POST["coordenadaX"];
+        // Si no, dará error
+    } else {
+        $errores["coordenadaX"][] = "Debe de introducir el valor de x";
     }
 
     // Si la coordenada 'x' no está entre 0 y 500 dará error
@@ -83,7 +81,7 @@ if (isset($_POST["enviar"])) {
         $errores["coordenadaX"][] = "La coordenada 'x' debe de ser mayor a cero 0 y menor de 500";
     }
 
-    // Guardamos la coordenada 'x' para mostrarla en el formulario
+    // Guardo la coordenada 'x' para mostrarla en el formulario
     $datos["coordenadaX"] = $coordenadaX;
 
     // ==========================================================
@@ -95,6 +93,9 @@ if (isset($_POST["enviar"])) {
     if (isset($_POST["coordenadaY"]) && is_numeric($_POST["coordenadaY"])) {
         // Asigno el valor del formulario convertido a int
         $coordenadaY = (int) $_POST["coordenadaY"];
+        // Si no, dará error
+    } else {
+        $errores["coordenadaY"][] = "Debe de introducir el valor de y";
     }
 
     // Si la coordenada 'y' no está entre 0 y 500 dará error
@@ -102,7 +103,7 @@ if (isset($_POST["enviar"])) {
         $errores["coordenadaY"][] = "La coordenada 'y' debe de ser mayor a cero 0 y menor de 500";
     }
 
-    // Guardamos la coordenada 'y' para mostrarla en el formulario
+    // Guardo la coordenada 'y' para mostrarla en el formulario
     $datos["coordenadaY"] = $coordenadaY;
 
     // ==========================================================
@@ -115,14 +116,18 @@ if (isset($_POST["enviar"])) {
 
         // Asigno el valor del formulario
         $color = $_POST["color"];
-
-        // Si el set no lo acepta, dará error
-        if (!$auxiliar->setColor($color)) {
-            $errores["color"][] = "El color seleccionado no existe";
-        }
     }
 
-    // Guardamos el color para mostrarlo en el formulario
+    // Si no se ha elegido ningún color dará error
+    if ($color === "") {
+        $errores["color"][] = "Debes introducir un color";
+
+        // Si el color no es una de las opciones dará error
+    } else if (!validaRango($color, $colores, 2)) {
+        $errores["color"][] = "El color seleccionado no existe";
+    }
+
+    // Guardo el color para mostrarlo en el formulario
     $datos["color"] = $color;
 
     // ==========================================================
@@ -133,20 +138,20 @@ if (isset($_POST["enviar"])) {
     // Si el grosor ha llegado desde el formulario:
     if (isset($_POST["grosor"])) {
 
-        // Asigno el valor del formulario
+        // Asigno el valor del formulario convertido a int
         $grosor = (int) $_POST["grosor"];
     }
 
-    // Si no se ha marcado ningún estado dará error
+    // Si no se ha marcado ningún grosor dará error
     if ($grosor === 0) {
         $errores["grosor"][] = "Debes introducir un grosor";
 
         // Si el grosor no es una de las opciones dará error
     } else if (!validaRango($grosor, $grosores, 2)) {
-        $errores["grosor"][] = "Debes introducir un grosor valido";
+        $errores["grosor"][] = "Debes introducir un grosor válido";
     }
 
-    // Guardamos el grosor para mostrarlo en el formulario
+    // Guardo el grosor para mostrarlo en el formulario
     $datos["grosor"] = $grosor;
 
     // ==========================================================
@@ -159,20 +164,22 @@ if (isset($_POST["enviar"])) {
         $info = $coordenadaX . " ; " . $coordenadaY . " ; " . $color . " ; " . $grosor;
 
         // Modifico el fichero ya creado con la nueva información
-        $f = fopen($rutaFichero, "a");
-        fputs($f,  $info . PHP_EOL);
-        fclose($f);
+        añadirLinea($rutaFichero, $info);
+
+        // Leo el fichero
+        leerFichero($rutaFichero, $puntos);
 
         // Creo la imagen con los puntos
         crearImagen($dirip, $navegador, $puntos);
+
+        // Recargo la página para que, al pulsar F5, no se vuelva a enviar el formulario
+        header("location: index.php");
+        exit;
     }
 }
 
 // Si se ha pulsado el botón de eliminar
 if (isset($_POST["eliminar"])) {
-
-    // Empiezo sin ninguna posición elegida
-    $posicionPuntoBorrar = 0;
 
     // Si ha llegado una posición del combo y es un número:
     if (isset($_POST["selectPuntos"]) && is_numeric($_POST["selectPuntos"])) {
@@ -180,12 +187,119 @@ if (isset($_POST["eliminar"])) {
         // Guardo la posición del punto a borrar como número entero
         $posicionPuntoBorrar = (int) $_POST["selectPuntos"];
 
-        // Quito el punto del array de puntos
-        array_splice($puntos, $posicionPuntoBorrar, 1);
+        // Si la posición existe en el array de puntos:
+        if ($posicionPuntoBorrar >= 0 && $posicionPuntoBorrar < count($puntos)) {
+
+            // Como la posición elegida en el combo es la misma que la del array,
+            // quito ese punto del array de puntos
+            array_splice($puntos, $posicionPuntoBorrar, 1);
+
+            // Borro todas las líneas del fichero
+            file_put_contents($rutaFichero, "");
+
+            // Ahora como está todo vacío vuelvo a añadir todos los puntos menos el que acabamos de quitar (pues ya no está en el array)
+            for ($i = 0; $i < count($puntos); $i++) {
+                $info = $puntos[$i]->getX() . " ; " . $puntos[$i]->getY() . " ; " . $puntos[$i]->getColor() . " ; " . $puntos[$i]->getGrosor();
+                añadirLinea($rutaFichero, $info);
+            }
+
+            // Creo la imagen sin el punto eliminado
+            crearImagen($dirip, $navegador, $puntos);
+
+            // Recargo la página para que, al pulsar F5, no se vuelva a enviar el formulario.
+            // Al recargar se vuelve a llamar a leerFichero (al principio del controlador) y se actualiza toda la página
+            header("location: index.php");
+            exit;
+        }
     }
 }
 
-// leerFichero($rutaFichero, $puntos);
+// Si se ha pulsado el botón de subir:
+if (isset($_POST["subir"])) {
+
+    // Guardo la información (nombre, ruta temporal, tamaño y error) del fichero subido 
+    $fichero = $_FILES["archivo"];
+
+    if (
+        // La subida ha ido bien
+        $fichero["error"] === 0 &&
+        // El fichero no está vacío
+        $fichero["size"] > 0 &&
+        // La extensión es txt
+        // Saco la extensión del nombre del fichero con PATHINFO_EXTENSION
+        pathinfo($fichero["name"], PATHINFO_EXTENSION) === "txt"
+    ) {
+        // Abro el fichero en modo lectura
+        // $fichero["tmp_name"] es la ruta temporal donde PHP guarda el fichero subido
+        $fic = fopen($fichero["tmp_name"], "r");
+
+        // Leo el fichero línea a línea
+        while ($linea = fgets($fic)) {
+
+            // Quito el retorno de carro del final de la línea
+            $linea = str_replace("\r", "", $linea);
+            // Quito el salto de línea del final de la línea
+            $linea = str_replace("\n", "", $linea);
+
+            // Si la línea no está vacía:
+            if ($linea != "") {
+
+                // Separo la línea en partes
+                $linea = explode(" ; ", $linea);
+
+                // Empiezo dando por mala la línea
+                $añadir = false;
+
+                // Si la línea tiene 4 partes es válida, si no no hago nada
+                if (count($linea) === 4) {
+
+                    // Doy la línea por buena y la marco como mala si después falla alguna comprobación
+                    $añadir = true;
+
+                    // Si 'x' no es un número entre 0 y 500, no es válida
+                    if (!is_numeric($linea[0]) || $linea[0] > 500 || $linea[0] < 0) {
+                        $añadir = false;
+                    }
+
+                    // Si 'y' no es un número entre 0 y 500, no es válida
+                    if (!is_numeric($linea[1]) || $linea[1] > 500 || $linea[1] < 0) {
+                        $añadir = false;
+                    }
+
+                    // Si el color no existe, no es válida
+                    if (!array_key_exists($linea[2], PUNTO::COLORES)) {
+                        $añadir = false;
+                    }
+
+                    // Si el grosor no existe, no es válida
+                    if (!array_key_exists($linea[3], PUNTO::GROSORES)) {
+                        $añadir = false;
+                    }
+                }
+
+                // Si todo está bien guardo la nueva línea en el fichero que ya teníamos
+                if ($añadir) {
+                    // Guardo toda la información 
+                    $info = $linea[0] . " ; " . $linea[1] . " ; " . $linea[2] . " ; " . $linea[3];
+                    añadirLinea($rutaFichero, $info);
+                }
+            }
+        }
+
+        // Cierro el fichero
+        fclose($fic);
+
+        // Leo el fichero para actualizar el array de puntos
+        leerFichero($rutaFichero, $puntos);
+
+        // Creo la imagen con los puntos nuevos
+        crearImagen($dirip, $navegador, $puntos);
+
+        // Recargo la página para que, al pulsar F5, no se vuelva a enviar el formulario
+        header("location: index.php");
+        exit;
+    }
+}
 
 // ==========================================================
 // PLANTILLA
@@ -205,6 +319,11 @@ finCuerpo();
 // VISTA
 // ==========================================================
 
+/**
+ * Muestra la cabecera de la página
+ *
+ * @return void
+ */
 function cabecera() {}
 
 /**
@@ -213,6 +332,8 @@ function cabecera() {}
  * @param array $datos Datos introducidos por el usuario
  * @param array $colores Todos los colores
  * @param array $errores Errores encontrados al validar
+ * @param array $puntos Todos los puntos guardados
+ * @param string $ruta Ruta de la imagen con los puntos
  * @return void
  */
 function cuerpo(
@@ -222,7 +343,7 @@ function cuerpo(
     array $puntos,
     string $ruta,
 ) {
-    // Mestro el formulario con los datos y los errores
+    // Muestro el formulario con los datos y los errores
     formulario($datos, $colores, $errores, $puntos, $ruta,);
 }
 
@@ -232,6 +353,8 @@ function cuerpo(
  * @param array $datos Datos introducidos por el usuario
  * @param array $colores Todos los colores
  * @param array $errores Errores encontrados al validar
+ * @param array $puntos Todos los puntos guardados
+ * @param string $ruta Ruta de la imagen con los puntos
  * @return void
  */
 function formulario(
@@ -242,14 +365,17 @@ function formulario(
     string $ruta,
 ) {
 ?>
-    <form action="" method="post">
+    <!-- Formulario -->
+    <form action="" method="post" enctype="multipart/form-data"> <!-- multipart/form-data permite subir ficheros -->
 
-        <!-- Input para introducir la coordenada X -->
+        <h2>Formulario</h2>
+
+        <!-- Input para introducir la coordenada 'x' -->
         <label for="coordenadaX">Coordenada X: </label>
         <input type="number" name="coordenadaX" id="coordenadaX" min="0" max="500"
             value="<?php echo $datos["coordenadaX"]; ?>">
 
-        <!-- Errores de la cordenada x -->
+        <!-- Errores de la coordenada 'x' -->
         <?php
         if (isset($errores["coordenadaX"])) {
             echo "<div class='error'>";
@@ -260,12 +386,12 @@ function formulario(
         }
         ?>
 
-        <!-- Input para introducir la coordenada Y -->
+        <!-- Input para introducir la coordenada 'y' -->
         <br><label for="coordenadaY">Coordenada Y: </label>
         <input type="number" name="coordenadaY" id="coordenadaY" min="0" max="500"
             value="<?php echo $datos["coordenadaY"]; ?>">
 
-        <!-- Errores de la cordenada y -->
+        <!-- Errores de la coordenada 'y' -->
         <?php
         if (isset($errores["coordenadaY"])) {
             echo "<div class='error'>";
@@ -320,97 +446,53 @@ function formulario(
         }
         ?>
 
+        <!-- Botón -->
+        <br><br><input type="submit" name="crearPunto" value="Añadir punto">
+
+        <!-- ========================================================== -->
+
+        <h2>Borrar punto</h2>
         <!-- Combo con todos los puntos -->
-        <br><select name="selectPuntos">
+
+        <select name="selectPuntos">
             <?php for ($i = 0; $i < count($puntos); $i++) { ?>
-                <option value=" <?php echo $i ?> " ?>
+                <option value="<?php echo $i ?>">
                     <?php echo $puntos[$i]->getX() . ";" . $puntos[$i]->getY() . ";" . $puntos[$i]->getColor() . ";" . $puntos[$i]->getGrosor() ?>
                 </option>
             <?php } ?>
         </select>
 
-        <!-- Botón borrar boton -->
-        <br><br><input type="submit" name="eliminar" value="Eliminar">
+        <!-- Botón para eliminar el punto elegido -->
+        <input type="submit" name="eliminar" value="Eliminar">
 
-        <!-- Botón -->
-        <br><br><input type="submit" name="enviar" value="Enviar">
+        <!-- ========================================================== -->
 
-        <!-- Textarea -->
-        <br><br><textarea readonly name="texto" rows="6" cols="40"><?php foreach ($puntos as $clave => $valor) { ?><?php echo $valor->getX() . ", " . $valor->getY() . ", " . $valor->getColor() . ", " . $valor->getGrosor() . "\n" ?><?php } ?></textarea>
+        <h2>Resumen de puntos</h2>
+        <!-- Textarea con el resumen de todos los puntos -->
+        <textarea readonly name="texto" rows="6" cols="40"><?php foreach ($puntos as $clave => $valor) { ?><?php echo $valor->getX() . ", " . $valor->getY() . ", " . $valor->getColor() . ", " . $valor->getGrosor() . "\n" ?><?php } ?></textarea>
 
-        <!-- Imagen -->
-        <br><img src=<?php echo $ruta ?> alt="Imagen">
+        <!-- ========================================================== -->
+        
+        <h2>Subir ficheros de puntos</h2>
+
+        <label for="archivo">Fichero: </label>
+
+        <!-- Input para elegir el fichero de puntos (solo deja elegir ficheros .txt) -->
+        <input type="file" name="archivo" id="archivo" accept=".txt">
+        
+        <!-- Botón para subir el fichero -->
+        <br><input type="submit" name="subir" value="Subir">
+
+        <!-- ========================================================== -->
+
+        <h2>Imagen</h2>
+
+        <!-- Imagen con los puntos (añado ?time() a la ruta para que el navegador no use una copia guardada y la pida siempre de nuevo) -->
+        <img src="<?php echo $ruta . "?" . time() ?>" alt="Imagen">
+        
+        <!-- Enlace para descargar la imagen -->
+        <br><a href="imagen.php">Descargar imagen</a>
+
     </form>
 <?php
-}
-
-/**
- * Funcion que lee un fichero y crea puntos a partir de el
- * 
- * @param string $ruta Ruta del fichero
- * @param array $datos Array que se rellena con los puntos leidos
- * @return bool Devuelve true si se ha leido bien, false si no se pudo abrir el fichero
- */
-function leerFichero(string $ruta, array &$datos): bool
-{
-    // Se abre el fichero para leer (tiene que existir)
-    $fic = fopen($ruta, "r");
-    // Si no se pudo abrir, se sale de la función con false
-    if (!$fic) {
-        return false;
-    }
-
-    // Se vacía el array antes de rellenarlo
-    foreach ($datos as $pos => $valor) {
-        unset($datos[$pos]);
-    }
-
-    // Se lee el fichero línea a línea hasta que no queden más
-    while ($linea = fgets($fic)) {
-
-        // Se quitan los saltos de línea del final
-        $linea = str_replace("\r", "", $linea);
-        $linea = str_replace("\n", "", $linea);
-
-        // Si la línea no está vacía
-        if ($linea != "") {
-            // Se separa la línea en trozos
-            $linea = explode(" ; ", $linea);
-
-            $nuevoPunto = new Punto((int) $linea[0], (int) $linea[1], $linea[2], (int) $linea[3]);
-            $datos[] = $nuevoPunto;
-        }
-    }
-
-    // Se cierra el fichero
-    fclose($fic);
-    // Todo ha ido bien
-    return true;
-}
-
-/**
- * Undocumented function
- *
- * @param string $ruta
- * @param array $datos
- * @return boolean
- */
-function editarFichero(string $ruta, array $datos): bool
-{
-    $fic = fopen($ruta, "w");
-    if (!$fic) {
-        return false;
-    }
-
-    foreach ($datos as $fila) {
-        $linea = "";
-        foreach ($fila as $columna) {
-            $linea .= $columna . ",";
-        }
-        $linea .= "\r\n";
-        fputs($fic, $linea);
-    }
-
-    fclose($fic);
-    return true;
 }

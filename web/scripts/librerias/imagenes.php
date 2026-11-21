@@ -1,14 +1,17 @@
 <?php
 
 /**
- * Función que crea una imagen jpg y la guarda en /imagenes/puntos/ 
- * con el nombre imagen_dirip_navegador.jpg
+ * Función que crea una imagen jpg con los puntos y, según el parámetro,
+ * la guarda en /imagenes/puntos/ con el nombre imagen_dirip_navegador.jpg
+ * o la envía directamente al navegador
  *
  * @param string $dirip Dirección IP del cliente
  * @param string $navegador Nombre del navegador del cliente
- * @return boolean true si la imagen se ha guardado correctamente, false si ha fallado
+ * @param array $puntos Puntos que se dibujan en la imagen
+ * @param boolean $guardar True para guardar la imagen y false para enviarla al navegador
+ * @return boolean true si la imagen se ha creado correctamente, false si ha fallado
  */
-function crearImagen(string $dirip, string $navegador, array $puntos): bool
+function crearImagen(string $dirip, string $navegador, array $puntos, bool $guardar = true): bool
 {
     // Creo el lienzo (ancho, alto), pongo 500 porque es el máximo valor de las coordenadas x e y de los puntos
     $img = imagecreatetruecolor(500, 500);
@@ -18,10 +21,10 @@ function crearImagen(string $dirip, string $navegador, array $puntos): bool
     $negro  = imagecolorallocate($img, 0, 0, 0);
 
     // Pinto la imagen de color blanco
-    imagefilledrectangle($img, 0, 0, 500, 500, $blanco);
+    imagefilledrectangle($img, 0, 0, 499, 499, $blanco);
 
     // Pinto un marco de color negro
-    imagerectangle($img, 0, 0, 500, 500, $negro);
+    imagerectangle($img, 0, 0, 499, 499, $negro);
 
     // Recorro todos los puntos para dibujarlos en la imagen
     foreach ($puntos as $clave => $valor) {
@@ -48,8 +51,14 @@ function crearImagen(string $dirip, string $navegador, array $puntos): bool
         imagefilledellipse($img, $valor->getX(), $valor->getY(), $grosor, $grosor, $nuevoColor);
     }
 
-    // Devuelvo la imagen como jpg (la guardo en su carpeta)
-    return imagejpeg($img, RUTABASE . "/imagenes/puntos/imagen_" .  $dirip . "_" .  $navegador . ".jpg");
+    // Si hay que guardar la imagen:
+    if ($guardar) {
+        // Devuelvo la imagen como jpg (la guardo en su carpeta)
+        return imagejpeg($img, RUTABASE . "/imagenes/puntos/imagen_" .  $dirip . "_" .  $navegador . ".jpg");
+    } else {
+        // Envío la imagen directamente al navegador, sin guardarla
+        return imagejpeg($img);
+    }
 }
 
 /**
@@ -69,7 +78,7 @@ function encontrarNavegador(string $HTTP_USER_AGENT): string
         "Safari" => "safari",
     ];
 
-    // Si en el User-Agent del usuario esta uno de los buscadores posibles lo devuelvo
+    // Si en el User-Agent del usuario está uno de los buscadores posibles lo devuelvo
     foreach ($navegadores as $clave => $valor) {
         if (str_contains($HTTP_USER_AGENT, $clave)) {
             return $valor;

@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Clase que representa un punto con sus coordenadas, su color y su grosor
+ */
 class Punto
 {
     // -------------------------------------------------------------
@@ -9,9 +12,9 @@ class Punto
     // Constante con todos los colores posibles
     public const COLORES = [
         "red" => ["nombre" => "rojo", "rgb" => [255, 0, 0]],
-        "green" => ["nombre" => "verde", "rgb" => [0, 225, 0]],
-        "blue" => ["nombre" => "azul", "rgb" => [0, 0, 225]],
-        "yellow" => ["nombre" => "amarillo", "rgb" => [225, 225, 0]],
+        "green" => ["nombre" => "verde", "rgb" => [0, 255, 0]],
+        "blue" => ["nombre" => "azul", "rgb" => [0, 0, 255]],
+        "yellow" => ["nombre" => "amarillo", "rgb" => [255, 255, 0]],
     ];
 
     // Constante con todos los grosores disponibles
@@ -25,9 +28,9 @@ class Punto
     private int $_x;
     // Coordenada y (0 - 20.000)
     private int $_y;
-    // Color del punto (COLORES)
+    // Color del punto
     private string $_color;
-    // Grosor del punto (GROSORES)
+    // Grosor del punto
     private int $_grosor;
 
     // -------------------------------------------------------------
@@ -79,10 +82,10 @@ class Punto
     // -------------------------------------------------------------
 
     /**
-     * Guarda el valor de x si esta comprendido entre 0 y 20000
+     * Guarda el valor de x si está comprendido entre 0 y 20000
      *
      * @param int $x Número de la coordenada x
-     * @return boolean Si esta comprendido entre 0 y 20000 dará true, si no dará false
+     * @return boolean Si está comprendido entre 0 y 20000 dará true, si no dará false
      */
     public function setX(int $x): bool
     {
@@ -95,10 +98,10 @@ class Punto
     }
 
     /**
-     * Guarda el valor de y si esta comprendido entre 0 y 20000
+     * Guarda el valor de y si está comprendido entre 0 y 20000
      *
      * @param int $y Número de la coordenada y
-     * @return boolean Si esta comprendido entre 0 y 20000 dará true, si no dará false
+     * @return boolean Si está comprendido entre 0 y 20000 dará true, si no dará false
      */
     public function setY(int $y): bool
     {
@@ -141,7 +144,7 @@ class Punto
     }
 
     // -------------------------------------------------------------
-    // Constrcuctor
+    // Constructor
     // -------------------------------------------------------------
 
     /**
@@ -150,7 +153,7 @@ class Punto
      * @param integer $x Coordenada x del punto
      * @param integer $y Coordenada y del punto
      * @param string $color Color del punto
-     * @param int $grosor Color del grosor
+     * @param int $grosor Grosor del punto
      */
     public function __construct(
         int $x,
@@ -168,12 +171,12 @@ class Punto
             throw new Exception("La coordenada y no es válida");
         }
 
-        // Si el color y no es válido, se lanza una excepción
+        // Si el color no es válido, se lanza una excepción
         if (!$this->setColor($color)) {
             throw new Exception("El color no es válido");
         }
 
-        // Si el grosor y no es válido, se lanza una excepción
+        // Si el grosor no es válido, se lanza una excepción
         if (!$this->setGrosor($grosor)) {
             throw new Exception("El grosor no es válido");
         }
